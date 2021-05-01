@@ -59,9 +59,9 @@ When you're building an Azure architecture, there are many considerations to kee
 
 ***
 
-# Cost Optimization
+## Cost Optimization
 
-## What is cost Optimization
+### What is cost Optimization
 
 Cost optimization is ensuring that the money your organization spends is being used to maximum effect.
 
@@ -78,3 +78,21 @@ When an organization adopts a cloud platform, it must shift away from CapEx-oren
 To optimize costs in your organization's architecture, you can use several principles.
 
 #### Plan and estimate costs
+
+For any cloud project, whether it is the development of a new application or the migration of an entire datacenter, it is important to get an estimate of your costs.
+
+This estimate involves identifying any current resources to move or redevelop, understanding business objectives that might affect sizing, and selecting the appropriate services for the project.
+
+With the requirements identified, you can use cost estimation tools to provide a more concise estimate of the resources that would be required.
+
+#### Provision with Optimization
+
+Provisioning services that are optimized for cost from the outset can reduce your work effort in the future.
+
+For example, you should ensure that you are selecting the appropriate service level for your workload, and take advantage of services that let you adjust the service level. You should also use discounts when they are available, such as reserved instances and bring-your-own license offers.
+
+Where possible you want to move from IaaS to PaaS. PaaS services typically cost less than IaaS, and they typically reduce your operational costs. Not all applications can be moved to PaaS, but with the cost savings that PaaS services provide, it is worth considering.
+
+#### Use monitoring and analytics to gain cost insights
+
+If you are not monitoring your spending, you do not know what you can save. Take advantage of cost management tools and regularly review billing statements to better understanding where money is being spent.
