@@ -1,5 +1,6 @@
 # Azure Well-Architected Framework Pillars
 
+
 Azure has five pillars
 
 	1) Cost Optimization
@@ -30,6 +31,8 @@ We need to secure data from attacks from unknown hackers. The integrity of your 
 
 
 ## General design Principles
+
+
 
 Enable architectural evolution:
 ------------------------------
