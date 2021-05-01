@@ -53,4 +53,28 @@ Automation of manual activities reduces operational cost, minimizes error introd
 
 In an ideal architecutre, you would build the most secure high-performance highly available, and efficient environment possible.
 
+To build an environment with the highest level of all these pillars, there's a cost. That cost might be in money, time to deliver, or operational agility. Every organization will have different priorities that will affect the design choices that are made in each pillar. As you design your architecture, you'll need to determine which trade-offs are acceptable, and which are not.
+
+When you're building an Azure architecture, there are many considerations to keep in mind. You want your architecture to be secure, scalable, available, and recoverable. To make that possible, you'll have to make decisions based on cost, organizational priorities, and risk.
+
 ***
+
+# Cost Optimization
+
+## What is cost Optimization
+
+Cost optimization is ensuring that the money your organization spends is being used to maximum effect.
+
+Cloud services provide computing as a utility.
+
+Technologies in the cloud are provided under a service model, to be consumed on demand.
+
+When an organization decides to own infrastructure, it buys equipment that goes onto the balance sheet as assets. Because a capital investment was made, accountants categorize this transaction as a capital expense **(CapEx)**.
+
+Cloud services, on the other hand, are categorized as an operating expense **(OpEx)**, because of their consumption model.
+
+When an organization adopts a cloud platform, it must shift away from CapEx-orented budgeting toward OpEx.
+
+To optimize costs in your organization's architecture, you can use several principles.
+
+#### Plan and estimate costs
