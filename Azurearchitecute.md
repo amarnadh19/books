@@ -1,4 +1,4 @@
-# Azure Well-Architected Framework pillars
+# Azure Well-Architected Framework Pillars
 
 Azure has five pillars
 
@@ -27,3 +27,22 @@ A successfull cloud environment is designed in a way that anticipates failures a
 Security:
 --------
 We need to secure data from attacks from unknown hackers. The integrity of your data should be protected too, through tools like encryption.
+
+
+## General design Principles
+
+Enable architectural evolution:
+------------------------------
+No architecture is static. Allow for the evolution of your architecture by taking advantage of new services, tools and technologies when they are available.
+
+Use data to make decisions:
+---------------------------
+Collect data analyze it, and use it to make decisions surrounding your architecture. From cost data, to Performance to user load, using data will guide you to make the right choices in your environment.
+
+Educate and enable:
+-------------------
+Cloud technology evolves quickly. Educate your development, operations and business teams to help them make the right decisions and build solutions to solve business problems.
+
+Automate:
+-------
+Automation of manual activities reduces operational cost, minimizes error introduced by manual steps and provides consistency between environments.
