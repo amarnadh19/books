@@ -47,3 +47,10 @@ Cloud technology evolves quickly. Educate your development, operations and busin
 #### Automate:
 
 Automation of manual activities reduces operational cost, minimizes error introduced by manual steps and provides consistency between environments.
+
+
+## Design choices
+
+In an ideal architecutre, you would build the most secure high-performance highly available, and efficient environment possible.
+
+***
