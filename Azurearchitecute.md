@@ -96,3 +96,5 @@ Where possible you want to move from IaaS to PaaS. PaaS services typically cost 
 #### Use monitoring and analytics to gain cost insights
 
 If you are not monitoring your spending, you do not know what you can save. Take advantage of cost management tools and regularly review billing statements to better understanding where money is being spent.
+
+***
