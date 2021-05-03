@@ -77,6 +77,7 @@ When an organization adopts a cloud platform, it must shift away from CapEx-oren
 
 To optimize costs in your organization's architecture, you can use several principles.
 
+
 #### Plan and estimate costs
 
 For any cloud project, whether it is the development of a new application or the migration of an entire datacenter, it is important to get an estimate of your costs.
@@ -84,6 +85,7 @@ For any cloud project, whether it is the development of a new application or the
 This estimate involves identifying any current resources to move or redevelop, understanding business objectives that might affect sizing, and selecting the appropriate services for the project.
 
 With the requirements identified, you can use cost estimation tools to provide a more concise estimate of the resources that would be required.
+
 
 #### Provision with Optimization
 
@@ -93,8 +95,59 @@ For example, you should ensure that you are selecting the appropriate service le
 
 Where possible you want to move from IaaS to PaaS. PaaS services typically cost less than IaaS, and they typically reduce your operational costs. Not all applications can be moved to PaaS, but with the cost savings that PaaS services provide, it is worth considering.
 
+
 #### Use monitoring and analytics to gain cost insights
 
 If you are not monitoring your spending, you do not know what you can save. Take advantage of cost management tools and regularly review billing statements to better understanding where money is being spent.
 
 ***
+
+## Operational Excellence
+
+### What is Operational Excellence?
+
+It ensures that you have full visibility into how your application is running, and ensuring the best experience for your users. Operational excellence includes making your development and release practices more agile, which allows your business to quickly adjust to changes.
+
+By improving operational capabilities, you can have faster development and release cycles and a better experience ofr users of your application.
+
+
+#### Design, Build and orchestrate with modern practices
+
+Modern architectures should be designed twith DevOps and continuous integration in mind.
+
+A Modern Architectures will give you the abililty to automate deployments by using infrastructure as code, automate application testing and build new environments as needed.
+
+
+#### Use Monitoring and analytics to gain operational insights.
+
+By creating an effective system for monitoring what is going on in your architecute, you can ensure that you will know when something is not right before your users are affected.
+
+Operationally, it is important to have a robust monitoring strategy. This helps you identify areas of waste, troubleshoot issues, and optimize the performance of your application.
+
+A multilayered approach is essential.
+
+Gathering data points from a components at every layer will help alert you when values are outside acceptable ranges and help you track spending over time.
+
+
+#### Use automation to reduce effort and error.
+
+You should automate as much of your architecute as pssible. The human element is costly, injecting time and error into operational activities.
+
+This increased time and error will result in increased operational costs.
+
+
+#### Test
+
+You should include testing in your application deployment and your ongoing operations. A good testing strategy will help you identify issues in your application before it is deployed, and ensure that dependent services can properly communicate with your application.
+
+A good testing strategy can also help identify performance issues and potential security vulnerabilites in both pre-production and production deployments.
+
+A robust testing plan can uncover issues with infrastructuredeployments that can affect the user experience and testing will help you provide a great experinece for your users.
+
+***
+
+## Performance Efficiency
+
+### What is Performance efficiency
+
+Performance efficency is matching the resources that are available to an application with the demand that is receiving.
