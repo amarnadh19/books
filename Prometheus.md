@@ -166,8 +166,57 @@ Brendan's method is more machine-focused and it states that for each resource (C
 The RED method is more focused on a service-level approach and not so much on the underlying system itself. Obviously, being useful to monitor services, this strategy is also valuable to predict the experience of external clients. If a service's error rate increases, it is reasonable to assume those errors will impact, directly or indirectly, on the customer's experience. These are the metrics to be aware of:
 
     - Rate: Translated as requests per second
+    
     - Errors: The amount of failing requests per second
+    
     - Duration: The time taken by those requests
 
 ***
+
+# A overview of Prometheus Ecosystem
+
+## Metrics Collection with Prometheus
+
+Prometheus is a time series-based, open source monitoring system. It collects data by sending HTTP requests to hosts and services on metrics endpoints, which it then makes available for analysis and alerting using a powerful query language. 
+
+Even though Prometheus has graduated with the Cloud Native Computing Foundation (CNCF) by demonstrating stability, maturity, and solid governance, it is still evolving at a very rapid pace.
+
+At the time of writing this book, the latest version is 2.26.0
+
+
+## High-level Overview of the Prometheus Architecture
+
+The Prometheus ecosystem is composed of several components, each with its own responsibility and clearly defined scope. Prometheus itself is essential as it sits squarely in the middle of most interactions, but many components are in fact optional, depending on your monitoring needs.
+
+![High level overview of the main components in the Prometheus echosystem](https://github.com/amarnadh19/books/blob/main/images/pro_image_3.png?)
+
+- The Prometheus server collects time series data, stores it, makes it available for querying, and sends alerts based on it.
+
+- The Alertmanager receives alert triggers from Prometheus and handles routing and dispatching of alerts.
+
+- The Pushgateway handles the exposition of metrics that have been pushed from short-lived jobs such as cron or batch jobs.
+
+- Applications that support the Prometheus exposition format make internal state available through an HTTP endpoint.
+
+- Community-driven exporters expose metrics from applications that do not support Prometheus natively.
+
+- First-party and third-party dashboarding solutions provide a visualization of collected data.
+
+The prometheus server has its own internal processes, such as recording rules and service discovery.
+
+*Prometheus was originally created by Matt T. Proud and Julius Volz while working at SoundCloud. It was inspired by Google's Borgmon, which influenced a lot of its earlier design: scraping plain text from metrics endpoints; exporters as proxies for metrics collection; time series as multi-dimensional vectors, which can then be transformed and filtered; and the use of ruleset evaluations for recording and alerting, among other features.*
+
+
+## Exposing internal state with exporters
+
+Not all applications are built with Prometheus-compatible instrumentation. Sometimes, no metrics are exposed at all. In these cases, we can rely on exporters
+
+![High level overview of an exporter](https://github.com/amarnadh19/books/blob/main/images/pro_image_4.png?)
+
+An exporter is nothing more than a piece of software that collects data from a service or application and exposes it via HTTP in the Prometheus format. Each exporter usually targets a specific service or application and as such, their deployment reflects this one-to-one synergy.
+
+Nowadays, you can find exporters for pretty much any service you need, and if a particular third-party service doesn't have an exporter available, it's quite simple to build your own.
+
+
+## Exporter fundamentals
 
