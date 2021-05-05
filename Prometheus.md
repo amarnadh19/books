@@ -32,3 +32,6 @@ Looking into an organizational context, roles such as system administrators, qua
 
     4) Product owners are interested in low-resolution, high-latency, and low-diversity data. Where product owners are concerned, monitoring data usually steps away from infrastructure to the realm of business. Product owners strive to understand the trends of specific software products, where historical data is fundamental and resolution is not so critical. Keeping in mind the objective of evaluating the impact of software releases on the customers, latency is not as essential for them as it is for system administrators. The product owner manages a specific set of products, so a low diversity of monitoring data is expected, comprised mostly of business metrics.
 
+
+|           | Data resolution  | Data Latency  |  Data diversity |
+| ------    | ---------------  | ------------  |  ---------------|
