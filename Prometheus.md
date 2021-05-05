@@ -59,5 +59,36 @@ Components can be given below topics:
     5) Visualization : This is a graphical representation of metrics, logs, or traces. 
 
 
-Recently, the term monitoring has been overtaken by a superset called ** observability **, which is regarded as the evolution of monitoring, or a different wrapping to spring a hype and revive the concept.
+Recently, the term monitoring has been overtaken by a superset called **observability**, which is regarded as the evolution of monitoring, or a different wrapping to spring a hype and revive the concept.
 
+
+## White box versus blackbox monitoring
+
+There are many ways we could go about monitoring, but they largely fall into two main categories, i.e., **blackbox** and **whitebox** monitoring.
+
+In *Blackbox* monitoring, the application or host is observed from the outside and, consequently, this approach can be fairly limited. Checks are made to assess whether the system under observation responds to probes in a known way:
+
+    - Does the host respond to ICMP echo requests?
+    - is a given TCP port Open?
+    - Does the application respond with the correct data and status code when it receives a specific HTTP requests?
+    - Is the process for a specific application running in its host?
+
+In *Whitebox* monitoring, the system under observation surfaces data about its internal state and the performance of critical sections.  This type of intospection can be very powerful as it exposes the operating telementry, and consequently the health, of the different internal components.
+
+    - Exported through logging: For instance, an HTTP server's access log can be processed to monitor requests rates, latencies and error percentages.
+
+    - Emitted as structured Events: This approach is similar to logging but instead of being written to disk, the data is sent directly to processing systems for analysis and aggregations.
+
+    - Maintained in memory as aggregates: Data in this format can be hosted in an endpoint or read directly from command-line tools. 
+
+Probing can be your last line of defence - if all else fails, you can rely on blackbox monitoring to asses availability.
+
+
+## understanding Metrics Collection
+
+The process by which metrics are by monitoring systems can be generally be divided into two approaches: *Push* and *pull*.
+
+
+## An overview of the two collection approaches
+
+![first image] (pro_image_1.png)
