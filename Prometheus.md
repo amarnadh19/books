@@ -108,4 +108,66 @@ In contract, Pull based monitoring systems collect metrics directly from applica
 Some notable monitoring software that uses pull are Nagios and Nagios-style systems (Icinga, Zabbix, Zenoss, and Sensu, to name a few). Prometheus is also one of those that embraces the pull approach and is very opinionated about this.
 
 
+## Push Vs Pull
+
+The main point of contention is usually about target discover.
+
+
+### Push-Based systems
+
+In *push-based systems*, the monitored hosts and services make themselves known by reporting to the monitoring system. The advantage here is that no prior knowledge of new systems is required for them to be picked up. However, this means that the monitoring service's location needs to be propagated to all targets, usually with some form of configuration management. Staleness is a big drawback of this approach: if a system hasn't reported in for some time, does that mean it's having problems or was it purposely decommissioned?
+
+Furthermore, when you manage a distributed fleet of hosts and services that push data to a central point, the risk of a thundering herd (overload due to many incoming connections at the same time) or a misconfiguration causing an unforeseen flood of data becomes much more complex and time-consuming to mitigate.
+
+
+### Pull-Based systems
+
+In *pull-based monitoring*, the system needs a definitive list of hosts and services to monitor so that their metrics are ingested.
+
+Having a central source of truth provides some level of assurance that everything is where it's supposed to be, with the drawback of having to maintain said source of truth and keeping it updated with any changes. With the rapid rate of change in today's infrastructures, some form of automated discovery is needed to keep up with the full picture. Having a centralized point of configuration enables a much faster response in the case of issues or misconfigurations.
+
+In the end, most of the drawbacks from each approach can be reduced or effectively solved by clever design and automation.
+
+There are other more important factors when choosing a monitoring tool, such as flexibility, ease of automation, maintainability, or broad support for the technologies being used.
+
+*Even though Prometheus is a pull-based monitoring system, it also provides a way of ingesting pushed metrics by using a gateway that converts from push to pull. This is useful for monitoring a very narrow class of processes*.
+
+
+## What is a measure?
+
+When planning metrics collection, there is a question that's bound to come up, which is defining what metrics to observe. To answer this question, we should turn to the current best practices and methodologies.
+
+
+## Google's four golden signals
+
+Google's rationale regarding monitoring is quite simple. It states, pretty straightforwardly, that the four most important metrics to keep track of are the following:
+
+    1) Latency: The time required to serve a request
+    
+    2)Traffic: The number of requests being made
+    
+    3) Errors: The rate of failing requests
+    
+    4) Saturation: The amount of work not being processed, which is usually queued
+
+## Brendan Gregg's USE method
+
+Brendan's method is more machine-focused and it states that for each resource (CPU, disk, network interface, and so on), the following metrics should be monitored:
+
+    - Utilization: Measured as the percentage of the resource that was busy
+    
+    - Saturation: The amount of work the resource was not able to process, which is usually queued
+    
+    - Errors: Amount of errors that occurre
+
+
+## Tom Wilkie's RED method
+
+The RED method is more focused on a service-level approach and not so much on the underlying system itself. Obviously, being useful to monitor services, this strategy is also valuable to predict the experience of external clients. If a service's error rate increases, it is reasonable to assume those errors will impact, directly or indirectly, on the customer's experience. These are the metrics to be aware of:
+
+    - Rate: Translated as requests per second
+    - Errors: The amount of failing requests per second
+    - Duration: The time taken by those requests
+
+***
 
