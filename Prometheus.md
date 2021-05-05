@@ -91,4 +91,4 @@ The process by which metrics are by monitoring systems can be generally be divid
 
 ## An overview of the two collection approaches
 
-![](https://github.com/amarnadh19/books/blob/main/images/pro_image_1.png?raw=true
+![](https://github.com/amarnadh19/books/blob/main/images/pro_image_1.png?)
