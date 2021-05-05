@@ -32,6 +32,7 @@ Looking into an organizational context, roles such as system administrators, qua
 
     4) Product owners are interested in low-resolution, high-latency, and low-diversity data. Where product owners are concerned, monitoring data usually steps away from infrastructure to the realm of business. Product owners strive to understand the trends of specific software products, where historical data is fundamental and resolution is not so critical. Keeping in mind the objective of evaluating the impact of software releases on the customers, latency is not as essential for them as it is for system administrators. The product owner manages a specific set of products, so a low diversity of monitoring data is expected, comprised mostly of business metrics.
 
+The following table sums up the previous examples in a much more condensed form:
 
 |                           | Data resolution   | Data Latency      |  Data diversity   |
 | --------------            | ---------------   | ------------      |  ---------------  |
@@ -39,3 +40,24 @@ Looking into an organizational context, roles such as system administrators, qua
 | Software release View     | High              | High              |  High             |
 | Capacity Planning         | Low               | High              |  High             |
 | Product/Business view     | Low               | High              |  Low              |
+
+
+## Monitoring Components
+
+The same way the monitoring definition changes across contexts, its components follow the same predicament. 
+
+Components can be given below topics:
+
+    1) ** Metrics ** : This exposes a certain system resources, application action, or business characteristic as specific point in time value. This information is obtained in an aggregated form
+
+    2) ** Logging ** : Containing much more data than a Metric, this manifests itself as an event from a system or application, containing all the information that is produced by such an Event.
+
+    3) ** Tracing ** : This is a special case of logging where a request is given a unique identifier so that it can be tracked during its entire life cycle across every system. Due to increase of the dataset with the number of requests, it is a good idea to use samples instead of tracking all requests. 
+
+    4) ** Alerting ** : This is the continuous threshold validation of metrics or logs, and fires an action or notification in the case of a transgression of the said threshold.
+
+    5) ** Visualization ** : This is a graphical representation of metrics, logs, or traces. 
+
+
+Recently, the term monitoring has been overtaken by a superset called ** observability **, which is regarded as the evolution of monitoring, or a different wrapping to spring a hype and revive the concept.
+
