@@ -48,15 +48,15 @@ The same way the monitoring definition changes across contexts, its components f
 
 Components can be given below topics:
 
-    1) ** Metrics ** : This exposes a certain system resources, application action, or business characteristic as specific point in time value. This information is obtained in an aggregated form
+    1) **Metrics** : This exposes a certain system resources, application action, or business characteristic as specific point in time value. This information is obtained in an aggregated form
 
-    2) ** Logging ** : Containing much more data than a Metric, this manifests itself as an event from a system or application, containing all the information that is produced by such an Event.
+    2) **Logging** : Containing much more data than a Metric, this manifests itself as an event from a system or application, containing all the information that is produced by such an Event.
 
-    3) ** Tracing ** : This is a special case of logging where a request is given a unique identifier so that it can be tracked during its entire life cycle across every system. Due to increase of the dataset with the number of requests, it is a good idea to use samples instead of tracking all requests. 
+    3) **Tracing** : This is a special case of logging where a request is given a unique identifier so that it can be tracked during its entire life cycle across every system. Due to increase of the dataset with the number of requests, it is a good idea to use samples instead of tracking all requests. 
 
-    4) ** Alerting ** : This is the continuous threshold validation of metrics or logs, and fires an action or notification in the case of a transgression of the said threshold.
+    4) **Alerting** : This is the continuous threshold validation of metrics or logs, and fires an action or notification in the case of a transgression of the said threshold.
 
-    5) ** Visualization ** : This is a graphical representation of metrics, logs, or traces. 
+    5) **Visualization** : This is a graphical representation of metrics, logs, or traces. 
 
 
 Recently, the term monitoring has been overtaken by a superset called ** observability **, which is regarded as the evolution of monitoring, or a different wrapping to spring a hype and revive the concept.
