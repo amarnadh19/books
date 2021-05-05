@@ -84,11 +84,28 @@ In *Whitebox* monitoring, the system under observation surfaces data about its i
 Probing can be your last line of defence - if all else fails, you can rely on blackbox monitoring to asses availability.
 
 
-## understanding Metrics Collection
+## Understanding Metrics Collection
 
 The process by which metrics are by monitoring systems can be generally be divided into two approaches: *Push* and *pull*.
 
 
 ## An overview of the two collection approaches
 
-![](https://github.com/amarnadh19/books/blob/main/images/pro_image_1.png?)
+In *push-based* monitoring systems, emitted metrics or events are sent either directly from the producting application or from a local agent to the collecting service like so:
+
+![Push-based monitoring system](https://github.com/amarnadh19/books/blob/main/images/pro_image_1.png?)
+
+Systems that handle raw event data generally prefer push since the frequency of envent generation is very high.
+
+Some examples that use this approach include Riemann, StatsD, and the Elasticsearch, logstash and the Kibana (ELK) stack.
+
+That is not to say that only these types of systems use push. Some monitoring systems such as Graphite, OpenTSDB, and the Telegraf, InfluxDB, Chronograph, and Kapacitor (TICK) stack have been designed using this approach. Even good old Nagios supports push through the Nagios Service Check Acceptor (NSCA), commonly known as passive checks:
+
+![Pull-based monitoring system](https://github.com/amarnadh19/books/blob/main/images/pro_image_2.png?)
+
+In contract, Pull based monitoring systems collect metrics directly from applications or from proxy processes that make those metrics available to the system. 
+
+Some notable monitoring software that uses pull are Nagios and Nagios-style systems (Icinga, Zabbix, Zenoss, and Sensu, to name a few). Prometheus is also one of those that embraces the pull approach and is very opinionated about this.
+
+
+
