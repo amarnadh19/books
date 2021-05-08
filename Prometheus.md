@@ -416,3 +416,69 @@ While label values can be full UTF-8, Labels name have to match a regular expres
 
 ``` for example,  [a-zA-Z0-9_]* ```
 
+Their main difference in regard to metric names is that label names don't allow the colon (:).
+
+
+### Samples
+
+Samples are the collected data points, and they represents the numerical value of time series data.
+
+
+### Cardinality
+
+Depending on the computing resources being assigned to a Prometheus instance, it will gracefully handle a number of time series. 
+
+This term is often used to mean the number of unique time series that are produced by a combination of metric names and their associated label names/values. As an example, a single metric with no additional dimensions (such as labels) from an application that has one hundred instances will naturally mean that Prometheus will store 100 time series, one for each instance (the instance, here, is a dimension that's added outside of the application); another metric from that application that had a label with ten possible values will translate into 1,000 time series (10 time series per instance, times 100 instances). This shows that cardinality is multiplicative—each additional dimension will increase the number of produced time series by repeating the existing dimensions for each value of the new one. Having multiple dimensions with a large number of possible values in a metric will cause what is called a cardinality explosion in Prometheus, which is the creation of a very large number of time series.
+
+When you have label values that don't have a clear limit, which can increase indefinitely or above hundreds of possible values, you will also have a cardinality problem. These metrics might be better suited to be handled in logs-based systems.
+
+
+## A tour of the four core metric types
+
+Prometheus metrics are divided into four main types: counters, gauges, histograms, and summaries.
+
+### Counter
+
+This is a strictly cumulative metric whose value can only increase. The only exception for this rule is when the metric is reset, which brings it back to zero.
+
+This is one of the most useful metric types because even if a scrape fails, you won't lose the cumulative increase in the data, which will be available on the next scrape
+
+To help visualize this type of metric, here are some examples of counters and their graphical representation
+![Sample metric](https://github.com/amarnadh19/books/blob/main/images/pro_image_9.jpg?)
+
+
+### Gauge
+
+A gauge is a metric that snapshots a given measurement at the time of collection, which can increase or decrease (such as temperature, disk space, and memory usage).
+
+If a scrape fails, you will lose that sample, as the next scrape might encounter the metric on a different value (higher/lower).
+
+![Sample metric](https://github.com/amarnadh19/books/blob/main/images/pro_image_10.jpg?)
+
+
+### Histogram
+
+Histograms allow you to retain some granularity by counting events into buckets that are configurable on the client side, and also by providing a sum of all observed values. 
+
+Furthermore, histograms in Prometheus are cumulative, which means each bucket will have the value of the previous bucket, plus the number of its own events.
+
+This type of metric is especially useful to track bucketed latencies and sizes (for example, request durations or response sizes) as it can be freely aggregated across different dimensions. Another great use is to generate heatmaps (the evolution of histograms over time).
+
+![Sample metric](https://github.com/amarnadh19/books/blob/main/images/pro_image_11.png?)
+
+
+### Summaries
+
+Summaries are similar to histograms in some ways, but present different trade-offs and are generally less useful.
+
+The main reason to use summary quantiles is when accurate quantile estimation is needed, irrespective of the distribution and range of the observed events.
+
+*Quantiles in Prometheus are referred to as φ-quantiles, where 0 ≤ φ ≤ 1.*
+
+Both quantiles and sliding window size are defined in the instrumentation code, so it's not possible to calculate other quantiles or window sizes on an ad hoc basis.
+
+![Sample metric](https://github.com/amarnadh19/books/blob/main/images/pro_image_12.jpg?)
+
+
+## Longitudinal and cross-sectional aggregations
+
