@@ -351,3 +351,68 @@ beverage=coffee,
 value=40172
 ```
 
+
+## Prometheus local storage
+
+Local storage is the standard approach for storing data in Prometheus. 
+
+At a very high level, Prometheus storage design is a combination of an index implementation using posting lists for all currently stored labels with their values, and its own time series data format.
+
+
+### Data Flow
+
+The way Prometheus stores collected data locally can be seen as a three part process.
+
+
+### Memory
+
+The freshest batch of data is kept in memory for upto two hours. This approach dramatically reduces disk I/O two fold; the most recent data is available in memory, making it blazingly fast to query; and the chunks of data are created in memory, avoiding constant disk writes.
+
+
+### Write ahead log
+
+While in memory, data is not persisted and could be lost if the process terminates abnormally. To prevent this scenario, a write-ahead log (WAL) in disk keeps the state of the in-memory data so that it can be replayed if Prometheus, crashes or restarted.
+
+
+### Disk
+
+After two-hour time window, the chunks get written to disk. These chunks are immutable and, even though data can be deleted, it is not an atomic operation.
+
+
+### Layout
+
+The way data gets stored in Prometheus is organized into a series of directories (Blocks) containing the data chunks, the LevelDB index for that data, a ``` meta.json ``` file with human-readable information about the block. Each one of these blocks represents a database.
+
+![Example directory structure](https://github.com/amarnadh19/books/blob/main/images/pro_image_8.png?)
+
+
+## Prometheus Data Model
+
+Prometheus stores data as time series, which includes key/value pairs known as labels, a timestamp, and finally a value.
+
+
+### Notation
+
+A time series in Prometheus is represented as follows:
+
+``` <metric_name>[{<label_1="value_1">,<label_N="value_N">}] <datapoint_numerical_value> ```
+
+### Metric names
+
+Even though this is an implementation detail, a metric name is nothing more than the value of a special label called ``` __name__```. So, if you have a metric named ``` beverages_total ```, internally, it's represented as ``` __name__=beverages_total ```. Keep in mind that labels surrounded by ``` __ ``` are internal to Prometheus, and any label prefixed with ```__ ``` is only available in some phases of the metrics collection cycle.
+
+The combination of labels (key/values) and the metric name defines the identity of a time series.
+
+Every metric name in Prometheus must match the following regular expression:
+
+``` a-zA-Z_:][a-zA-Z0-9_:]* ```
+
+
+### Metric Labels
+
+Labels, or the key/value pairs associated with a certain metric, add dimensionality to the metrics.
+
+While label values can be full UTF-8, Labels name have to match a regular expression to be considered valid; 
+
+``` for example,  [a-zA-Z0-9_]* ```
+
