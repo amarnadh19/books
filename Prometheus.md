@@ -309,4 +309,45 @@ The Prometheus server also ships with two internal visulizations components:
 ![The Prometheus Architecture in detail](https://github.com/amarnadh19/books/blob/main/images/pro_architecture.png?)
 
 
+***
+
+# Prometheus Metrics Fundamentals
+
+Metrics are the core resources that the Prometheus stack ingests to provide you with usefull information. Understand them correctly is essential to fully utilize, manage, or even extend the realm of possibilities this stack has to offer.
+
+
+## Understanding Prometheus data Model
+
+To understand the Prometheus data model, we need to go through what makes a time series and the storage of such data.
+
+
+### Time Series Data
+
+Time series data can usually be defined as a sequence of numerical data points that are indexed chronologically from the same source.
+
+In the scope of Prometheus, these data points are collected at a fixed time interval.
+
+As such, this kind of data, when represented in graphical form, will most commonly plot the evolution of the data through time, with the x axis being time and the y axis being the data value.
+
+
+### Time series databases
+
+It all starts with the need to collect, store, and query measurements over time. Nothing prevents you from using standard relational or NoSQL databases to store time series data.
+
+As such, modern time series databases store the following components:
+
+    - A timestamp
+    - A value
+    - Some context about the value, encoded in a metric name or in associated key/value pairs
+
+
+An abstract example of data that fits this time series database specification is as follows:
+
+
+> timestamp=1544978108, 
+> company=ACME, 
+> location=headquarters, 
+> beverage=coffee, 
+> value=40172
+
 
