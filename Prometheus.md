@@ -304,11 +304,9 @@ The Prometheus server also ships with two internal visulizations components:
 ![The Prometheus console interface](https://github.com/amarnadh19/books/blob/main/images/pro_image_7.png?)
 
 
-```
 #### Note Architecture in Detail (Source from Prometheus site)
     
 ![The Prometheus Architecture in detail](https://github.com/amarnadh19/books/blob/main/images/pro_architecture.png?)
 
-```
 
 
