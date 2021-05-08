@@ -343,11 +343,11 @@ As such, modern time series databases store the following components:
 
 An abstract example of data that fits this time series database specification is as follows:
 
-
-> timestamp=1544978108, 
-> company=ACME, 
-> location=headquarters, 
-> beverage=coffee, 
-> value=40172
-
+```
+timestamp=1544978108, 
+company=ACME, 
+location=headquarters, 
+beverage=coffee, 
+value=40172
+```
 
