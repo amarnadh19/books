@@ -220,3 +220,85 @@ Nowadays, you can find exporters for pretty much any service you need, and if a 
 
 ## Exporter fundamentals
 
+When the exporter starts, it binds to a configured port and exposes the internal state of whatever is being collected in an HTTP endpoint of your choosing (the default being /metrics).
+
+The instrumentation data is collected when an HTTP GET request is made to the configured endpoint.
+
+For Example,  node exporter, one of the most commonly used exporters, relies on a number of kernel statistics to present data such as disk I/O, CPU, memory, network, filesystem usage, and much, much more. Every single time that endpoint is scraped, the information is quickly gathered and exposed in a synchronous operation.
+
+The Http GET request that is made by the Prometheus server to the observed system for metric collection is called a **scrape**.
+
+If you are the one writing the service, the best option is to instrument the code directly using a Prometheus client library. There are official client libraries available for the following programming languages:
+
+- Go
+- Java/JVM
+- Python
+- Ruby
+
+There are community-driven client libraries for the following programming languages:
+
+- Bash
+- C++
+- Common Lisp
+- Elixir
+- Erlang
+- Haskell
+- Lua for NGINX
+- Lua for Tarantool
+- .NET
+- C#
+- Node.js
+- Perl
+- PHP
+- Rust
+
+Usually, exporters are very light and the performance footprint is mostly negligible but, as always, there are exceptions for this rule.
+
+
+## Alert routing and management with Alert Manager
+
+Alertmanager is the component from the Prometheus ecosystem that's responsible for the notifications that are triggered by the alerts that are generated from the Prometheus server.
+
+As such, its availability is of the essence and the design choices reflect this need. It's the only component that's truly conceived to work in a highly available cluster setup, and uses gossip as the communication protocol
+
+![High level overview of Alertmanager](https://github.com/amarnadh19/books/blob/main/images/pro_image_5.png?)
+
+At a very high level, Alertmanager is a service that receives HTTP POST requests from Prometheus servers via its API, which it then deduplicates and acts on by following a predefined set of routes.
+
+AlertManager also exposes a web interface to allow, for instance, the visualization and silencing of firing alerts of applying inhibition rules for them.
+
+One of the core design choices is to value delivery over deduplication. This means that if a network partition occurs between a cluster of Alertmanager instances, notifications will be sent from both sides of the partition.
+
+
+### Alerting Routes
+
+A route, in its essence, can be seen as a tree-like structure. If an incoming alert has a specific payload that triggers a particular route (branch in tree), a pre-defined integration will be invoked.
+
+There are multiple out-of-the-box integrations available for the most common use cases, such as:
+
+- Email
+- Hipchat
+- PagerDuty
+- Slack
+- Opsgenie
+- VictorOps
+- WeChat
+
+There's also the webhook integration that issues an HTTP POST request with the JSON payload of the firing alert to an endpoint of your choosing.
+
+
+## Visualizing your data
+
+Data visualization is one of the simplest ways to produce or consume information. Prometheus exposes a well-defined API, where PromQL queries can produce raw data for visualizations.
+
+Currently, the best external software for visualization is Grafana.
+
+The Prometheus server also ships with two internal visulizations components:
+
+- Expression Browser :-  Here, you can run PromQL directly to quickly query data and visualize it instantly:
+
+![The Prometheus expression browser interface](https://github.com/amarnadh19/books/blob/main/images/pro_image_6.jpeg?)
+
+- Consoles :- These are web pages that are built using the Golang templating languages and are served by the Prometheus server itself. This approach allows you to have pre-defined data visualization interfaces without you having to constantly type PromQL:
+
+![The Prometheus console interface](https://github.com/amarnadh19/books/blob/main/images/pro_image_6.jpeg?)
