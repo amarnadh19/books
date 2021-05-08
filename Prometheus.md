@@ -302,3 +302,13 @@ The Prometheus server also ships with two internal visulizations components:
 - Consoles :- These are web pages that are built using the Golang templating languages and are served by the Prometheus server itself. This approach allows you to have pre-defined data visualization interfaces without you having to constantly type PromQL:
 
 ![The Prometheus console interface](https://github.com/amarnadh19/books/blob/main/images/pro_image_7.png?)
+
+
+```
+#### Note Architecture in Detail (Source from Prometheus site)
+    
+![The Prometheus Architecture in detail](https://github.com/amarnadh19/books/blob/main/images/pro_architecture.png?)
+
+```
+
+
