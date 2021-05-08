@@ -477,7 +477,7 @@ The main reason to use summary quantiles is when accurate quantile estimation is
 
 Both quantiles and sliding window size are defined in the instrumentation code, so it's not possible to calculate other quantiles or window sizes on an ad hoc basis.
 
-![Sample metric](https://github.com/amarnadh19/books/blob/main/images/pro_image_12.jpg?)
+![Sample metric](https://github.com/amarnadh19/books/blob/main/images/pro_image_12.png?)
 
 
 ## Longitudinal and cross-sectional aggregations
