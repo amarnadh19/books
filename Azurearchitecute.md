@@ -513,3 +513,82 @@ The following illustration shows a 50 percent savings achieved by moving one siz
 
 Azure Advisor identifies which virtual machines are underutilized. Azure Advisor monitors your virtual machine usage for 14 days, and then it identifies any underutilized virtual machines. Virtual machines with a CPU utilization of 5 percent or less, and network usage of 7 MB or less, for four or more days are considered underutilized.
 
+#### Implement shutdown schedules for virtual machines
+
+If you have VM workloads that are used only periodically, but are running continuously, you're wasting money. These VMs can be shut down when they're not in use, which saves your compute costs while the VM is deallocated. For example, a development environment is a good candidate for shutdown during your organization's off hours because development generally happens only during business hours.
+
+You have several options to deallocate a VM. For example:
+
+- You can use Azure Automation to run your VMs only during times that your workloads require.
+- You can use the auto-shutdown feature on a virtual machine to schedule a one-off automated shutdown.
+- You can manually stop a VM in the Azure portal.
+
+You should always use the Azure controls to stop your VMs. Shutting down the OS from inside a VM does not deallocate its Azure resource, so you'll continue to accrue costs.
+
+
+#### Apply compute cost discounts
+
+Azure Hybrid Benefit offers an additional way to optimize the costs of your Windows Server and SQL Server instances. It enables you to use your licenses for your on-premises computers running Windows Server or SQL Server with Software Assurance as a discount toward the compute cost of these VMs. You can then reduce or eliminate the costs for Windows Server and SQL Server on enabled instances.
+
+Azure Reserved Virtual Machine Instances (Azure RI) enables you to purchase compute capacity for a one-year or three-year commitment. It offers you significant savings - up to 72 percent - when compared to pay-as-you-go compute resources.
+
+The following illustration shows savings achieved when you combine your on-premises licenses with Azure Hybrid Benefit. It also shows savings achieved when you combine your on-premises licenses with both Azure Reserved Virtual Machine Instances and Azure Hybrid Benefit.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_14.png?)
+
+
+#### Cost optimization for VM disk storage
+
+For workloads that don't require high reliability and performance disks, you can use the reduced-cost standard storage. For example, you might choose to use standard storage for your development and test environments that are not required to be an identical match for your production workloads.
+
+
+Disks that aren't associated with a VM still incur storage costs, so you should make sure you don't have any orphaned disks remaining in your environment.
+
+If you've removed a VM but not its associated disks, you can reduce your storage costs by identifying and removing these orphaned disks from your environment.
+
+You should also make sure that you don't have any orphaned snapshots remaining in your environment. Pricing for snapshots is lower than pricing for the disks themselves, but it's still a good practice to eliminate costs for unnecessary resources.
+
+
+## Optimize PaaS costs
+
+Platform as a service (PaaS) services are typically optimized for costs over IaaS services. But there are opportunities to identify waste and optimize for minimal costs in your PaaS services as well. 
+
+### Optimize Azure SQL Database costs
+
+When creating an Azure SQL database, you have to select a server and decide on a performance tier. Each tier provides a performance level either in database transaction units (DTUs) or virtual cores (vCores).
+
+SQL Database elastic pools are a simple, cost-effective solution for managing and scaling several databases that have varying and unpredictable usage demands.
+
+The databases in an elastic pool are on a single Azure SQL Database server, and share a set number of resources at a set price. Pools are well suited for a large number of databases with specific utilization patterns. For a given database, this pattern is characterized by low average utilization, with relatively infrequent utilization spikes.
+
+The more databases you can add to a pool, the greater your savings become. The following illustration shows the capabilities of the three types of elastic database pools:
+
+- Basic autoscales up to 5 eDTUs per database.
+- Standard autoscales up to 100 eDTUs per database.
+- Premium autoscales up to 1,000 eDTUs per database.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_15.png?)
+
+Elastic pools are a great way to spread costs across multiple databases. They can make a significant impact on reducing your Azure SQL Database costs.
+
+### Optimize Blob Storage costs
+
+Blob Storage is a cost-effective way to store data. But as the amount of data grows, your bill can benefit from optimizing how the data is stored.
+
+Azure Storage offers three tiers for blob object storage:
+
+- **Hot access tier:** Highest storage costs but lowest access costs. This tier is optimized for storing data that's accessed often.
+
+- **Cool access tier:** Lower storage costs and higher access costs compared to hot storage. This tier is optimized for storing data that's infrequently accessed and stored for at least 30 days.
+
+- **Archive access tier:** Lowest storage cost and highest data retrieval costs compared to hot and cool storage. This tier is optimized for storing data that is rarely accessed and stored for at least 180 days, with flexible latency requirements (for example, several hours of retrieval latency).
+
+
+### Consumption pricing models
+
+Moving to PaaS services can take the pay-as-you-go model even further into a true consumption pricing model. Services such as Azure Functions have the ability to use consumption plans.
+
+When you're using a consumption plan, instances of the Azure Functions host are dynamically added and removed based on the number of incoming events. This serverless plan scales automatically, and you're charged for compute resources only when your functions are running. On a consumption plan, a function execution times out after a configurable period of time. Billing is based on the number of executions, the length of execution time, and the amount of memory used. Billing is aggregated across all functions within a function app.
+
+Moving to services that use a consumption pricing model can bring a new approach to cost savings into your architecture.
+
