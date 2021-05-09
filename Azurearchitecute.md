@@ -163,3 +163,80 @@ A robust testing plan can uncover issues with infrastructuredeployments that can
 ### What is Performance efficiency
 
 Performance efficency is matching the resources that are available to an application with the demand that is receiving.
+
+### Scale up and Scale out
+
+Compute resources can be scaled in two directions:
+
+#### Scaling up is adding more resources to a single instance.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_6.png?)
+
+#### Scaling out is adding more instances.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_7.png?)
+
+Scaling up is concerned with adding more resources, such as CPU or memory, to a single instance. This instance might be a virtual machine or a PaaS service.
+
+Scaling out is concerned with adding more instances to a service. They can be virtual machines or PaaS services. Instead of adding more capacity by making a single instance more powerful, we add capacity by increasing the total number of instances.
+
+In both types of scaling, resources can be reduced, which brings cost optimization into the picture.
+
+*Autoscaling* is the process of dynamically allocating resources to match performance requirements.
+
+
+### Optimize network performance
+
+When you're optimizing for performance, you'll look at network and storage performance to ensure that their levels are within acceptable limits. These performance levels can affect the response time of your application. Selecting the right networking and storage technologies for your architecture will help you ensure that you're providing the best experience for your consumers.
+
+**Adding a messaging layer between services can have a benefit to performance and scalability.** A messaging layer creates a buffer so that requests can continue to flow in without error if the receiving application can't keep up. As the application works through the requests, they'll be answered in the order in which they were received.
+
+
+### Optimize storage performance
+
+In many large-scale solutions, data is divided into separate partitions that can be managed and accessed separately. The partitioning strategy must be chosen carefully to maximize the benefits while minimizing adverse effects. Partitioning can help improve scalability, reduce contention, and optimize performance.
+
+Use caching in your architecture to help improve performance. Caching is a mechanism to store frequently used data or assets (webpages, images) for faster retrieval. You can use caching at different layers of your application. You can use caching between your application servers and a database in order to decrease data retrieval times.
+
+You can also use caching between your users and your web servers, by placing static content closer to users and decreasing the time it takes to return webpages to the users. This has a secondary effect of offloading requests from your database or web servers, increasing the performance for other requests.
+
+
+### Identify performance bottlenecks in your application
+
+Distributed applications and services running in the cloud are complex pieces of software that comprise many moving parts. In a production environment, it's important to be able to track the way in which users utilize your system, trace resource utilization, and generally monitor the health and performance of your system. You can use this information as a diagnostic aid to detect and correct issues. You can also use this information to help spot potential problems and prevent them from occurring.
+
+Look across all layers of your application and identify and remediate performance bottlenecks. These bottlenecks might be poor memory handling in your application, or even the process of adding indexes into your database. It might be an iterative process as you relieve one bottleneck and then uncover another that you were unaware of.
+
+***
+
+## Reliability
+
+### What is reliability?
+
+Designing for reliability includes maintaining uptime through small-scale incidents and temporary conditions like partial network outages.
+
+You can ensure that your application can handle localized failures by integrating high availability into each component of the application and eliminating single points of failure. Such a design also minimizes the impact of infrastructure maintenance. High-availability designs typically aim to eliminate the impact of incidents quickly and automatically, and to ensure that the system can continue to process requests with little to no impact.
+
+Designing for reliability also focuses on recovery from data loss and from larger-scale disasters. Recovery from these types of incidents often involves active intervention, though automated recovery steps can reduce the time needed to recover. These types of incidents might result in some amount of downtime or permanently lost data. Disaster recovery is as much about careful planning as it is about execution.
+
+Architecting for reliability ensures that your application can meet the commitments you make to your customers. This includes ensuring that your systems are available to end users and can recover from any failures.
+
+Including high availability and recoverability in the design of your architecture protects your business from financial losses that result from downtime and lost data. They ensure that your reputation isn't negatively affected by a loss of trust from your customers.
+
+
+### Build a highly available architecture
+
+For availability, identify the service-level agreement (SLA) you're committing to. Examine the potential high-availability capabilities of your application relative to your SLA, and identify where you have proper coverage and where you'll need to make improvements. Your goal is to add redundancy to components of the architecture so that you're less likely to experience an outage.
+
+Examples of high-availability design components include clustering and load balancing:
+
+- Clustering replaces a single VM with a set of coordinated VMs. When one VM fails or becomes unreachable, services can fail over to another one that can service the requests.
+
+- Load balancing spreads requests across many instances of a service, detecting failed instances and preventing requests from being routed to them.
+
+
+### Build an architecture that can recover from failure
+
+For recoverability, you should perform an analysis that examines your possible data loss and major downtime scenarios. Your analysis should include an exploration of recovery strategies and the cost/benefit tradeoff for each
+
+
