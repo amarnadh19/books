@@ -310,4 +310,206 @@ Revisiting the model of shared responsibility, we can reframe this in the contex
 
 # Microsoft Azure Well-Architected Framework - Cost optimization
 
+## Plan and estimate your Azure costs
+
+
+Whether your organization wants to build a new application on Azure, or you're looking to move an entire datacenter to the cloud, estimating costs is a key part of your planning process to ensure a successful project.
+
+Proper planning is incredibly important to any cloud project. Let's look at what you need to consider.
+
+### Capture requirements
+
+Before you start any cloud project, take time to plan properly. That's especially important when you're considering costs.
+
+Start by identifying the stakeholders for the project. This should include the business teams that are driving the organizational outcomes.
+
+Identify the business and technical requirements of your project:
+
+- Business requirements might be an API to enable partner communications or a reporting interface for the accounting department to view financial transactions.
+
+- Technical requirements might be the ability to store relational data, or the ability for users to use a personal identity to access applications.
+
+Both of these requirements will affect the overall cost of the project. They'll also influence your selection of services.
+
+After you have identified your requirements, you'll want to define the workloads that are in scope to use cloud services, and identify the services and resources you'll use.
+
+When you have listed all of the requirements, services, and resources for your project, you can begin to estimate your costs.
+
+
+### Estimating the cost
+
+With your list of services captured, you can use the ***Azure Pricing Calculator*** to create estimates of the cost of your application.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_10.png?)
+
+
+As part of your cost estimation, it's also important to understand the subscription and billing models that are available on Azure. Two of the most common models are pay-as-you-go and enterprise agreement:
+
+- Pay-as-you-go subscriptions give you the flexibility to purchase and use the services you need, with the advantage of having no up-front commitments.
+
+- Enterprise agreements enable organizations to take advantage of discounts through up-front commitments. These agreements enable organizations to centralize their Azure costs and billing. They can include other Microsoft services such as Microsoft 365.
+
+There are additional billing models. Each gives you access to the full suite of Azure services with the flexibility to purchase only what you need, when you need it.
+
+Evolving your architecture can reduce resources costs, such as moving from virtual machines to app services. It can also reduce operational costs by requiring less downtime for maintenance.
+
+
+### Organize resources for cost awareness
+
+It's also important to set up an organizational framework to enable the control, reporting, and attribution of costs throughout your environment.
+
+Use Azure Policy to create limitations for the size or tier of resources that can be provisioned.
+
+Enable your users to view reports and billing as needed by creating roles that allow them to view services such as Azure Cost Management. Enabling your users to view costs will help them see the impact of their business decisions. It also provides for transparency across the organization with respect to cloud resource costs.
+
+Organize your resources into resource groups or subscriptions. They can serve as boundaries for projects, business units, or services. You can also use Azure Policy to enforce the tagging of resources. Subscriptions, resource groups, and tags are exposed in billing reports. These reports will enable you to account for the usage of resources by product, business unit, or project.
+
+
+### Budget for education
+
+Educating your engineers, developers, and users is an important piece of a successful cloud project.
+
+
+## Provision with optimization
+
+When provisioning resources, you'd ideally make them as efficient as possible from the start.
+
+### Select appropriate service tiers and sizes
+
+When you're provisioning resources on the cloud, selecting the right SKU or tier will have a direct impact on the capabilities, capacity, and performance of the Azure service. This selection is tied directly to cost.
+
+There is a wide variety of virtual machine types to choose from when you're provisioning for VM-based workloads. Each VM SKU comes with an assigned amount of CPU, memory, and storage. Assess the resource requirements for your workload, and select the VM SKU that most closely matches your needs.
+
+Provisioning VM sizes can often be challenging. You might be deploying for your maximum workload, even though your application needs that capacity for only a portion of its running time. Choosing a VM size is not a permanent decision. **You can modify your VM size at any time, but in most cases it will require a restart of your VM.**
+
+
+### Pay only for consumption
+
+Many cloud services provide a consumption billing model. With consumption models, you pay for only the amount of transactions, CPU time, or run time of your application. This can bring cost savings and efficiency to your application, because you aren't paying for the resources to run your application when it's not being used. Let's look at a few examples of Azure services that have a consumption cost model:
+
+- **Azure Functions** is an event-driven, serverless compute platform that provides a consumption plan. When you're using the consumption plan, you're charged for compute resources only when your functions are running. Billing is based on the number of executions, the length of time running, and the amount of memory used. As an added benefit, your function scales automatically. Instances of the Azure Functions host are dynamically added and removed based on the number of incoming events. Function execution times out after a configurable period of time.
+
+- **Azure Logic Apps** is a service that helps you create automated, integration workflows in the cloud. Logic Apps provides a consumption tier where you only pay per execution of a connector.
+
+- **Azure SQL Database** is service that enables you to store relational data in the cloud. Azure SQL Database has a serverless tier where you can reduce your costs by pausing the database when it's not in use. Azure SQL Database serverless is price-performance optimized for single databases with intermittent, unpredictable usage patterns that can afford some delay in compute warm-up after idle usage periods.
+
+- **Azure API Management** is a service that provides centralized API administration, proxy, and deployment. API Management has a consumption tier that bills per execution, and will scale out automatically as requests change over time. The consumption tier enables the service to be used in a serverless fashion, with instant provisioning, automated scaling, built-in high availability, and pay-per-action pricing.
+
+
+### Use spot instances for low-priority workloads
+
+You can use spot VMs to take advantage of unused capacity on Azure at a significant cost savings. At any point when Azure needs the capacity back, the Azure infrastructure will evict spot VMs. Spot VMs are great for workloads that can handle interruptions like batch processing jobs, development/test environments, and large compute workloads.
+
+
+### Take advantage of reserved instances
+
+Azure reservations help you save money by committing to one-year or three-year plans for multiple products. Committing to one of these plans enables you to get a discount on the resources you use. Reservations can reduce your resource costs up to 72 percent on pay-as-you-go prices. Reservations provide a billing discount and don't affect the runtime state of your resources. After you purchase a reservation, the discount automatically applies to matching resources.
+
+Reservations are available for services such as:
+
+- Windows and Linux virtual machines
+- Azure SQL Database
+- Azure Cosmos DB
+- Azure Synapse Analytics
+- Azure Storage
+
+
+### Use managed services when possible
+
+Whenever possible, take advantage of combining lower resource costs and lower operational costs by using managed services. These services come with lower operational costs because you don't need to patch and manage the underlying infrastructure and services. Deploying applications on VMs comes with the administration and maintenance of the operating system, as well as any layered software.
+
+Azure SQL Database is a great example of a managed service. You can deploy a single or pooled database, or a managed instance, and each of these is fully managed. You don't need to patch the underlying database software, and operational items like backup are built in and provided for you.
+
+Azure App Service is another example of a managed service that is designed to host web applications. Rather than deploying and managing VMs to host your web applications, you can deploy your applications directly to App Service, and dramatically reduce the amount of effort that is required to maintain infrastructure.
+
+
+## Use monitoring and analytics to gain cost insights
+
+You've deployed your application by using infrastructure and services that are as cost-effective as possible. But what do you do when your business, customer demand, or application changes?
+
+
+### Track your cloud spend
+
+To make intelligent decisions, you need data. By analyzing where your money is going, you can compare your costs to your utilization to discover where you might have waste within your environment.
+
+An export of your billing data is available at any time. By using your billing data, you can track where your costs are going and how they're allocated across your resources. One challenge for you is that the billing data shows your costs but not your utilization. You'll have data that indicates you're paying for a large VM, but how much are you actually using it?
+
+**Azure Cost Management** gives you insights into where your spend is going, as well as underutilized resources. Azure Cost Management tracks your total spend, cost by service, and cost over time. You can drill down into resource types and instances. You can also break down your costs by organization or cost center by tagging resources with those categories.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_11.png?)
+
+Azure Advisor also has a cost component that:
+
+- Recommends VM resizing when necessary.
+- Identifies unused Azure ExpressRoute circuits and idle virtual network gateways.
+- Advises when to consider buying reserved instances because that might be more cost-effective than using pay-as-you-go instances.
+
+Azure Advisor makes additional recommendations in the areas of performance, high availability, and security.
+
+The important part is to take time to review your spend, and evaluate where your money is going. Effective analysis will help you identify areas of inefficiency, and ensure you're operating as cost-effectively as possible.
+
+
+### Conduct cost reviews
+
+After you have your Azure services running, you should regularly check your costs to track your Azure spending. You can use cost analysis to understand where the costs originated for your Azure usage.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_12.png?)
+
+Take time as an organization to regularly meet and review billing and expenditures that are related to cloud services. Review the respective expenditures with the technical and business stakeholders for each application. This brings increased visibility to the costs that are associated with an application, and the decisions made from a cost perspective.
+
+
+### Respond to cost alerts
+
+One of the key features of Azure Cost Management is the ability to configure alerts that are based on spending. These alerts can provide immediate visibility into spending that might be exceeding your budget. You can then take steps to address these costs. There are three types of cost alerts:
+
+- **Budget alerts** notify you when spending, based on usage or cost, reaches or exceeds the amount defined in the *alert* condition of the budget. Budgets in **Azure Cost Management** help you plan for and drive organizational accountability.
+
+  - With budgets, you can account for the Azure services that you consume or subscribe to during a specific period. They help you to proactively inform others about their spending, and to monitor how spending progresses over time. When the budget thresholds that you've created are exceeded, alerts can be sent to the appropriate teams. You can set budgets at varying levels, from resource groups to subscriptions to enterprise agreements.
+
+- **Credit alerts** notify you when your Azure credit monetary commitments are consumed. Monetary commitments are for organizations with enterprise agreements.
+
+- **Department spending quota alerts** notify you when department spending reaches a fixed threshold of the quota. You configure spending quotas in the Azure Enterprise Agreement portal. When a threshold is met, an email is sent to department owners and a notification appears in cost alerts.
+
+
+### Report anomalies
+
+When an anomaly in spending is identified through your data collection, cost reviews, or cost alerts, you should report it to the necessary stakeholders.
+
+
+## Maximize efficiency of cloud spend
+
+### How the cloud changes your expenses
+
+One of the differences between the public cloud and on-premises infrastructure is how you pay for the services that you use.
+
+In an on-premises datacenter, hardware procurement is a long process. Physical hardware is sized for maximum capacity. Some of the costs, such as computer power and storage space, can be hidden from the business units that are consuming those resources. Purchasing physical infrastructure ties up investments in long-term assets, which hinders your ability to be agile with your resources.
+
+Shifting to the cloud replaces the burgeoning costs of maintaining physical infrastructure with a pay-for-what-you-use cost model. You no longer need to tie up investments in physical assets. If your resource requirements change, you can respond by adding, moving, or removing resources.
+
+Cloud infrastructure can handle fluctuating resource usage scenarios. Resources that have significant periods of inactivity can be shut down when not in use, and then not incur any cost at all.
+
+
+## Optimize IaaS costs
+
+The compute costs are typically your largest expense, followed by storage costs.
+
+Let's take a look at best practices to reduce your compute and storage costs.
+
+### Compute
+
+A few options are available to achieve cost savings for virtual machines:
+
+- Choose a smaller size for the virtual machine instance.
+- Reduce the number of hours a virtual machine runs.
+- Use discounts for the compute costs.
+
+#### Rightsize virtual machines
+
+Rightsizing a virtual machine is the process of matching virtual machine sizes with the respective requirements for resource demand. If a VM is running 25 percent idle, reducing the size of the VM will immediately reduce your cost. Virtual machine costs are linear within an instance family; each next size larger will double your cost. Conversely, reducing a VM by a single instance size will reduce your cost by half.
+
+The following illustration shows a 50 percent savings achieved by moving one size down within the same series.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_13.png?)
+
+Azure Advisor identifies which virtual machines are underutilized. Azure Advisor monitors your virtual machine usage for 14 days, and then it identifies any underutilized virtual machines. Virtual machines with a CPU utilization of 5 percent or less, and network usage of 7 MB or less, for four or more days are considered underutilized.
 
