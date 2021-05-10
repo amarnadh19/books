@@ -482,3 +482,35 @@ Both quantiles and sliding window size are defined in the instrumentation code, 
 
 ## Longitudinal and cross-sectional aggregations
 
+One of Prometheus' core strengths is that it makes the manipulation of time series data easy, and this slicing and dicing of data usually boils down to two kinds of aggregations, which are often used together: longitudinal and cross-sectional aggregations.
+
+In the context of time series, an aggregation is a process that reduces or summarizes the raw data, which is to say that it receives a set of data points as input and produces a smaller set (often a single element) as output. Some of the most common aggregation functions in time series databases are minimum, maximum, average, count, and sum.
+
+***
+
+# Running a Prometheus server
+
+## Deep dive into the Prometheus configuration
+
+Default configurations of Prometheus, that it can scale from a quick test running on a local computer to a production-grade instance, handling millions of samples per second without having to touch almost any of its many knobs and dials.
+
+There are two main types of configuration on a Prometheus server
+
+- **Command line flags** : Command-line flags control the parameters that cannot be changed at runtime, such as the storage path or which TCP port to bind to, and need a full server restart to apply any change done at this level.
+- **Operating logics through configuration files**: The configuration files control runtime configuration, such as scrape job definitions, rules files locations, or remote storage setup.
+
+
+## Prometheus startup configuration
+
+While running a Prometheus server with no startup configuration can be good enough for local instances, it is advisable to configure a couple of basic command-line flags for any serious deployment.
+
+At the time of writing, Prometheus has almost 30 command-line flags for tweaking several aspects of its operational configuration, grouped by the following namespaces: ```config```, ```web```, ```storage```, ```rules```, ```alertmanager```, ```query```, and ```log```. The --help flag does a good job of describing most options, but it can be a bit terse in a few places, so we're going to highlight the ones that are either important for any deployment or whose function is not readily apparent.
+
+### The config section
+
+The first thing that is usually important to set is the Prometheus configuration file path, through the ```--config.file``` flag. By default, Prometheus will look for a file named ```prometheus.yml``` in the current working directory. 
+
+While this is great for local tests, production deployments usually place server binaries and configuration files in their own paths, and so this flag is commonly needed. As a side note, this and a storage directory are the only hard requirements for starting a Prometheus server; without a configuration file, Prometheus refuses to start.
+
+### The storage section
+
