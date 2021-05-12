@@ -592,3 +592,57 @@ When you're using a consumption plan, instances of the Azure Functions host are 
 
 Moving to services that use a consumption pricing model can bring a new approach to cost savings into your architecture.
 
+***
+
+# Microsoft Azure Well-Architected Framework - Operational excellence
+
+## Design, build, and orchestrate with modern practices
+
+Development and operational practices have evolved over the years to become more seamless and integrated
+
+
+### DevOps
+
+DevOps is the union of people, processes, and products to enable continuous delivery of value to end users. DevOps focuses on bringing the development and operations functions together, and breaking down the existing barriers between them.
+
+There are several services and tools that are available from Microsoft to help an organization adopt and develop DevOps practices. Azure DevOps is a suite of products and tools that teams adopting DevOps practices can use to plan, develop, deliver, and operate their solutions.
+
+Azure Boards is a part of Azure DevOps that helps teams plan and track work. Azure Boards has modern agile tools like Kanban boards, backlogs, dashboards and scrum boards to enable your team to have greater visibility into the work that is planned, and what has been delivered.
+
+### Continuous Integration and Continuous Delivery (CI/CD)
+
+Continuous Integration (CI) is the practice of building and testing code every time a team member commits changes to version control. CI encourages developers to share their code and unit tests by merging their changes into a shared version control repository after every small task completion. Committing code triggers an automated build system to grab the latest code from the shared repository, and then build, test, and validate the full master branch.
+
+Continuous Delivery (CD) is the process to build, test, configure and deploy from a build environment to a production environment. Multiple testing or staging environments create a release pipeline to automate the creation of infrastructure and deployment of a new build. Successive environments support progressively longer-running activities of integration, load, and user acceptance testing.
+
+Continuous integration and continuous delivery are often combined into a single pipeline known as CI/CD. Continuous integration starts the continuous delivery process, and the CI/CD pipeline stages changes from each successive environment to the next upon successful completion of the tests that are defined at each stage.
+
+Azure Pipelines is a cloud service that you can use to automatically build and test your code project and make it available to others. It works with just about any language or project type, and integrates with GitHub, GitHub Enterprise, Azure Repos, and other version control systems. Azure Pipelines combines continuous integration (CI) and continuous delivery (CD) to constantly and consistently test and build your code and ship it to any target.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_16.jpg?)
+
+
+### Microservices
+
+A microservices architecture consists of services that are small, independent, and loosely coupled. Each service can be deployed and scaled independently.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_17.png?)
+
+A microservice is small enough that a single, small team of developers can write and maintain it. Because services can be deployed independently, a team can update an existing service without rebuilding and redeploying the entire application.
+
+
+### Environment consistency
+
+A key piece of ensuring that you can develop and deploy applications with confidence is by ensuring that your environments are consistent between development, test, and production. As your CI/CD processes move your code through your environments, any variation risks introducing areas where testing can fail or overlook defects.
+
+
+## Use monitoring and analytics to gain operational insights
+
+Monitoring is the act of collecting and analyzing data to determine the performance, health, and availability of your business applications, and the resources on which they depend. An effective monitoring strategy helps you focus on the health of your application.  It also helps you increase your uptime by proactively notifying you of critical issues, so that you can resolve them before they become problems.
+
+When it comes to monitoring and analytics on Azure, we can bundle services into three specific areas of focus:
+
+- Core monitoring
+- Deep infrastructure monitoring
+- Deep application monitoring
+

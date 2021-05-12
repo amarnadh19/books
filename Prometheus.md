@@ -589,3 +589,32 @@ regex: expensive_metric_.+
 action: drop
 ```
 
+Let's examine each section in detail
+
+### Global Configuration
+
+The global configuration defines the default parameters for every other configuration section, as well as outlining what labels should be added to metrics going to external systems, as shown in the following code block:
+
+```
+global:
+scrape_interval: 1m
+scrape_timeout: 10s
+evaluation_interval: 1m
+external_labels:
+dc: dc1
+prom: prom1
+```
+
+*Duration can only be integer values and can only have one unit. This means that trying to use 0.5 minutes instead of 30 seconds or one minute 30 seconds instead of 90 seconds will be considered a configuration error.*
+
+**scrape_interval** sets the default frequency targets that should be scraped. This is usually between 10 seconds and one minute, and the default 1m is a good conservative value to start.
+
+**scrape_timeout** defines how long Prometheus should wait by default for a response from a target before closing the connection and marking the scrape as failed (10 seconds if not declared)
+
+Similar to **scrape_interval, evaluation_interval** sets the default frequency recording and alerting rules are evaluated. For sanity, both should have the same.
+
+![](https://github.com/amarnadh19/books/blob/main/images/pro_image_13.png?)
+Figure : Representation of scrape intervals and evaluation intervals inside prometheus
+
+Lastly, **external_labels** allows you to set label name/value pairs that are added to time series or alerts going to external systems, such as Alertmanager, remote read and write infrastructure, or even other Prometheis through federation. This functionality is usually employed to uniquely identify the source of a given alert or time series; therefore, it is common to identify the region, datacenter, shard, or even the instance identifier of a Prometheus server.
+
