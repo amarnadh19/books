@@ -568,7 +568,9 @@ At a high level, we can split the configuration file into the following sections
     - remote_write
 
 A configuration file with the most comprehensive list of options available can be found in the Prometheus project GitHub repository, located in the following address: 
-[](https://github.com/prometheus/prometheus/blob/v2.9.2/config/testdata/conf.good.yml)
+[https://github.com/prometheus/prometheus/blob/v2.9.2/config/testdata/conf.good.yml]
+
+
 
 
 
