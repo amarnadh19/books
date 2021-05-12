@@ -539,9 +539,36 @@ The Prometheus local storage can only be written to by a single Prometheus insta
 There can be an edge case to this behavior; when using persistent volumes to store the data directory, there is a chance that, when relaunching Prometheus as another container instance using the same volume, the previous instance might not have unlocked the database. This problem would make a setup of this kind susceptible to race conditions. Luckily, there is the ```--storage.tsdb.no-lockfile``` flag, which can be used in exactly this type of situation.
 
 
- ### The Web Section
+### The Web Section
 
- The next step is to configure what address users are going to utilize to get to the Prometheus server. The ```--web.external-url``` flag sets this base URL so that weblinks generated both in the web user interface and in outgoing alerts link back to the Prometheus server or servers correctly.
+The next step is to configure what address users are going to utilize to get to the Prometheus server. The ```--web.external-url``` flag sets this base URL so that weblinks generated both in the web user interface and in outgoing alerts link back to the Prometheus server or servers correctly.
 
- This might be the DNS name for a load balancer/reverse proxy, a Kubernetes service, or, in the simplest deployments, the publicly accessible, fully qualified domain name of the host running the server. 
+This might be the DNS name for a load balancer/reverse proxy, a Kubernetes service, or, in the simplest deployments, the publicly accessible, fully qualified domain name of the host running the server. 
+
+The Prometheus server behaves as a conventional *nix daemon by reloading its configuration file (along with rules files) when it receives a SIGHUP. However, there are situations where sending this signal isn't convenient (for example, when running in a container orchestration system such as Kubernetes or using custom-built automation) or even impossible (when running Prometheus on Windows). In these situations, the ```--web.enable-lifecycle ```flag can be used to enable the ```/-/reload and /-/quit``` HTTP endpoints, which can be used to control, reload, and shut down, respectively
+
+Similarly, the ```--web.enable-admin-api``` flag is also turned off by default for the same reason. This flag enables HTTP endpoints that provide some advanced administration actions, such as creating snapshots of data, deleting time series, and cleaning tombstones.
+
+
+### The Query section
+
+This section is all about tuning the inner workings of the query engine. Some are fairly straightforward to understand, such as how long a given query can run before being aborted (--query.timeout), or how many queries can run simultaneously (--query.max-concurrency)
+
+
+
+## Prometheus Configuration file Walkthrough.
+
+At a high level, we can split the configuration file into the following sections:
+
+    - global
+    - scrape_configs
+    - alerting
+    - rule_files
+    - remote_read
+    - remote_write
+
+A configuration file with the most comprehensive list of options available can be found in the Prometheus project GitHub repository, located in the following address: 
+[](https://github.com/prometheus/prometheus/blob/v2.9.2/config/testdata/conf.good.yml)
+
+
 
