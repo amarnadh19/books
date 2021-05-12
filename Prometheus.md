@@ -512,5 +512,36 @@ The first thing that is usually important to set is the Prometheus configuration
 
 While this is great for local tests, production deployments usually place server binaries and configuration files in their own paths, and so this flag is commonly needed. As a side note, this and a storage directory are the only hard requirements for starting a Prometheus server; without a configuration file, Prometheus refuses to start.
 
+```
+root@monitoring:/etc/prometheus# prometheus --config.file=/etc/prometheus/test_promo.yml
+level=info ts=2021-05-10T12:33:45.411665156Z caller=main.go:218 msg="Starting Prometheus" version="(version=2.1.0+ds, branch=debian/sid, revision=2.1.0+ds-1)"
+level=info ts=2021-05-10T12:33:45.413009088Z caller=main.go:219 build_context="(go=go1.9.2, user=pkg-go-maintainers@lists.alioth.debian.org, date=20180121-21:30:42)"
+level=info ts=2021-05-10T12:33:45.41387477Z caller=main.go:220 host_details="(Linux 4.15.0-142-generic #146-Ubuntu SMP Tue Apr 13 01:11:19 UTC 2021 x86_64 monitoring (none))"
+level=info ts=2021-05-10T12:33:45.414650327Z caller=main.go:221 fd_limits="(soft=1024, hard=1048576)"
+level=info ts=2021-05-10T12:33:45.418046403Z caller=main.go:492 msg="Starting TSDB ..."
+level=info ts=2021-05-10T12:33:45.447262566Z caller=web.go:359 component=web msg="Start listening for connections" address=0.0.0.0:9090
+level=info ts=2021-05-10T12:33:45.530688545Z caller=main.go:502 msg="TSDB started"
+level=info ts=2021-05-10T12:33:45.533698241Z caller=main.go:578 msg="Loading configuration file" filename=/etc/prometheus/test_promo.yml
+level=info ts=2021-05-10T12:33:45.535124393Z caller=main.go:479 msg="Server is ready to receive web requests."
+level=info ts=2021-05-10T12:33:45.536011132Z caller=manager.go:59 component="scrape manager" msg="Starting scrape manager..." 
+```
+
 ### The storage section
+
+Following the same logic from the previous section, the ```--storage.tsdb.path``` flag should be set to configure the base path to the data storage location. This defaults to data/ on the current working directory. 
+
+*NOTE* : NFS (AWS EFS included) is not supported, as it doesn't support the POSIX locking primitives needed for safe database files management.
+
+Placing the Prometheus data storage directory in a network share is also ill-advised as transient network failures would impact the monitoring system's ability to keep functioning - just when you'd need it the most.
+
+The Prometheus local storage can only be written to by a single Prometheus instance at a time. To make sure this is the case, it uses a lock file in the data directory. On startup, it tries to lock this file using OS-specific system calls, and will refuse to start if the file is already locked by another process.
+
+There can be an edge case to this behavior; when using persistent volumes to store the data directory, there is a chance that, when relaunching Prometheus as another container instance using the same volume, the previous instance might not have unlocked the database. This problem would make a setup of this kind susceptible to race conditions. Luckily, there is the ```--storage.tsdb.no-lockfile``` flag, which can be used in exactly this type of situation.
+
+
+ ### The Web Section
+
+ The next step is to configure what address users are going to utilize to get to the Prometheus server. The ```--web.external-url``` flag sets this base URL so that weblinks generated both in the web user interface and in outgoing alerts link back to the Prometheus server or servers correctly.
+
+ This might be the DNS name for a load balancer/reverse proxy, a Kubernetes service, or, in the simplest deployments, the publicly accessible, fully qualified domain name of the host running the server. 
 
