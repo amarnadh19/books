@@ -957,3 +957,8 @@ Another critical component of your test strategy should be routine testing of yo
 
 These tests can include automated security scans to test against common vulnerabilities, such as cross-site scripting or SQL injection. Your security tests can also include red team exercises, where security teams attempt to compromise your application.
 
+***
+
+# Microsoft Azure Well-Architected Framework - Performance efficiency
+
+
