@@ -570,7 +570,22 @@ At a high level, we can split the configuration file into the following sections
 A configuration file with the most comprehensive list of options available can be found in the Prometheus project GitHub repository, located in the following address: 
 [https://github.com/prometheus/prometheus/blob/v2.9.2/config/testdata/conf.good.yml]
 
+Our example configuration looks as follows:
 
-
-
+```
+global:
+scrape_interval: 1m
+...
+scrape_configs:
+- job_name: 'prometheus'
+scrape_interval: 15s
+scrape_timeout: 5s
+sample_limit: 1000
+static_configs:
+- targets: ['localhost:9090']
+metric_relabel_configs:
+- source_labels: [ __name__ ]
+regex: expensive_metric_.+
+action: drop
+```
 
