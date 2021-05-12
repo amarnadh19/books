@@ -646,3 +646,314 @@ When it comes to monitoring and analytics on Azure, we can bundle services into 
 - Deep infrastructure monitoring
 - Deep application monitoring
 
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_18.png?)
+
+
+## Core Monitoring
+
+Core monitoring provides fundamental, required monitoring across Azure resources. When we talk about fundamental monitoring, you can think of this as monitoring what is happening with your resources at the Azure platform level. This area of focus gives you insight into things like the health of the Azure platform, changes being made to your resources, and performance metrics. Using services from this area gives you the ability to monitor the basic pieces you need to keep your application running.
+
+Azure provides services to give you visibility into four key core monitoring areas: activity logging, the health of services, metrics and diagnostics, and recommendations on best practices.
+
+These services are built in to Azure and take little to no configuration to enable and set up. Let's take a closer look at each of these services.
+
+
+### Activity logging (Activity logging)
+
+Activity logging is an incredibly important source of information about what is happening with your resources at the Azure platform level. Every change that is submitted to the Azure platform is tracked in the Azure Activity Log, which gives you the ability to trace any action that is taken on your resources. The Activity Log will contain detailed information on activities to help you answer questions like:
+
+- Who has attached a disk to this virtual machine?
+- When was this machine shut down?
+- Who changed the load balancer configuration?
+- Why did the autoscale operation on my virtual machine scale set fail?
+
+Using Activity Log to answer these types of questions will help you troubleshoot issues, track changes, and provide auditing of what's happening in your Azure environment. Activity Log data is only retained for 90 days, although you can archive your data to a storage account, or you can send your data to Azure Log Analytics for longer retention and further analysis.
+
+
+### Health of cloud services (Service Health)
+
+At some point, any system can have issues, and that's true for Azure services as well.  Staying informed of the health of Azure services will help you understand if and when an issue that is impacting an Azure service is impacting your environment. What may seem like a localized issue could be the result of a more widespread issue, and Azure Service Health provides this insight. Azure Service Health identifies any issues with Azure services that might affect your application. Service Health also helps you plan for scheduled maintenance.
+
+
+### Metrics and diagnostics (Azure Monitor)
+
+The ability to view metrics and diagnostic information is critical for troubleshooting performance issues and staying notified when something goes wrong. To provide this visibility, Azure services have a common way of showing health, metric, or diagnostic information. Azure Monitor enables core monitoring for Azure services by allowing the collection, aggregation, and visualization of metrics, activity logs, and diagnostic logs.
+
+Metrics are available that provide performance statistics for different resources, and even the operating system inside a virtual machine. You can view this data with one of the explorers in the Azure portal, and create alerts based on these metrics. Azure Monitor provides a fast metrics pipeline, so you should use it for time-critical alerts and notifications.
+
+
+### Recommendations on best practices (Azure Advisor)
+
+Azure Advisor can help by keeping an eye out for potential performance, cost, high availability, or security issues within your resources. Advisor makes personalized recommendations based on resource configuration and telemetry, and provides you with guidance that most traditional monitoring platforms don't provide.
+
+
+## Deep infrastructure monitoring (Log analytics, Management solution, Service Map, Network Monitoring)
+
+When you're designing a monitoring strategy, it's important to include every component in the application chain, so you can correlate events across services and resources.
+
+Services that support Azure Monitor can be easily configured to send their data to a Log Analytics workspace. Virtual machines (both in the cloud and on-premises) can have an agent installed to send data to Log Analytics. You can submit custom data to Log Analytics through the Log Analytics API.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_19.png?)
+
+With this data in Log Analytics, you can query the raw data for troubleshooting, root cause identification, and auditing purposes. For several known services, like SQL Server and Windows Server Active Directory, there are readily-available management solutions that visualize monitoring data and uncover compliance with best practices.
+
+Log Analytics allows you to create queries and interact with other systems based on those queries. The most common example is an alert. Maybe you want to receive an email when a system runs out of disk space, or a best practice on your SQL Servers is no longer being followed. Log Analytics can send alerts, kick off automation, and even hook into custom APIs for things like integration with IT service management (ITSM).
+
+
+## Deep application monitoring (Application insights)
+
+It's important to understand how core services and infrastructure are performing, but you can take your monitoring capabilities even further by looking deep into your applications to identify performance issues, usage trends, and the overall availability of services you develop and depend on. By using an application performance management tool, you can better detect and diagnose issues that occur within your web apps and services.
+
+Azure Application Insights allows you to do exactly that. Application Insights provides telemetry collection, query, and visualization capabilities. Instrumenting this level of monitoring requires little to no code changes; you only have to install a small instrumentation package into your application. Application Insights is cross platform, supporting .NET, Node.js, or Java.
+
+For instance, the response time for one of your applications might be complex to troubleshoot. For example: is the web server being overloaded? Is a specific SQL query not optimized? Is an API that you're calling performing slower than usual? Application performance monitoring solutions can help uncover the underlying issues that basic metric monitoring can't expose. The following screenshot shows a graphical display of an application’s performance details provided by Azure Application Insights.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_20.png?)
+
+
+## Use automation to reduce effort and error
+
+Managing the infrastructure for any type of workload involves configuration tasks. This configuration can be done manually, but manual steps do not scale well.
+
+
+### Infrastructure as code
+
+Infrastructure as code (IaC) is the management of infrastructure - such as networks, virtual machines, load balancers, and connection topology - in a descriptive model, using a versioning system that is similar to what is used for source code.
+
+When you are creating an application, the same source code will generate the same binary every time it is compiled. In a similar manner, an IaC model generates the same environment every time it is applied. IaC is a key DevOps practice, and it is often used in conjunction with continuous delivery.
+
+IaC evolved to solve the problem of environment drift. Without IaC, teams must maintain the settings of individual deployment environments. Over time, each environment becomes a snowflake that is increasingly unique, and cannot be reproduced automatically.
+
+The administration and infrastructure maintenance of these snowflake environments involves manual processes that are hard to track and contribute to errors, and the resultant inconsistencies between these snowflake environments lead to issues during deployments.
+
+When automating the deployment of services and infrastructure, there are two different approaches you can take: imperative and declarative.
+
+- With an imperative approach, you explicitly state the commands that are executed to produce the outcome you are looking for.
+
+- With a declarative approach, you specify what you want the outcome to be instead of specifying how you want it done.
+
+
+#### Imperative automation
+
+This is typically done programmatically through a scripting language or SDK. For Azure resources, we could use the Azure CLI or Azure PowerShell. Let's take a look at an example that uses the Azure CLI to create a storage account.
+
+```
+az group create \
+    --name storage-resource-group \
+    --location eastus
+
+az storage account create \
+    --name mystorageaccount \
+    --resource-group storage-resource-group \
+    --kind BlobStorage \
+    --access-tier hot
+
+```
+
+With this approach, we're able to fully automate our infrastructure. We can provide areas for input and output, and can ensure that the same commands are executed every time. By automating our resources, we've taken the manual steps out of the process, making resource administration operationally more efficient.
+
+However, there are some downsides to this approach. Scripts to create resources can quickly become complex as the architecture becomes more complex. Error handling and input validation may need to be added to ensure full execution. Commands may change, requiring ongoing maintenance of the scripts.
+
+
+#### Declarative automation
+
+With declarative automation, we're specifying what we want our result to be, leaving the details of how it's done to the system we're using. On Azure, declarative automation is done through the use of Azure Resource Manager (ARM) templates, which are **JSON-structured files** that specify what we want created. ARM templates have four sections: *parameters, variables, resources*, and *outputs*.
+
+- Parameters handle input to be used within the template.
+- Variables provide a way to store values for use throughout the template.
+- Resources are the things that are being created.
+- Outputs provide details to the user of what was created.
+
+In the example below, we're telling Azure to create a storage account with the names and properties that we specify. The actual steps that are executed behind the scenes to create this storage account are left for Azure to decide.
+
+```
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "accountType": {
+            "type": "string",
+            "defaultValue": "Standard_RAGRS"
+        },
+        "kind": {
+            "type": "string"
+        },
+        "accessTier": {
+            "type": "string"
+        },
+        "httpsTrafficOnlyEnabled": {
+            "type": "bool",
+            "defaultValue": true
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "apiVersion": "2018-02-01",
+            "name": "[parameters('name')]",
+            "location": "[parameters('location')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "[parameters('accountType')]"
+            },
+            "kind": "[parameters('kind')]",
+            "properties": {
+                "supportsHttpsTrafficOnly": "[parameters('httpsTrafficOnlyEnabled')]",
+                "accessTier": "[parameters('accessTier')]",
+                "encryption": {
+                    "services": {
+                        "blob": {
+                            "enabled": true
+                        },
+                        "file": {
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
+            "dependsOn": []
+        }
+    ],
+    "outputs": {
+        "storageAccountName": {
+            "type": "string",
+            "value": "[parameters('name')]"
+        }
+    }
+}
+
+```
+
+You can use ARM templates to create and manipulate most services on Azure. You can store your templates in code repositories and inherit all the benefits of using a source control system, and you can share your templates across environments to ensure that the infrastructure you use for your development environment matches your production environment. ARM templates are a great way to automate deployments, and they help ensure consistency, eliminate deployment misconfigurations, and can increase operational speed.
+
+
+### VM images vs. post-deployment configuration
+
+For many virtual machine deployments, your job isn't done when a VM is simply up and running. In many situations, it's quite likely there's additional configuration that you need to take care of before the VM can actually serve its intended purpose.
+
+There are two common strategies that you can use for the configuration work, which for all intents and purposes are considered to be part of the configuration process for the VM itself, and each of these strategies has its advantages and disadvantages.
+
+- **Custom images** are generated by deploying a virtual machine, and then configuring or installing software on that running instance. When everything is configured correctly, the virtual machine can be shut down, and an image is created from the VM. This image can then be used as a base for deploying other new virtual machines. Working with custom images can speed up the overall time of your deployment, because as soon as the virtual machine is deployed and running, no additional configuration would be needed. *If deployment speed is an important factor, custom images are definitely worth exploring*.
+
+- **Post-deployment** scripting typically leverages a basic base image, and then relies on scripting or a configuration management platform to perform the necessary configuration after the VM is deployed. The post-deployment scripting could be done by executing a script on the VM through the Azure Script Extension, or by leveraging a more robust solution such as *Azure Automation Desired State Configuration (DSC)*.
+
+Each of these approaches has a few specific and some shared considerations to keep in mind.
+
+- When using images, you'll need to ensure there's a process to handle image updates, security patches, and inventory management of the images themselves.
+
+- With post-deployment scripting, build times can be extended since the VM can't be added to live workloads until the build is complete. This may not be a significant issue for standalone systems, but when using services that autoscale (such as virtual machine scale sets), this extended build time can impact how quickly you can scale.
+
+- With both approaches, you'll want to ensure that you address configuration drift; as new configuration is rolled out, you'll need to ensure that existing systems are updated accordingly.
+
+
+### Automation of operational tasks
+
+Automating these tasks with Azure Automation reduces manual workloads, enables configuration and update management of compute resources, provides a framework for running any type of Azure task, and centralizes shared resources such as schedules, credentials, and certificates.
+
+Examples of this automation might include:
+
+- Periodically searching for orphaned disks
+- Installing the latest security patches on VMs
+- Searching for and shutting down virtual machines in off-hours
+- Running daily reports and producing a dashboard to report to senior management
+
+As an example, let's suppose that you want to reduce your compute costs by configuring one of your development virtual machines to run only during your organization's business hours. You can write a script to start the VM in the morning and shut it down in the evening, and you can configure Azure Automation to run the script at set times. The following illustration shows the role of Azure Automation in this process.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_21.png?)
+
+
+### Automating development environments
+
+At the other end of your cloud infrastructure pipeline are a collection of development machines, which are used by your developers to write the applications and services that are the core of your business. **You can use Azure DevTest Labs** to deploy VMs with all of the correct tools and repositories that your developers need. Developers working on multiple services can switch between development environments without having to provision a new VM themselves. These development environments can be shut down when they are not in use, and then restarted when they are required again.
+
+
+## Testing strategies for your application
+
+Testing is one of the fundamental components of DevOps and agile development in general.
+
+A main tenet of a DevOps practice to achieve system reliability is the shift left principle.
+
+Testing should occur on both application code and infrastructure code, and they should both be subject to the same quality controls. The environment where applications are running should be version-controlled, and deployed through the same mechanisms as application code. As a result, both application code and infrastructure code can be tested and validated using DevOps testing paradigms.
+
+You can use your favorite testing tool to run your tests, including Azure Pipelines for automated testing and Azure Testing Plans for manual testing.
+
+There are multiple stages at which tests can be performed in the life cycle of code, and each type of testing has several considerations that are important for you to understand.
+
+
+### Automated Testing
+
+Automating tests is the best way to make sure that they are executed.
+
+#### Unit Testing
+
+Unit tests are tests typically run by each new version of code that is committed into your version control system. Unit Tests should be extensive (should cover ideally 100% of the code), and quick (typically under 30 seconds, although this number is not a rule set in stone).
+
+Unit testing could verify things like the syntax correctness of application code, Resource Manager templates or Terraform configurations, that the code is following best practices, or that they produce the expected results when provided certain inputs.
+
+Unit tests should be applied both to application code and infrastructure code.
+
+
+#### Smoke Testing
+
+Smoke tests are more exhaustive than unit tests, but still not as much as integration tests. Smoke tests normally run in less than 15 minutes. While smoke tests do not verify the interoperability of your different components with each other, they verify that each component can be correctly built, and each component meets your criteria for expected functionality and performance.
+
+Smoke tests usually involve building the application code; and if you're deploying infrastructure as part of your process, then possibly testing the deployment in a test environment.
+
+
+#### Integration Testing
+
+After making sure that your different application components operate correctly individually, integration testing determines whether your components can interact with each other as they should. Integration tests usually take longer than smoke testing; and as a consequence, they are sometimes executed less frequently. For example, running integration tests every night still offers a good compromise between the different types of automated testing; your integration testing will detect interoperability issues between application components no later than one day after they were introduced.
+
+
+### Manual Testing
+
+Manual testing is much more expensive than automated testing, and as a consequence it is used less frequently than automated testing
+
+
+#### Acceptance Testing
+
+There are many different ways of confirming that the application is doing what it should.
+
+- Blue/Green deployments: when deploying a new application version, you can deploy it in parallel to the existing one. This way you can start redirecting your clients to the new version; if everything goes well, you will decommission the old version. If there is any problem with the new deployment, you can always redirect your clients back to the older deployment.
+
+- Canary releases: you can expose new functionality of your application (ideally using feature flags) to a select group of users. If these users are satisfied with the new functionality, you can extend it to the rest of your user community. In this scenario we are talking about releasing functionality, and not necessarily about deploying a new version of the application.
+
+- A/B testing: A/B testing is similar to canary release testing, but while canary releases focus on mitigating risk, A/B testing focuses on evaluating the effectiveness of two similar ways of achieving the same goal. For example, if you have two versions of the layout of a certain area of your application, you could send half of your users to one version and the other half your users to the other, and then you could use some metrics to see which layout works better for your application goals.
+
+
+#### Stress tests
+
+As other sections of this framework have explained, designing your application code and infrastructure for scalability is of paramount importance.
+
+With this in mind, it is critical that you test whether your application and infrastructure code will both be able to adapt to changing load conditions.
+
+During your stress tests, it is critical to that you monitor all the components of the system in order to identify whether there are any scale limitations.
+
+Every component of the system that is not able to scale out can turn into a bottleneck (such as active/passive network components or databases). It is important for you to know the limits for each of your components so you can mitigate their impact into your application scale.
+
+It is equally important to verify that after the stress test is concluded, your infrastructure scales back down to its normal condition in order to keep your costs under control.
+
+
+#### Fault injection
+
+Your application should be resilient to infrastructure failures, and introducing faults in the underlying infrastructure and observing how your application behaves is fundamental for increasing the trust in your redundancy mechanisms.
+
+For example: ungracefully shutting down infrastructure components, degrading the performance of certain elements such as network equipment, or purposely introducing faults in the environment are ways of verifying that your application is going to continue to behave or react as expected, should these situations ever occur in real life.
+
+Most companies use a controlled way of injecting faults into the system; although if your are confident with your application resiliency, you could use automated frameworks
+
+#### Security tests
+
+Another critical component of your test strategy should be routine testing of your application for security vulnerabilities. You should regularly perform security tests against your application to identify any application vulnerabilities that are introduced through code defects or through software dependencies.
+
+These tests can include automated security scans to test against common vulnerabilities, such as cross-site scripting or SQL injection. Your security tests can also include red team exercises, where security teams attempt to compromise your application.
+
