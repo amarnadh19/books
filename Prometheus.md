@@ -618,3 +618,48 @@ Figure : Representation of scrape intervals and evaluation intervals inside prom
 
 Lastly, **external_labels** allows you to set label name/value pairs that are added to time series or alerts going to external systems, such as Alertmanager, remote read and write infrastructure, or even other Prometheis through federation. This functionality is usually employed to uniquely identify the source of a given alert or time series; therefore, it is common to identify the region, datacenter, shard, or even the instance identifier of a Prometheus server.
 
+
+### Scrape configuration
+
+Even though Prometheus accepts an empty file as a valid configuration file, the absolute minimum useful configuration needs a ```scrape_configs```section. This is where we define the targets for metrics collection, and if some post-scrape processing is needed before actual ingestion.
+
+```
+scrape_configs:
+ - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+...
+
+  - job_name: 'blackbox'
+    static_configs:
+      - targets:
+        - http://example.com
+        - https://example.com:443
+...
+
+```
+
+In the configuration example we introduced previously, we defined two scrape jobs: ```prometheus``` and ```blackbox```
+
+In Prometheus terms, a scrape is the action of collecting metrics through an HTTP request from a targeted instance, parsing the response, and ingesting the collected samples to storage. The default HTTP endpoint used in the Prometheus ecosystem for metrics collection is aptly named ```/metrics```.
+
+A collection of such instances is called a **job**.
+
+A scrape job definition needs at least a job_name and a set of targets. In this example, static_configs was used to declare the list of targets for both scrape jobs. While Prometheus supports a lot of ways to dynamically define this list, static_configs is the simplest and most straightforward method:
+
+```
+scrape_configs:
+ - job_name: 'prometheus'
+    scrape_interval: 15s
+    scrape_timeout: 5s
+    sample_limit: 1000
+    static_configs:
+      - targets: ['localhost:9090']
+    metric_relabel_configs:
+      - source_labels: [ __name__ ]
+        regex: expensive_metric_.+
+        action: drop
+```
+
+Analyzing the prometheus scrape job in detail, we can see that both ```scrape_interval``` and ```scrape_timeout``` can be redeclared at the job level, thus overriding the global values. As stated before, having varying intervals is discouraged, so only use this when absolutely necessary.
+
