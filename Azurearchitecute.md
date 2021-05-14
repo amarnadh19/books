@@ -999,4 +999,281 @@ You now know that scaling up and down adjusts the amount of resources a single i
 - **Scaling out** is the process of adding more instances to support the load of your solution. For example, if your website front ends were hosted on virtual machines, you could increase the number of virtual machines if the level of load increased.
 - **Scaling in** is the process of removing instances that are no longer needed to support the load of your solution. If your website front ends have low usage, you might want to lower the number of instances to save cost.
 
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_23.png?)
+
+Here are some examples of what scaling out or in means in the context of Azure resources:
+
+- For the infrastructure layer, you would likely use virtual machine scale sets to automate the addition and removal of extra instances.
+  - Virtual machine scale sets let you create and manage a group of identical, load-balanced VMs.
+  - The number of VM instances can automatically increase or decrease in response to demand or a defined schedule.
+- In an Azure SQL Database implementation, you could share the load across database instances by sharding. Sharding is a technique to distribute large amounts of identically structured data across a number of independent databases.
+- In Azure App Service, the App Service plan is the virtual web server farm that hosts your application. Scaling out in this way means that you're increasing the number of virtual machines in the farm. As with virtual machine scale sets, the number of instances can be automatically raised or lowered in response to certain metrics or a schedule.
+
+Scaling out is easily performed via the Azure portal, command-line tools, or Azure Resource Manager templates. In most cases, it's seamless to the user.
+
+
+#### Autoscale
+
+You can configure some of these services to use a feature called autoscale. With autoscale, you no longer have to worry about scaling services manually. Instead, you can set a minimum and maximum threshold of instances.
+
+An example is weekdays between 5:00 PM and 7:00 PM. The following illustration shows how the autoscale feature manages instances to handle the load.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_24.png?)
+
+#### Considerations when you scale in and out
+
+When you scale out, the startup time of your application can impact how quickly your application can scale. If your web app takes two minutes to start up and become available for users, that means each of your instances will take two minutes until they're available to your users. You need to consider this startup time when you determine how fast you want to scale.
+
+You also need to think about how your application handles state. When the application scales in, any state that was stored on the instance that's removed from your environment will be lost. 
+
+If a user connects to an instance that doesn't have its state, your application might force the user to sign in or reselect their data. The result is a poor user experience. 
+
+A common pattern is to externalize your state to another service, like Azure Cache for Redis or SQL Database, which makes your web servers stateless. Now that your web front ends are stateless, you don't need to worry about which individual instances are available. They're all doing the same job and are deployed in the same way.
+
+
+### Throttling
+
+We've established that the load on an application varies over time. This variation might be because of the number of active or concurrent users and the activities that are being performed. You can use autoscaling to add capacity. But you can also use a throttling mechanism to limit the number of requests from a source. You can safeguard performance limits by putting known limits into place at the application level. In this way, you prevent the application from breaking. 
+
+*Throttling is most frequently used in applications that expose API endpoints.*
+
+After the application has identified that it would breach a limit, throttling could begin and ensure the overall system SLA isn't breached. For example, if you exposed an API for customers to get data, you could limit the number of requests to 100 per minute. If any single customer exceeded this limit, you could respond with an HTTP 429 status code and include the wait time before another request can successfully be submitted.
+
+
+### Serverless
+
+You configure your serverless apps to respond to events. An event can be a REST endpoint, a timer, or a message received from another Azure service. The serverless app runs only when it's triggered by an event.
+
+When you work with serverless apps, infrastructure isn't your responsibility. Scaling and performance are handled automatically. You're only billed for the resources you use. There's no need to reserve capacity. **Azure Functions, Azure Container Instances, and Azure Logic Apps** are examples of serverless computing available on Azure.
+
+
+### Containers
+
+A container is a method of running applications in a virtualized environment. A virtual machine is virtualized at the hardware level, where a hypervisor makes it possible to run multiple virtualized operating systems on a single physical server. 
+
+Containers take the virtualization up a level. The virtualization is done at the OS level, which makes it possible to run multiple identical application instances within the same OS.
+
+Containers are lightweight and well suited to scale-out scenarios. They're designed to be created, scaled out, and stopped dynamically as your environment and demands change. Another benefit of using containers is the ability to run multiple isolated applications on each virtual machine. Because containers are secured and isolated at a kernel level, you don't necessarily need to separate VMs for separate workloads.
+
+Although you can run containers on virtual machines, there are a couple of Azure services that ease the management and scaling of containers:
+
+- **Azure Kubernetes Service (AKS)**
+
+    With Azure Kubernetes Service, you can set up virtual machines to act as your nodes. Azure hosts the Kubernetes management plane. You're charged only for the running worker nodes that host your containers.
+
+    To increase the number of your worker nodes in Azure, you can use the Azure CLI to increase that number manually. At the time of this writing, a preview of Cluster Autoscaler on AKS is available. It enables autoscaling of your worker nodes. On your Kubernetes cluster, you can use the Horizontal Pod Autoscaler to scale out the number of instances of the container to be deployed.
+
+ - **Azure Container Instances**
+
+    Azure Container Instances is a serverless approach that lets you create and execute containers on demand. You're charged only for the execution time per second.
+
+    You can use Virtual Kubelet to connect Azure Container Instances into your Kubernetes environment, which includes AKS. With Virtual Kubelet, when your Kubernetes cluster demands additional container instances, those demands can be met from Container Instances. Because Container Instances is serverless, there's no need to have reserved capacity. You can take advantage of the control and flexibility of Kubernetes scaling with the per-second-billing of serverless. At the time of this writing, the Virtual Kubelet is described as experimental software and shouldn't be used in production scenarios.
+
+
+## Optimize Network Performance
+
+Network performance can have a dramatic impact on a user's experience
+
+
+### The importance of network latency
+
+Latency is a measure of delay. Network latency is the time that it takes for data to travel between a source to a destination across a network.
+
+The time that it takes for data to travel from the source to a destination and for the destination to respond is commonly known as a round-trip delay.
+
+All Azure regions are interconnected by a high-speed fiber backbone, the speed of light is still a physical limitation. Calls between services in different physical locations will still have network latency directly correlated to the distance between them.
+
+In addition, depending on the communication needs of an application, more round trips might be required. Each round trip comes with a latency tax, and each round trip adds to the overall latency. The following illustration shows how the latency perceived by the user is the combination of the round trips required to service the request.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_25.png?)
+
+
+### Latency between Azure resources
+
+Imagine that you work for a healthcare organization that's pilot testing a new patient booking system. This system runs on several web servers and a database. All of the resources are located in the West Europe Azure region. The scope of your pilot test is available only for users in Western Europe. This architecture minimizes your network latency, because all of your resources are colocated inside a single Azure region
+
+Suppose that your pilot testing of the booking system was successful. As a result, the scope of your pilot test has expanded to include users in Australia. When the users in Australia view your website, they'll incur the additional round-trip time that's necessary to access all of the resources that are located in West Europe. Their experience will be diminished because of the additional network latency.
+
+To address your network latency issues, your IT team decides to host another front-end instance in the Australia East region. This design helps reduce the time for your web servers to return content to users in Australia. But their experience is still diminished because there's significant latency for data that's being transferred between the front-end web servers in Australia East and the database in West Europe.
+
+There are a few ways you could reduce the remaining latency:
+
+- Create a read-replica of the database in Australia East. A read replica allows reads to perform well, but writes still incur latency. Azure SQL Database geo-replication allows for read-replicas.
+- Sync your data between regions with Azure SQL Data Sync.
+- Use a globally distributed database such as Azure Cosmos DB. This database allows both reads and writes to occur regardless of location. But it might require changes to the way your application stores and references data.
+- Use caching technology, such as Azure Cache for Redis, to minimize high-latency calls to remote databases for frequently accessed data.
+
+
+### Latency between users and Azure resources
+
+You want to optimize delivery of the front-end user interface to your users. Let's look at some ways to improve the network performance between your users and your application.
+
+#### Use a DNS load balancer for endpoint path optimization
+
+In our example scenario, your IT team created an additional web front-end node in Australia East. But users have to explicitly specify which front-end endpoint they want to use. As the designer of a solution, you want to make the experience as smooth as possible for users.
+
+**Azure Traffic Manager** could help. Traffic Manager is a DNS-based load balancer that you can use to distribute traffic within and across Azure regions.
+
+Rather than having the user browse to a specific instance of your web front end, Traffic Manager can route users based on a set of characteristics:
+
+- **Priority**: You specify an ordered list of front-end instances. If the one with the highest priority is unavailable, Traffic Manager routes the user to the next available instance.
+- **Weighted**: You set a weight against each front-end instance. Traffic Manager then distributes traffic according to those defined ratios.
+- **Performance**: Traffic Manager routes users to the closest front-end instance based on network latency.
+- **Geographic**: You set up geographical regions for front-end deployments and route your users based on data sovereignty mandates or localization of content.
+
+Traffic Manager profiles can also be nested. For example, you could initially route your users across different geographies (such as Europe and Australia) by using geographic routing. Then you can route them to local front-end deployments by using the performance routing method.
+
+It's important to note that this load balancing is only handled via DNS. No inline load balancing or caching is happening here. Traffic Manager simply returns the DNS name of the closest front end to the user.
+
+
+#### Use a CDN to cache content close to users
+
+Your website likely uses some form of static content, either whole pages or assets such as images and videos. This static content can be delivered to users faster by using a content delivery network (CDN), such as **Azure Content Delivery Network**.
+
+With content deployed to Azure Content Delivery Network, those items are copied to multiple servers around the globe.
+
+This approach puts content closer to the destination, which reduces latency and improves the user experience. The following illustration shows how using Azure Content Delivery Network puts content closer to the destination, which reduces latency and improves the user experience.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_26.png?)
+
+
+Content delivery networks can also be used to host cached dynamic content. Extra consideration is required though, because cached content might be out of date compared with the source. Context expiration can be controlled by setting a *time to live (TTL)*. If the TTL is too high, out-of-date content might be displayed and the cache would need to be purged.
+
+One way to handle cached content is with a feature called *dynamic site acceleration*, which can increase performance of webpages with dynamic content. Dynamic site acceleration can also provide a low-latency path to additional services in your solution. An example is an *API endpoint*.
+
+
+#### Use ExpressRoute for connectivity from on-premises to Azure
+
+Optimizing network connectivity from your on-premises environment to Azure is also important. For users who connect to applications, whether they're hosted on virtual machines or on platform as a service (PaaS) offerings like Azure App Service, you'll want to ensure they have the best connection to your applications.
+
+You might want a private connection to your Azure resources. Site-to-site VPN over the internet is also an option. VPN overhead and internet variability can have a noticeable impact on network latency for high-throughput architectures.
+
+**Azure ExpressRoute** can help. ExpressRoute is a private, dedicated connection between your network and Azure. It gives you guaranteed performance and ensures that your users have the best path to all of your Azure resources. The following illustration shows how an ExpressRoute circuit provides connectivity between on-premises applications and Azure resources.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_27.png?)
+
+
+## Optimize storage performance
+
+It's important to include storage performance considerations in your architecture. Just like network latency, poor performance at the storage layer can affect your user experience.
+
+### Optimize virtual machine storage performance
+
+Different applications have different storage requirements. Your application might be sensitive to latency of disk reads and writes. Or, it might require the ability to handle a large number of input/output operations per second (IOPS) or greater overall disk throughput.
+
+When you build an infrastructure as a service (IaaS) workload, which type of disk should you use? There are four options:
+
+- **Local SSD storage**: Each virtual machine has a temporary disk that's backed by local SSD storage. The size of this disk varies depending on the size of the virtual machine. Because this SSD is local to the virtual machine, the performance is high. But data could be lost during a maintenance event or a redeployment of the VM. This disk is only suitable for temporary storage of data that you don't need permanently. For example, this disk is great for the VM's page or swap file, and for things like tempdb in Azure SQL Server. There's no charge for this storage. It's included in the cost of the VM.
+- **Standard storage HDD**: This type of storage is spindle disk storage. It might fit well where your application isn't bound by inconsistent latency or lower levels of throughput. A dev/test workload where guaranteed performance isn't required is a great use case for this disk type.
+- **Standard storage SSD**: This SSD-backed storage has the low latency of an SSD, but with lower levels of throughput. A non-production web server is a good use case for this disk type.
+- **Premium storage SSD**: This SSD-backed storage is well suited for those workloads that are going into production and require the greatest reliability, demand consistent low latency, or need high levels of throughput and IOPS. Because these disks have greater performance and reliability capabilities, they're recommended for all production workloads.
+
+Premium storage can attach only to specific VM sizes. Premium storage-capable sizes are designated with an "s" in the name. 
+Examples are D2s_v3 or Standard_F2s_v2. Any virtual machine type (with or without an "s" in the name) can attach standard storage HDD or SSD drives.
+
+Disks can be striped by using a striping technology like Storage Spaces on Windows or mdadm on Linux. Striping increases the throughput and IOPS by spreading disk activity across multiple disks. You can use disk striping to push the limits of performance for disks. Striping is often seen in high-performance database systems and other systems with intensive storage requirements.
+
+
+### Optimize storage performance for your application
+
+#### Caching
+
+A common approach to improve application performance is to integrate a caching layer between your application and your data store.
+
+A cache typically stores data in memory and allows for fast retrieval. This data can be frequently accessed data, data that you specify from a database, or temporary data such as user state
+
+You have control over the type of data stored, how often it refreshes, and when it expires. By colocating this cache in the same region as your application and database, you reduce the overall latency between the two. Pulling data out of the cache is almost always faster than retrieving the same data from a database.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_28.png?)
+
+**Azure Cache** for Redis is a caching service on Azure that stores data in memory. It's based on the open-source **Redis cache** and is a fully managed service offering by Microsoft. You select the performance tier that you require, and then you configure your application to use the service.
+
+#### Polyglot persistence
+
+Polyglot persistence is the use of different data storage technologies to handle your storage requirements.
+
+Consider the following e-commerce example. Suppose that you store application assets in a blob store, product reviews and recommendations in a NoSQL store, and user profile or account data in a SQL database. The following illustration shows how an application might use multiple data storage techniques to store different types of data.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_29.png?)
+
+It's important to know that different data stores are designed for certain use cases or might be more accessible because of cost. As an example, storing blobs in a SQL database might be costly and slower to access than directly from a blob store.
+
+Maintaining data consistency across distributed data stores can be a significant challenge. 
+
+**Eventual consistency** means that replica data stores eventually converge if there are no further writes. If a write is made to one of the data stores, reads from another data store might provide slightly out-of-date data. Eventual consistency enables higher scale because there's a low latency for reads and writes, instead of waiting to check if information is consistent across all stores.
+
+
+## Identify performance bottlenecks in your application
+
+### Performance requirements
+
+*Nonfunctional requirements* help you find that point. These particular requirements don't tell you what your app must do. Instead, they tell you what quality levels it must meet. For example, you can define nonfunctional requirements to discover:
+
+- How fast a transaction must return under a given load.
+- How many simultaneous connections your application needs to support before it begins to return errors.
+- If there's server failure, what's the maximum amount of time your application is allowed to be down before a backup is online.
+
+### Performance monitoring options in Azure
+
+Monitoring is the act of collecting and analyzing data to determine the performance, health, and availability of your business application and associated resources.
+
+You want to be kept informed that your applications are running smoothly. Proactive notifications can be used to inform about critical issues that arise. There are many layers of monitoring to consider. Let's focus on the infrastructure layer and the application layer.
+
+#### Azure Monitor
+
+Azure Monitor provides a single management point for infrastructure-level logs and monitoring for most of your Azure services.
+
+Azure Monitor maximizes the availability and performance of your applications by delivering a comprehensive solution for collecting, analyzing, and acting on telemetry from your cloud and on-premises environments.
+
+The following diagram depicts a high-level view of Azure Monitor. At the center of the diagram are the data stores for metrics and logs. These are the two fundamental types of data that Azure Monitor uses. On the left side are the sources of monitoring data that populate these data stores. On the right side are the different functions that Azure Monitor performs with this collected data, such as analysis, alerting, and streaming to external systems.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_30.png?)
+
+Azure Monitor can collect data from a variety of sources. You can think of monitoring data for your applications as occurring in tiers that range from your application to any OS and the services it relies on to the platform itself.
+
+Azure Monitor collects data from each of the following tiers:
+
+- **Application monitoring data**: Data about the performance and functionality of the code you've written, regardless of its platform.
+- **Guest OS monitoring data**: Data about the OS on which your application is running. This OS might be in Azure, another cloud, or on-premises.
+- **Azure resource monitoring data**: Data about the operation of an Azure resource.
+- **Azure subscription monitoring data**: Data about the operation and management of an Azure subscription, and data about the health and operation of Azure itself.
+- **Azure tenant monitoring data**: Data about the operation of tenant-level Azure services, such as Azure Active Directory (Azure AD).
+
+As soon as you create an Azure subscription and start adding resources, such as VMs and web apps, Azure Monitor starts collecting data.
+
+- Activity logs record when resources are created or modified.
+- Metrics tell you how the resource is performing and the resources that it's consuming.
+- You can also extend the data you collect.
+- You can enable diagnostics in your apps and add agents to collect telemetry data from Linux and Windows or Application Insights.
+
+Azure Monitor is the place to start for all your resource metric insights gathered in near real time. Many Azure resources start outputting metrics automatically after they're deployed. For example, web apps built with the Web Apps feature of Azure App Service output compute and application request metrics. Metrics from Application Insights are also collated here in addition to VM host diagnostic metrics. VM guest diagnostic metrics also appear after you opt in.
+
+#### Log Analytics
+
+Centralized logging can help you uncover hidden issues that might be difficult to track down. With Log Analytics, you can query and aggregate data across logs.
+
+This cross-source correlation can help you identify issues or performance problems that might not be evident when you look at logs or metrics individually. The following illustration shows how Log Analytics acts as a central hub for monitoring data. Log Analytics receives monitoring data from your Azure resources and makes it available to consumers for analysis or visualization.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_31.png?)
+
+You can collate a wide range of data sources, security logs, Azure activity logs, and server, network, and application logs. You can also push on-premises System Center Operations Manager data to Log Analytics in hybrid deployment scenarios. Then Azure SQL Database can send diagnostic information directly into Log Analytics for detailed performance monitoring.
+
+*Centralized logging can be highly beneficial for troubleshooting all types of scenarios. You can use it to troubleshoot performance issues. Centralized logging is a key part of a good monitoring strategy for any architecture.*
+
+
+### Application performance management
+
+Deep application issues are often tricky to track down. This type of scenario is when it can be beneficial to integrate telemetry into your application by using an application performance management (APM) solution
+
+An APM solution helps you to track down low-level application performance and behavior. Telemetry can include individual page request times, exceptions within your application, and even custom metrics to track business logic. This telemetry can provide a wealth of insight into what's going on within your application.
+
+**Application Insights** is an Azure service that provides this deep application performance management. You install a small instrumentation package in your application and then set up an Application Insights resource in the Azure portal.
+
+You can use Application Insights to consume telemetry from the host environments, such as ```performance counters, Azure diagnostics,``` and ```Docker logs```.
+
+You can also set up web tests that periodically send synthetic requests to your web service. You could even configure your application to send custom events and metrics that you write yourself in the client or server code. For example, you can track application-specific events such as items sold or games won.
+
+Application Insights stores its data in a common repository, and metrics are shared with Azure Monitor. Application Insights can also take advantage of shared functionality such as alerts, dashboards, and deep analysis with the Log Analytics query language.
+
+A common pattern used to determine the availability of a web application is the health endpoint monitoring pattern. This pattern is used to monitor web applications and their associated back-end services to ensure that they're available and performing correctly. The pattern is implemented by querying a particular URI. The endpoint checks on the status of many components. Even the back-end services that the app depends on are checked instead of only the availability of the front end itself. The health endpoint monitoring pattern acts as a service-level health check that returns an indication of the overall health of the service.
 
