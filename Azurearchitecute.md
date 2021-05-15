@@ -1613,3 +1613,18 @@ No backup system is complete without a strategy for verifying backups and testin
 ***
 
 # Microsoft Azure Well-Architected Framework - Security
+
+## Introduction
+
+Security is one of the most important aspects of any architecture.
+
+Anything outside the perimeter was treated as hostile, whereas inside the wall, an organization's systems were trusted. Today's security posture is to assume breach and use the Zero Trust model.
+
+Security professionals no longer focus on perimeter defense. Modern organizations have to support access to data and services evenly from both inside and outside the corporate firewall.
+
+## Defense in depth
+
+### Zero Trust model
+
+The analyst firm Forrester Research introduced the Zero Trust model, which states that you should never assume trust but instead continually validate trust.
+
