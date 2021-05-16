@@ -1,0 +1,14 @@
+# Ingress
+
+An API object that manages external access to the services in a cluster, typically HTTP.
+
+Ingress may provide load balancing, SSL termination and name-based virtual hosting.
+
+
+## Terminology 
+
+- **Node** : A Kubernetes cluster node.
+
+- **Cluster**: A Kubernetes cluster
+
+- **EndRouter**: A router that enforces the firewall policy for your cluster.
