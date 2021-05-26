@@ -1628,3 +1628,224 @@ Security professionals no longer focus on perimeter defense. Modern organization
 
 The analyst firm Forrester Research introduced the Zero Trust model, which states that you should never assume trust but instead continually validate trust.
 
+Most users now access applications and data from the internet, and many companies now allow users to use their own devices at work (bring your own device, or BYOD).
+
+The Zero Trust model relies on verifiable user and device trust claims to grant access to organizational resources. No longer is trust assumed based on the location inside an organization's perimeter.
+
+This model has forced security researchers, engineers, and architects to rethink the approach applied to security and use a layered strategy to protect their resources.
+
+
+### Defense in depth: A layered approach to security
+
+Defense in depth is a strategy that employs a series of mechanisms to slow the advance of an attack that's aimed at acquiring unauthorized access to information. Each layer provides protection so that if one layer is breached, a subsequent layer is already in place to prevent further exposure.
+
+Microsoft applies a layered approach to security, both in its physical datacenters and across Azure services. The objective of defense in depth is to protect information and prevent it from being stolen by individuals who aren't authorized to access it. The common principles that help define a security posture are confidentiality, integrity, and availability, known collectively as CIA.
+
+- **Confidentiality**: The principle of least privilege restricts access to information only to individuals explicitly granted access. This information includes protection of user passwords, remote access certificates, and email content.
+
+- **Integrity**: The goal is to prevent unauthorized changes to information at rest or in transit. A common approach used in data transmission is for the sender to create a unique fingerprint of the data by using a one-way hashing algorithm. The hash is sent to the receiver along with the data. The receiver recalculates the data's hash and compares it to the original to ensure that the data wasn't lost or modified in transit.
+
+- **Availability**: Ensure that services are available to authorized users. Denial-of-service attacks are a common cause of loss of availability to users. Natural disasters also drive system design to prevent single points of failure and deploy multiple instances of an application to geo-dispersed locations.
+
+
+### Security layers
+
+You can visualize defense in depth as a set of concentric rings, with the data to be secured at the center. Each ring adds a layer of security around the data.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_41.png?)
+
+
+#### Data
+
+In almost all cases, attackers are after data:
+
+- Stored in a database.
+- Stored on disk inside virtual machines.
+- Stored on a software as a service (SaaS) application such as Microsoft 365.
+- Stored in cloud storage.
+
+The people who store and control access to data are responsible for ensuring that it's properly secured.
+
+
+#### Applications
+
+- Ensure that applications are secure and free of vulnerabilities.
+- Store sensitive application secrets in a secure storage medium.
+- Make security a design requirement for all application development.
+
+
+#### Compute
+
+- Secure access to virtual machines.
+- Implement endpoint protection and keep systems patched and current.
+
+#### Networking
+
+- Limit communication between resources through segmentation and access controls.
+- Deny by default.
+- Restrict inbound internet access and limit outbound where appropriate.
+- Implement secure connectivity to on-premises networks.
+
+#### Perimeter
+
+- Use distributed denial-of-service (DDoS) protection to filter large-scale attacks before they can cause a denial of service for users.
+- Use perimeter firewalls to identify and alert on malicious attacks against your network.
+
+
+#### Identity and access
+
+- Control access to infrastructure (change control).
+- Use single sign-on and multifactor authentication.
+- Audit events and changes.
+
+
+#### Physical security
+
+Physical building security and controlling access to computing hardware within the datacenter are the first line of defense.
+
+
+### Shared responsibilities
+
+As computing environments move from customer-controlled datacenters to cloud datacenters, the responsibility of security also shifts.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_42.png?)
+
+
+### Continuous improvement
+
+The threat landscape is evolving in real time and at massive scale, so a security architecture is never complete. Microsoft and its customers need the ability to respond to these threats intelligently, quickly, and at scale.
+
+
+## Identity management
+
+### Identity as a layer of security
+
+Digital identities are an integral part of today's business and social interactions on-premises and online. In the past, identity and access services were restricted to operating within a company's internal network. Protocols such as Kerberos and LDAP were designed for this purpose.
+
+As your organization evaluates the capabilities of its architecture around identity, it's looking at ways to bring the following capabilities into the application:
+
+- Provide single-sign on to application users.
+- Enhance the application to use modern authentication with minimal effort.
+- Enforce multifactor authentication for all sign-ins outside the company's network.
+- Develop an application to allow patients to enroll and securely manage their account data.
+
+
+#### Single sign-on
+
+The more identities a user has to manage, the greater the risk of a credential-related security incident. With single sign-on, users need to remember only one ID and one password. Access across applications is granted to a single identity tied to a user, simplifying the security model. 
+
+Using single sign-on for accounts will make it easier for users to manage their identities. It will also increase the security capabilities in your environment.
+
+#### SSO with Azure Active Directory
+
+**Azure AD** is a cloud-based identity service. It has built-in support for synchronizing with your on-premises Active Directory instance, or it can be used on its own. This means that all your applications, whether on-premises, in the cloud (including Microsoft 365), or even mobile, can share the same credentials. Administrators and developers can control access to data and applications by using centralized rules and policies configured in Azure AD.
+
+By using **Azure AD** for SSO, you'll also have the ability to combine multiple data sources into an intelligent security graph. This security graph can help you provide threat analysis and real-time identity protection to all accounts in Azure AD, including accounts that are synchronized from on-premises Active Directory. By using a centralized identity provider, you'll have centralized the security controls, reporting, alerting, and administration of your identity infrastructure.
+
+
+#### Synchronize directories with Azure AD Connect
+
+Azure AD Connect can integrate your on-premises directories with Azure Active Directory. Azure AD Connect provides the newest capabilities and replaces older versions of identity integration tools such as DirSync and Azure AD Sync.
+
+It's a single tool to provide an easy deployment experience for synchronization and sign-in.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_43.png?)
+
+Your organization requires that authentication occurs primarily against on-premises domain controllers, but it also requires cloud authentication in a disaster recovery scenario. It doesn't have any requirements that Azure AD doesn't already support.
+
+Your organization has made the decision to move forward with the following configuration:
+
+- Use Azure AD Connect to synchronize groups, user accounts, and password hashes stored in on-premises Active Directory to Azure AD.
+
+- This can be a backup if pass-through authentication is unavailable.
+
+- Configure pass-through authentication by using an on-premises authentication agent installed on Windows Server.
+
+- Use the seamless SSO feature of Azure AD to automatically sign in users from on-premises domain-joined computers.
+
+  SSO reduces user friction by suppressing multiple authentication requests.
+
+
+### Authentication and access
+
+This requirement combines two aspects of the Azure AD service: multifactor authentication and conditional access policies.
+
+#### Multifactor authentication
+
+Multifactor authentication provides additional security for your identities by requiring two or more elements for full authentication. These elements fall into three categories:
+
+- Something you know: A password or the answer to a security question.
+- Something you have: A mobile app that receives a notification or a token-generating device.
+- Something you are: Some sort of biometric property such as a fingerprint or face scan used on many mobile devices.
+
+Azure AD has multifactor authentication capabilities built in and will integrate with other multifactor authentication providers. Basic multifactor authentication features are available to Microsoft 365 and Azure AD administrators for no extra cost.
+
+
+#### Conditional access policies
+
+Along with multifactor authentication, ensuring that additional requirements are met before granting access can add another layer of protection. Blocking logins from a suspicious IP address, or denying access from devices without malware protection, can limit access from risky sign-ins.
+
+Azure Active Directory provides conditional access policies based on group, location, or device state. The location feature allows your organization to differentiate IP addresses that don't belong to the network, and it satisfies the security policy to require multifactor authentication from all such locations.
+
+Your organization has created a conditional access policy that requires users who access the application from an IP address outside the company network to be challenged with multifactor authentication.
+
+In the following illustration, user requests to access the on-premises and cloud applications are first checked against a list of conditions. The requests are either allowed access, forced to go through multifactor authentication, or blocked based on the conditions that they satisfy.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_44.png?)
+
+
+### Securing applications
+
+Azure AD Application Proxy can allow users to access the application remotely without any code changes.
+
+**Azure AD Application Proxy** is:
+
+- **Simple**
+  You don't need to change or update your applications to work with Application Proxy.
+  Your users get a consistent authentication experience. They can use the MyApps portal to get single sign-on to both SaaS apps in the cloud and your apps on-premises.
+
+- **Secure**
+  When you publish your apps by using Azure AD Application Proxy, you can take advantage of the authorization controls and security analytics in Azure. You get cloud-scale security and Azure security features like conditional access and two-step verification.
+  You don't have to open any inbound connections through your firewall to give your users remote access.
+
+- **Cost-effective**
+  Application Proxy works in the cloud, so you can save time and money. On-premises solutions typically require you to set up and maintain perimeter networks, edge servers, or other complex infrastructures.
+
+
+**Azure AD Application Proxy** has two components. The first is a **connector agent** that sits on a server running Windows within your corporate network. The second is an **external endpoint**, either the MyApps portal or an external URL. When a user goes to the endpoint, they authenticate with Azure AD and are routed to the on-premises application via the connector agent.
+
+
+### Working with consumer identities
+
+Azure AD B2C is an identity management service that's built on the foundation of Azure Active Directory. It enables you to customize and control how customers sign up, sign in, and manage their profiles when using your applications. This includes applications developed for iOS, Android, and .NET, among others.
+
+Azure AD B2C provides a social identity login experience, while at the same time protecting your customer identity profile information. Azure AD B2C directories are distinct from standard Azure AD directories and can be created in the Azure portal.
+
+
+## Infrastructure protection
+
+### Role-based access control
+
+*Role-based access control (RBAC) offers a slightly different approach*. Roles are defined as collections of access permissions. Security principals are mapped to roles directly or through group membership. Separating security principals, access permissions, and resources provides simplified access management and more detailed control.
+
+On Azure, users, groups, and roles are all stored in Azure Active Directory (Azure AD). The Azure Resource Manager API uses role-based access control to secure all resource access management within Azure.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_45.png?)
+
+#### Roles and management groups
+
+Roles are sets of permissions, like read-only or contributor, that users can be granted to access an Azure service instance. Roles can be granted at the level of an individual service instance, but they also flow down the Azure Resource Manager hierarchy. Roles assigned at a higher scope, like an entire subscription, are inherited by child scopes, like service instances.
+
+Management groups are an additional hierarchical level recently introduced into the RBAC model. Management groups add the ability to group subscriptions together and apply policy at an even higher level.
+
+The ability to flow roles through an arbitrarily defined subscription hierarchy also allows administrators to grant temporary access to an entire environment for authenticated users. For example, an auditor might require temporary read-only access to all subscriptions.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_46.png?)
+
+
+#### Privileged Identity Management
+
+In addition to managing Azure resource access with RBAC, a comprehensive approach to infrastructure protection should consider including the ongoing auditing of role members as the organization changes and evolves. Azure AD Privileged Identity Management (PIM) is an additional paid-for offering that provides oversight of role assignments, self-service, and just-in-time (JIT) role activation.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_47.png?)
+
