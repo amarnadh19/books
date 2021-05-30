@@ -12,7 +12,7 @@ Blob storage can be referred as object storage.
 
 **Common uses of Blob storage include:**
 
-- serving images or documents idrectly to a browser.
+- Serving images or documents idrectly to a browser.
 
 - Storing files for distributed access, such as installation.
 
@@ -33,5 +33,6 @@ Blob storage offers three types of resources:
 
 - Blobs in a container
 
-![](https://github.com/amarnadh19/books/blob/main/images/az_storage1.png?)
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage1.PNG?)
+
 
