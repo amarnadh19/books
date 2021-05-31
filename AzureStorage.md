@@ -1,6 +1,6 @@
 # Table of contents
 
-[Azure Storage] (#AzureStorage)
+1. [Azure Storage] (#AzureStorage)
 
 
 
