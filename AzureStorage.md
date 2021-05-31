@@ -1,4 +1,10 @@
-# Azure Storage
+# Table of contents
+
+[Azure Storage] (#AzureStorage)
+
+
+
+# Azure Storage <a name="AzureStorage"></a>
 
 Below are storage types available in Azure.
 
@@ -7,6 +13,28 @@ Below are storage types available in Azure.
     - Azure queues
     - Azure tables
     - Azure disks
+
+To use Azure storage, we need **Storage account**.
+
+Azure VMs use Azure Disk storage to store virtual disks. Azure Disk storage cannot be used to store data outside the VM.
+
+## Azure Storage account
+
+Types of Storage Account 
+
+## Storage Pricing
+
+All storage accounts use a pricing model for blob storage based on the tier of each blob. When using a storage account, the following billing considerations apply:
+
+- **Performance tiers:** In addition to, amount of daa stored, the cost of storing data varies deponding on the storage tier. The per-GB gost decreases as the tier gets cooler.
+
+- **Data access costs:** Data access charges increase as the tier gets cooler. For data in the cool and archive storage tier, you are charged a per-gigabyte data access charge for reads.
+
+- **Transaction Costs:** There is a per-transaction charge for all tiers that increases as the tier gets cooler.
+
+- **Geo-Replication data Transfer costs:** This charge only applies to accounts with Geo-replication configured, including GRS and RA-GRS. It occurs per GB
+
+- **Outbound data transfer costs:** Outbound data transfers (data transfered out of an Azure region) incur billing for bandwidth usage on a per GB basis, Consistent with General-purpose storage accounts.
 
 ## Azure Blob storage
 
@@ -144,4 +172,6 @@ There are multiple methods to upload data to blob storage
 - The **Azure Import/Export** service provides a way to import or export large amounts of data to and from your storage account using hard drives that you provide.
 
 - **Azure Storage Explorer** also can be used
+
+## azure Storage Replication
 
