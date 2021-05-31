@@ -1,12 +1,41 @@
-# Table of contents
+# Azure Storage 
 
-1. [Azure Storage] (#AzureStorage)
+Azure Storage is Microsoft's cloud storage solution for modern data storage scenarios.
 
+Azure Storage is:
 
-
-# Azure Storage <a name="AzureStorage"></a>
-
+- **Durable and Highly available.** Redundancy ensures that your data is safe in the event of transient hardware failures. You can also opt to replicate data across datacenters or geographical regions for additional protection
 Below are storage types available in Azure.
+
+- **Secure.** All data written to an Azure storage account is encrypted by the service. Azure Storage provides you with fine-grained control over who has access to your data.
+
+- **Scalable.** Azure Storage is designed to be massively scalable to meet the data storage and performance needs of today's applications.
+
+- **Managed.** Azure handles hardware maintenance, updates, and critical issues for you.
+
+- **Accessible.** Data in Azure Storage is accessible from anywhere in the world over HTTP or HTTPS
+
+
+Azure storage in three categories.
+
+- **Storage for Virtual Machines.** This includes disks and files. Disks are persistent block storage for Azure IaaS Virtual machines. Files are fully managed file shares in the cloud.
+
+- **Unstructured Data.** This includes Blobs and Data Lake Store. Blobs are highly scaleable, REST based cloud object store. Data Lake store is Hadoop Distributed File System (HDFS) as a service.
+
+- **Structured Data.** This includes Tables. Tables are key/value, auto-scaling NoSQL store.
+
+General Purpose Storage accounts have two tiers: **Standard** and **Premium**.
+
+- **Standard** Backup by HDD and provide the lowest cost per GB. Good for apps which requires bulk storage or where data is accessed infrequetly (old storage)
+
+- **Premium** are backed up SSD, Offers consistent low latency performance. Good for fast accessing data like Database.
+
+*We cannot convert from standard to premium or viceversa. Have to create a new one and copy data.*
+
+
+## Core Storage services
+
+Different types of Storage options available in Azure:
 
     - Blob storage
     - Azure files
@@ -35,6 +64,9 @@ All storage accounts use a pricing model for blob storage based on the tier of e
 - **Geo-Replication data Transfer costs:** This charge only applies to accounts with Geo-replication configured, including GRS and RA-GRS. It occurs per GB
 
 - **Outbound data transfer costs:** Outbound data transfers (data transfered out of an Azure region) incur billing for bandwidth usage on a per GB basis, Consistent with General-purpose storage accounts.
+
+- **Changing the storage tier:** Changing the account storage tier from cool to hot incurs a charge equal to reading all the data existing in the storage account. However, changing the account storage from Hot to Cool incurs a charge equal to writing all the data into the cool tier (GPv2 accounts only).
+
 
 ## Azure Blob storage
 
