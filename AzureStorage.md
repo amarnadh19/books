@@ -374,4 +374,3 @@ There are multiple methods to upload data to blob storage
 
 - **Azure Storage Explorer** also can be used
 
-
