@@ -49,7 +49,76 @@ Azure VMs use Azure Disk storage to store virtual disks. Azure Disk storage cann
 
 ## Azure Storage account
 
-Types of Storage Account 
+An Azure storage account contains all of your Azure Storage data objects: blobs, file shares, queues, tables, and disks. 
+
+The storage account provides a unique namespace for your Azure Storage data that's accessible from anywhere in the world over HTTP or HTTPS. 
+
+Data in your storage account is durable and highly available, secure, and massively scalable.
+
+### Types of Storage Account 
+
+Azure Storage offers serveral types of storge accounts. The types of storage accounts are:
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage6.PNG?)
+
+- **General-purpose v1 accounts (Storage):** 
+  - Legacy account type of blobs, files, queues, and tables. 
+  - Use general-purpose V2 accounts instead when possible.
+
+- **General-purpose V2 accounts (StorageV2):** 
+  - Basic storage account type for blobs, files, queues, and tables.
+  - Recommended for most scenarios using Azure Storage.
+  - For NFS use premium file share account type.
+
+- **Block blob storage accounts (BlockBlobStorage):**
+  - Blob-only storage accounts with premium performance.
+  - Premium storage type for Block blob and append blob.
+  - Recommended for scenarios with high transactions rates, using smaller objects, or requiring consistently low storage latency.
+
+- **FileStorage storage accounts (FileStorage):**
+  - Files-only storage accounts with premium performance characteristics.
+  - Recommended for enterprise or high performance scale appllications.
+  - Supports both SMB and NFS protocols.
+
+- **Premium page blobs:**
+  - For page blobs only
+  - Premium storage account type for page blobs.
+  - SSD drives for low latency and high throughput.
+
+### Storage account Endpoints
+
+- Every object that you store in Azure Storage has an address that includes your unique account name.
+
+- The combination of the account name and the Azure Storage service endpoint forms the endpoints for your storage account.
+
+#### When naming your storage account, keep these rules in mind:
+
+- Storage account names must be between 3 and 24 characters in length and may contain numbers and lowercase letters only.
+- Your storage account name must be unique within Azure. No two storage accounts can have the same name.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage7.PNG?)
+
+Construct the URL for accessing an object in a storage account by appending the object's location in the storage account to the endpoint. For example, the URL for a blob will be similar to:
+
+```http://*mystorageaccount*.blob.core.windows.net/*mycontainer*/*myblob*```
+
+
+## Azure Storage account replication
+
+### Redundancy in the Primary Region
+
+Data in an Azure Storage account is always replicated three times in the primary region.
+
+Azure Storage offers two options for how your data is replicated in the primary region:
+
+- Locally Redundant Storage (LRS)
+- Zone-redundant Storage (ZRS)
+
+    Microsoft recommends using ZRS in the primary region for Azure Data Lake Storage Gen2 Workloads.
+
+#### Locally Redundant Storage (LRS)
+
+
 
 ## Storage Pricing
 
@@ -204,6 +273,3 @@ There are multiple methods to upload data to blob storage
 - The **Azure Import/Export** service provides a way to import or export large amounts of data to and from your storage account using hard drives that you provide.
 
 - **Azure Storage Explorer** also can be used
-
-## azure Storage Replication
-
