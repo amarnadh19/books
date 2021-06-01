@@ -84,6 +84,7 @@ Azure Storage offers serveral types of storge accounts. The types of storage acc
   - For page blobs only
   - Premium storage account type for page blobs.
   - SSD drives for low latency and high throughput.
+  - Supports only LRS
 
 ### Storage account Endpoints
 
