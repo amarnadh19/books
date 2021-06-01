@@ -372,3 +372,5 @@ There are multiple methods to upload data to blob storage
 - The **Azure Import/Export** service provides a way to import or export large amounts of data to and from your storage account using hard drives that you provide.
 
 - **Azure Storage Explorer** also can be used
+
+
