@@ -447,5 +447,17 @@ The Azure Queue service is used to store and retrieve messages.Accessing message
 
 Access to table storage is fast and cost effective for many types of applications, typically low cost than traditional SQL for same volume of data
 
+The service is a NoSQL datastore which accepts authenticated calls from inside and outside the Azure cloud
+
+you can use Table storage to store flexible datasets like user data for web application, address books, device information or other typr of metadata your service requires
+
+you can store any number of entities in a table, and a storage account may contain any number of tables, up to the capacity limit of the storage account
+
+zure tables are ideal for storing structured, non-relational data.
+
+### Common uses of Table storage include
+
+
+
 
 
