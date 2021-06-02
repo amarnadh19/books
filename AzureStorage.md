@@ -396,3 +396,8 @@ you can generate the SAS tokens, they allow specific access to private asset for
 - Configuration files can be stored on a file share and accessed from multiple VMs. Tools and utilities used by multiple developers in a group can be stored on a file share, ensuring that everybody can find them, and that they use the same version.
 - Resource logs, metrics, and crash dumps are just three examples of data that can be written to a file share and processed or analyzed later.
 
+## Queue storage
+
+The Azure Queue service is used to store and retrieve messages.Accessing messages from anywhere in the world via authenticated calls using HTTP or HTTPS. Queue messgaes can be upto 64 KB in size, and a queue can contain million of messages,upto the total capacity limit of storage account. Queues are generally used to store lists of messgaes to be processed asynchronously
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage16.PNG?)
