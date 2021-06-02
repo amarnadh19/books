@@ -374,9 +374,14 @@ There are multiple methods to upload data to blob storage
 
 - **Azure Storage Explorer** also can be used
 
+
 ## AzureFiles
 
+### What are Azure files?
+
 Azure Files enables you to set up highly available network file shares that can be accessed by using the standard Server Message Block (SMB) protocol. That means that multiple VMs can share the same files with both read and write access. You can also read the files using the REST interface or the storage client libraries.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage16.PNG?)
 
 Azure file shares can be mounted concurrently by cloud or on-premises deployments.
 
@@ -386,9 +391,29 @@ Azure Files NFS file shares are accessible from Linux or macOS clients.
 
 Azure Files SMB file shares can be cached on Windows Servers with Azure File Sync for fast access
 
-one differnce between azurefile and files on corporate fileshare is you can access the files from anywhere in the world using URL and inludes a shared Access Signature(SAS) token
+*One difference between Azure files and files on corporate fileshare is you can access the files from anywhere in the world using URL and inludes a shared Access Signature(SAS) token*
 
 you can generate the SAS tokens, they allow specific access to private asset for specifc amount of time
+
+### Choose your data access method
+
+There are two built-in methods of data access supported by Azure Files. 
+
+- One method is direct access via a mounted drive in your operating system.
+
+- The other method is to use a Windows server (either on-premises or in Azure) and install Azure File Sync to synchronize the files between local shares and Azure Files.
+
+### Choose your file redundancy option
+
+Because Azure Files stores files in a storage account, you can choose between standard or premium performance storage accounts:
+
+- **Standard performance:** Double-digit ms latency, 10,000 IOPS, 300-MBps bandwidth.
+
+- **Premium performance:** Single-digit ms latency, 100,000 IOPS, 5-GBps bandwidth.
+
+  Note:
+
+  Premium File storeage accounts with ZRS are only supported in a smaller subset of regions.
 
 ### FileShare Common scenarios:
 
@@ -396,8 +421,19 @@ you can generate the SAS tokens, they allow specific access to private asset for
 - Configuration files can be stored on a file share and accessed from multiple VMs. Tools and utilities used by multiple developers in a group can be stored on a file share, ensuring that everybody can find them, and that they use the same version.
 - Resource logs, metrics, and crash dumps are just three examples of data that can be written to a file share and processed or analyzed later.
 
+
 ## Queue storage
 
 The Azure Queue service is used to store and retrieve messages.Accessing messages from anywhere in the world via authenticated calls using HTTP or HTTPS. Queue messgaes can be upto 64 KB in size, and a queue can contain million of messages,upto the total capacity limit of storage account. Queues are generally used to store lists of messgaes to be processed asynchronously
 
 ![](https://github.com/amarnadh19/books/blob/main/images/az_storage16.PNG?)
+
+### Create and Connect to an Azure File share
+
+There are two steps to create Azure File shares.
+
+- The first step is to create a storage account by choosing the correct option.
+
+- The second step involves creating the file shares themselves.
+
+
