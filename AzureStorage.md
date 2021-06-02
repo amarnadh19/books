@@ -432,7 +432,7 @@ There are two steps to create Azure File shares.
 
 The Azure Queue service is used to store and retrieve messages.Accessing messages from anywhere in the world via authenticated calls using HTTP or HTTPS. Queue messgaes can be upto 64 KB in size, and a queue can contain million of messages,upto the total capacity limit of storage account. Queues are generally used to store lists of messgaes to be processed asynchronously
 
-### Queue stirage concepts   
+### Queue storage concepts   
 
 ![](https://github.com/amarnadh19/books/blob/main/images/az_storage16.PNG?)
 
@@ -443,9 +443,17 @@ The Azure Queue service is used to store and retrieve messages.Accessing message
   The following URL addresses a queue in the diagram:
 
    https://myaccount.queue.core.windows.net/images-to-download 
-   
+
 - **Storage account:** All access to Azure Storage is done through a storage account.
 - **Queue:** A queue contains a set of messages. The queue name must be all lowercase
 - **Message:** A message, in any format, of up to 64 KB. Before version 2017-07-29, the maximum time-to-live allowed is seven days.
                For version 2017-07-29 or later, the maximum time-to-live can be any positive number, or -1 indicating that the message doesn't expire. If this parameter is omitted, the default time-to-live is seven days.
+
+## Table Storage
+
+**Azure Table storage is now part of Azure Cosmos DB**. Azure Table storage is a service that stores non-relational structured data (known as structured NoSQL data) in the cloud, providing a key/attribute store with schemaless design. Because Table Storage is schemaless, it's easy to adopt your data as the application evolve
+
+Access to table storage is fast and cost effective for many types of applications, typically low cost than traditional SQL for same volume of data
+
+
 
