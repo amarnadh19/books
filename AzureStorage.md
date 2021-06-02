@@ -374,3 +374,14 @@ There are multiple methods to upload data to blob storage
 
 - **Azure Storage Explorer** also can be used
 
+## AzureFiles
+
+Azure Files enables you to set up highly available network file shares that can be accessed by using the standard Server Message Block (SMB) protocol. That means that multiple VMs can share the same files with both read and write access. You can also read the files using the REST interface or the storage client libraries.
+
+Azure file shares can be mounted concurrently by cloud or on-premises deployments.
+
+Azure Files SMB file shares are accessible from Windows, Linux, and macOS clients.
+
+Azure Files NFS file shares are accessible from Linux or macOS clients.
+
+Azure Files SMB file shares can be cached on Windows Servers with Azure File Sync for fast access
