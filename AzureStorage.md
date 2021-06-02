@@ -381,7 +381,6 @@ There are multiple methods to upload data to blob storage
 
 Azure Files enables you to set up highly available network file shares that can be accessed by using the standard Server Message Block (SMB) protocol. That means that multiple VMs can share the same files with both read and write access. You can also read the files using the REST interface or the storage client libraries.
 
-![](https://github.com/amarnadh19/books/blob/main/images/az_storage16.PNG?)
 
 Azure file shares can be mounted concurrently by cloud or on-premises deployments.
 
@@ -433,5 +432,20 @@ There are two steps to create Azure File shares.
 
 The Azure Queue service is used to store and retrieve messages.Accessing messages from anywhere in the world via authenticated calls using HTTP or HTTPS. Queue messgaes can be upto 64 KB in size, and a queue can contain million of messages,upto the total capacity limit of storage account. Queues are generally used to store lists of messgaes to be processed asynchronously
 
+### Queue stirage concepts   
+
 ![](https://github.com/amarnadh19/books/blob/main/images/az_storage16.PNG?)
+
+- URL format: Queues are addressable using the following URL format:
+
+  https://<storage account>.queue.core.windows.net/<queue>
+
+  The following URL addresses a queue in the diagram:
+
+   https://myaccount.queue.core.windows.net/images-to-download 
+   
+- **Storage account:** All access to Azure Storage is done through a storage account.
+- **Queue:** A queue contains a set of messages. The queue name must be all lowercase
+- **Message:** A message, in any format, of up to 64 KB. Before version 2017-07-29, the maximum time-to-live allowed is seven days.
+               For version 2017-07-29 or later, the maximum time-to-live can be any positive number, or -1 indicating that the message doesn't expire. If this parameter is omitted, the default time-to-live is seven days.
 
