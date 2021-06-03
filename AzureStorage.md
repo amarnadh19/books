@@ -104,6 +104,111 @@ Construct the URL for accessing an object in a storage account by appending the 
 ```http://*mystorageaccount*.blob.core.windows.net/*mycontainer*/*myblob*```
 
 
+### Creation of Storage account
+
+#### Creation of Storage account using Azure portal
+
+Below Screenshots show how to create Storage account.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage18.png?)
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage19.png?)
+
+
+#### Create Storage account using Azure CLI
+
+Use the ```az storage account``` create command to create the storage account. You can enter the command into the Cloud Shell window on the right.
+
+``` 
+
+amarnadh_t@Azure:~$ az storage account create --name queuestorag234567e -g learn-08afede4-6043-4d0b-9add-9b3a449cd9ac --kind StorageV2 --sku Standard_LRS
+{
+  "accessTier": "Hot",
+  "allowBlobPublicAccess": null,
+  "allowCrossTenantReplication": null,
+  "allowSharedKeyAccess": null,
+  "azureFilesIdentityBasedAuthentication": null,
+  "blobRestoreStatus": null,
+  "creationTime": "2021-06-03T05:01:54.329182+00:00",
+  "customDomain": null,
+  "enableHttpsTrafficOnly": true,
+  "enableNfsV3": null,
+  "encryption": {
+    "encryptionIdentity": null,
+    "keySource": "Microsoft.Storage",
+    "keyVaultProperties": null,
+    "requireInfrastructureEncryption": null,
+    "services": {
+      "blob": {
+        "enabled": true,
+        "keyType": "Account",
+        "lastEnabledTime": "2021-06-03T05:01:54.438557+00:00"
+      },
+      "file": {
+        "enabled": true,
+        "keyType": "Account",
+        "lastEnabledTime": "2021-06-03T05:01:54.438557+00:00"
+      },
+      "queue": null,
+      "table": null
+    }
+  },
+  "extendedLocation": null,
+  "failoverInProgress": null,
+  "geoReplicationStats": null,
+  "id": "/subscriptions/1aaf9514-a838-4b16-9737-bd8e019e73de/resourceGroups/learn-08afede4-6043-4d0b-9add-9b3a449cd9ac/providers/Microsoft.Storage/storageAccounts/queuestorag234567e",
+  "identity": null,
+  "isHnsEnabled": null,
+  "keyCreationTime": {
+    "key1": "2021-06-03T05:01:54.422942+00:00",
+    "key2": "2021-06-03T05:01:54.422942+00:00"
+  },
+  "keyPolicy": null,
+  "kind": "StorageV2",
+  "largeFileSharesState": null,
+  "lastGeoFailoverTime": null,
+  "location": "westus",
+  "minimumTlsVersion": null,
+  "name": "queuestorag234567e",
+  "networkRuleSet": {
+    "bypass": "AzureServices",
+    "defaultAction": "Allow",
+    "ipRules": [],
+    "resourceAccessRules": null,
+    "virtualNetworkRules": []
+  },
+  "primaryEndpoints": {
+    "blob": "https://queuestorag234567e.blob.core.windows.net/",
+    "dfs": "https://queuestorag234567e.dfs.core.windows.net/",
+    "file": "https://queuestorag234567e.file.core.windows.net/",
+    "internetEndpoints": null,
+    "microsoftEndpoints": null,
+    "queue": "https://queuestorag234567e.queue.core.windows.net/",
+    "table": "https://queuestorag234567e.table.core.windows.net/",
+    "web": "https://queuestorag234567e.z22.web.core.windows.net/"
+  },
+  "primaryLocation": "westus",
+  "privateEndpointConnections": [],
+  "provisioningState": "Succeeded",
+  "resourceGroup": "learn-08afede4-6043-4d0b-9add-9b3a449cd9ac",
+  "routingPreference": null,
+  "sasPolicy": null,
+  "secondaryEndpoints": null,
+  "secondaryLocation": null,
+  "sku": {
+    "name": "Standard_LRS",
+    "tier": "Standard"
+  },
+  "statusOfPrimary": "available",
+  "statusOfSecondary": null,
+  "tags": {},
+  "type": "Microsoft.Storage/storageAccounts"
+}
+
+```
+
+
+
 ## Azure Storage account replication
 
 ### Redundancy in the Primary Region
@@ -444,9 +549,11 @@ Typically, you will have one or more **sender components** and one or more **rec
 
 **Sender components** add messages to the queue. **Receiver components** retrieve messages from the front of the queue for processing.
 
+A queue must be part of a storage account
+
 The following illustration shows multiple sender applications adding messages to the Azure Queue and one receiver application retrieving the messages.
 
-![](https://github.com/amarnadh19/books/blob/main/images/az_storage17.PNG?)
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage17.png?)
 
 Pricing is based on queue size and number of operations. Larger message queues cost more than smaller queues. 
 
@@ -454,8 +561,30 @@ Charges are also incurred for each operation, such as adding a message and delet
 
 ### Why use queues?
 
+A queue increases resiliency by temporarily storing waiting messages. At times of low or normal demand, the size of the queue remains small because the destination component removes messages from the queue faster than they are added.
 
+At times of high demand, the queue may increase in size, but messages are not lost. The destination component can catch up and empty the queue as demand returns to normal.
 
+A single queue can be up to 500 TB in size, so it can potentially store millions of messages. The target throughput for a single queue is 2000 messages per second, allowing it to handle high-volume scenarios.
+
+Azure Queue storage instantaneously handles high demand by storing messages until processing resources are available.
+
+### What is a message?
+
+A message in a queue is a byte array of up to 64 KB. Message contents are not interpreted at all by any Azure component.
+
+If you want to create a structured message, you could format the message content using XML or JSON. Your code is responsible for generating and interpreting your custom format. For example, you could make a custom JSON message that looks like the following:
+
+```
+{
+    "Message": {
+        "To": "news@contoso.com",
+        "From": "writer@contoso.com",
+        "Subject": "Support request",
+        "Body": "Send me a photographer!"
+    }
+}
+```
 
 ### Queue storage concepts   
 
@@ -471,6 +600,61 @@ Charges are also incurred for each operation, such as adding a message and delet
 - **Queue:** A queue contains a set of messages. The queue name must be all lowercase
 - **Message:** A message, in any format, of up to 64 KB. Before version 2017-07-29, the maximum time-to-live allowed is seven days.
                For version 2017-07-29 or later, the maximum time-to-live can be any positive number, or -1 indicating that the message doesn't expire. If this parameter is omitted, the default time-to-live is seven days.
+
+### Settings for queues
+
+
+When you create a storage account that will contain queues, you should consider the following settings:
+
+- Queues are only available as part of Azure general-purpose storage accounts (v1 or v2). You cannot add them to Blob storage accounts.
+
+- The Access tier setting which is shown for StorageV2 accounts applies only to Blob storage and does not affect queues.
+
+- You should choose a location that is close to either the source components or destination components or (preferably) both.
+
+- Data is always replicated to multiple servers to guard against disk failures and other hardware problems. You have a choice of replication strategies: Locally Redundant Storage (LRS) is low-cost but vulnerable to disasters that affect an entire data center while Geo-Redundant Storage (GRS) replicates data to other Azure data centers. 
+
+- The performance tier determines how your messages are stored: Standard uses magnetic drives while Premium uses solid-state drives. Choose Standard if you expect peaks in demand to be short. Consider Premium if queue length sometimes becomes long and you need to minimize the time to access messages.
+
+- Require secure transfer if sensitive information may pass through the queue. This setting ensures that all connections to the queue are encrypted using Secure Sockets Layer (SSL).
+
+
+### Identify a queue
+
+To access a queue, you need three pieces of information:
+
+- Storage account name
+- Queue name
+- Authorization token
+
+#### Queue identity
+
+Every queue has a name that you assign during creation. The name must be unique within your storage account but doesn't need to be globally unique (unlike the storage account name).
+
+#### Access authorization
+
+Every request to a queue must be authorized and there are several options to choose from.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage20.png?)
+
+#### Retrieving the account key
+
+```
+Azure CLI
+
+az storage account keys list --account-name <your storage account name>
+
+```
+```
+Powershell
+
+Get-AzStorageAccountKey ...
+```
+
+### Accessing queues
+
+You access a queue using a REST API. To do this, you'll use a URL that combines the name you gave the storage account with the domain queue.core.windows.net and the path to the queue you want to work with. For example: http://<storage account>.queue.core.windows.net/<queue name>. An Authorization header must be included with every request. The value can be any of the three authorization styles.
+
 
 
 ## Table Storage
