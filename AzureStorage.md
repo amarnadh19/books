@@ -1,4 +1,4 @@
-# Azure Storage 
+# Azure Storage
 
 Azure Storage is Microsoft's cloud storage solution for modern data storage scenarios.
 
@@ -49,23 +49,23 @@ Azure VMs use Azure Disk storage to store virtual disks. Azure Disk storage cann
 
 ## Azure Storage account
 
-An Azure storage account contains all of your Azure Storage data objects: blobs, file shares, queues, tables, and disks. 
+An Azure storage account contains all of your Azure Storage data objects: blobs, file shares, queues, tables, and disks.
 
-The storage account provides a unique namespace for your Azure Storage data that's accessible from anywhere in the world over HTTP or HTTPS. 
+The storage account provides a unique namespace for your Azure Storage data that's accessible from anywhere in the world over HTTP or HTTPS.
 
 Data in your storage account is durable and highly available, secure, and massively scalable.
 
-### Types of Storage Account 
+### Types of Storage Account
 
 Azure Storage offers serveral types of storge accounts. The types of storage accounts are:
 
 ![](https://github.com/amarnadh19/books/blob/main/images/az_storage6.PNG?)
 
-- **General-purpose v1 accounts (Storage):** 
-  - Legacy account type of blobs, files, queues, and tables. 
+- **General-purpose v1 accounts (Storage):**
+  - Legacy account type of blobs, files, queues, and tables.
   - Use general-purpose V2 accounts instead when possible.
 
-- **General-purpose V2 accounts (StorageV2):** 
+- **General-purpose V2 accounts (StorageV2):**
   - Basic storage account type for blobs, files, queues, and tables.
   - Recommended for most scenarios using Azure Storage.
   - For NFS use premium file share account type.
@@ -138,7 +138,7 @@ LRS is a good choice for the following scenarios:
 
 - Zone-redundant storage (ZRS) replicates your Azure Storage data synchronously across three Azure availability zones in the primary region.
 - Durabililty 99.999999999999% (12 nines) over a year.
-- With ZRS, your data is still accessible for both read and write operations even if a zone becomes unavailable. 
+- With ZRS, your data is still accessible for both read and write operations even if a zone becomes unavailable.
 - When designing applications for ZRS, follow practices for transient fault handling, including implementing retry policies with exponential back-off.
 - A write request to a storage account that is using ZRS happens synchronously.
 - The write operation returns successfully only after the data is written to all replicas across the three availability zones.
@@ -155,7 +155,7 @@ When you create a storage account, you select the primary region for the account
 - Geo-redundant storage (GRS)
 - Geo-zone-redundant storage (GZRS)
 
-With GRS or GZRS, the data in the secondary region isn't available for read or write access unless there is a failover to the secondary region. 
+With GRS or GZRS, the data in the secondary region isn't available for read or write access unless there is a failover to the secondary region.
 
 For read access to the secondary region, configure your storage account to use read-access geo-redundant storage (RA-GRS) or read-access geo-zone-redundant storage (RA-GZRS).
 
@@ -204,7 +204,7 @@ Only general-purpose v2 storage accounts support GZRS and RA-GZRS.
 
     The Main difference between GRS and GZRS is:
 
-    GRS data is replicated 3 times in primary region using LRS and one copy is ansync with secondary region i.e secondary region has only one copy. 
+    GRS data is replicated 3 times in primary region using LRS and one copy is ansync with secondary region i.e secondary region has only one copy.
 
 The following table describes key parameters for each redundancy option:
 
@@ -315,7 +315,7 @@ There are three types of blobs in Azure
 
 ### Blob Access Tiers
 
-Azure Storage provides different options for accessing block blob data based on usage. 
+Azure Storage provides different options for accessing block blob data based on usage.
 
 By selecting the correct access tier for your needs, you can store your block blob data in the most cost-effective manner.
 
@@ -341,7 +341,7 @@ The lifecycle management policy lets you:
 
 - Delete blobs at the end of their lifecycles.
 
-- Define rules to be run once per day at the storage account level. 
+- Define rules to be run once per day at the storage account level.
 
 - Apply rules to containers or a subset of blobs (using prefixes as filters).
 
@@ -358,9 +358,9 @@ Once the blob has been created, it cannot be changed.
 
 #### Blob Upload tools
 
-There are multiple methods to upload data to blob storage 
+There are multiple methods to upload data to blob storage
 
-- **AzCopy** is an easy-to-use command-line tool for Windows and Linux that copies data to and from Blob storage, across containers, or across storage accounts. 
+- **AzCopy** is an easy-to-use command-line tool for Windows and Linux that copies data to and from Blob storage, across containers, or across storage accounts.
 
 - The **Azure Storage Data Movement** library is a .NET library for moving data between Azure Storage services. The AzCopy utility is built with the Data Movement library.
 
@@ -397,7 +397,7 @@ you can generate the SAS tokens, they allow specific access to private asset for
 
 ### Choose your data access method
 
-There are two built-in methods of data access supported by Azure Files. 
+There are two built-in methods of data access supported by Azure Files.
 
 - One method is direct access via a mounted drive in your operating system.
 
@@ -418,13 +418,44 @@ Because Azure Files stores files in a storage account, you can choose between st
 ### FileShare Common scenarios:
 
 - Many on-premises applications use file shares. This feature makes it easier to migrate those applications that share data to Azure. If you mount the file share to the same drive letter that the on-premises application uses, the part of your application that accesses the file share should work with minimal, if any, changes.
+
 - Configuration files can be stored on a file share and accessed from multiple VMs. Tools and utilities used by multiple developers in a group can be stored on a file share, ensuring that everybody can find them, and that they use the same version.
+
 - Resource logs, metrics, and crash dumps are just three examples of data that can be written to a file share and processed or analyzed later.
 
 
 ## Queue storage
 
-The Azure Queue service is used to store and retrieve messages.Accessing messages from anywhere in the world via authenticated calls using HTTP or HTTPS. Queue messgaes can be upto 64 KB in size, and a queue can contain million of messages,upto the total capacity limit of storage account. Queues are generally used to store lists of messgaes to be processed asynchronously
+### What is Azure Queue Storage?
+
+Azure Queue storage is an Azure service that implements cloud-based queues
+
+The Azure Queue service is used to store and retrieve messages.
+
+Accessing messages from anywhere in the world via authenticated calls using HTTP or HTTPS.
+
+Application components access a queue using a REST API or an Azure-supplied client library.
+
+Queue messgaes can be upto 64 KB in size, and a queue can contain million of messages,upto the total capacity limit of storage account.
+
+Queues are generally used to store lists of messgaes to be processed asynchronously
+
+Typically, you will have one or more **sender components** and one or more **receiver components**.
+
+**Sender components** add messages to the queue. **Receiver components** retrieve messages from the front of the queue for processing.
+
+The following illustration shows multiple sender applications adding messages to the Azure Queue and one receiver application retrieving the messages.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_storage17.PNG?)
+
+Pricing is based on queue size and number of operations. Larger message queues cost more than smaller queues. 
+
+Charges are also incurred for each operation, such as adding a message and deleting a message. 
+
+### Why use queues?
+
+
+
 
 ### Queue storage concepts   
 
@@ -434,12 +465,13 @@ The Azure Queue service is used to store and retrieve messages.Accessing message
 
   The following URL addresses a queue in the diagram:
 
-   https://myaccount.queue.core.windows.net/images-to-download 
+   https://myaccount.queue.core.windows.net/images-to-download
 
 - **Storage account:** All access to Azure Storage is done through a storage account.
 - **Queue:** A queue contains a set of messages. The queue name must be all lowercase
 - **Message:** A message, in any format, of up to 64 KB. Before version 2017-07-29, the maximum time-to-live allowed is seven days.
                For version 2017-07-29 or later, the maximum time-to-live can be any positive number, or -1 indicating that the message doesn't expire. If this parameter is omitted, the default time-to-live is seven days.
+
 
 ## Table Storage
 
@@ -453,11 +485,6 @@ you can use Table storage to store flexible datasets like user data for web appl
 
 you can store any number of entities in a table, and a storage account may contain any number of tables, up to the capacity limit of the storage account
 
-zure tables are ideal for storing structured, non-relational data.
+Azure tables are ideal for storing structured, non-relational data.
 
 ### Common uses of Table storage include
-
-
-
-
-
