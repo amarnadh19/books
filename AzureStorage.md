@@ -421,11 +421,43 @@ Because Azure Files stores files in a storage account, you can choose between st
 - Configuration files can be stored on a file share and accessed from multiple VMs. Tools and utilities used by multiple developers in a group can be stored on a file share, ensuring that everybody can find them, and that they use the same version.
 - Resource logs, metrics, and crash dumps are just three examples of data that can be written to a file share and processed or analyzed later.
 
-### Create and Connect to an Azure File share
 
-There are two steps to create Azure File shares.
+## Queue storage
 
-- The first step is to create a storage account by choosing the correct option.
+The Azure Queue service is used to store and retrieve messages.Accessing messages from anywhere in the world via authenticated calls using HTTP or HTTPS. Queue messgaes can be upto 64 KB in size, and a queue can contain million of messages,upto the total capacity limit of storage account. Queues are generally used to store lists of messgaes to be processed asynchronously
 
-- The second step involves creating the file shares themselves.
+### Queue storage concepts   
+
+- URL format: Queues are addressable using the following URL format:
+
+  https://<storage account>.queue.core.windows.net/<queue>
+
+  The following URL addresses a queue in the diagram:
+
+   https://myaccount.queue.core.windows.net/images-to-download 
+
+- **Storage account:** All access to Azure Storage is done through a storage account.
+- **Queue:** A queue contains a set of messages. The queue name must be all lowercase
+- **Message:** A message, in any format, of up to 64 KB. Before version 2017-07-29, the maximum time-to-live allowed is seven days.
+               For version 2017-07-29 or later, the maximum time-to-live can be any positive number, or -1 indicating that the message doesn't expire. If this parameter is omitted, the default time-to-live is seven days.
+
+## Table Storage
+
+**Azure Table storage is now part of Azure Cosmos DB**. Azure Table storage is a service that stores non-relational structured data (known as structured NoSQL data) in the cloud, providing a key/attribute store with schemaless design. Because Table Storage is schemaless, it's easy to adopt your data as the application evolve
+
+Access to table storage is fast and cost effective for many types of applications, typically low cost than traditional SQL for same volume of data
+
+The service is a NoSQL datastore which accepts authenticated calls from inside and outside the Azure cloud
+
+you can use Table storage to store flexible datasets like user data for web application, address books, device information or other typr of metadata your service requires
+
+you can store any number of entities in a table, and a storage account may contain any number of tables, up to the capacity limit of the storage account
+
+zure tables are ideal for storing structured, non-relational data.
+
+### Common uses of Table storage include
+
+
+
+
 
