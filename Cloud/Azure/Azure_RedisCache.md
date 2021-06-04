@@ -136,4 +136,126 @@ You can use distributed cache to:
 - Locate content geographically closer to users.
 - Provide for output caching.
 
+As the following graphic illustrates, Azure Cache for Redis can help improve performance in apps that interface with many database solutions, including Azure SQL Database, Azure Cosmos DB, and Azure Database for MySQL.
 
+![](https://github.com/amarnadh19/books/blob/main/images/az_cache1.png?)
+
+
+### Session store
+
+Your session-oriented apps require the ability to store and access temporary session data when users sign in and remain active on your apps.
+
+The session store use-case in Azure Cache for Redis:
+
+- Manages up to hundreds of thousands of simultaneous users.
+- Makes data-replication options available to help provide for maximum reliability.
+- Helps reduce costs, as it's typically more cost-effective and scalable than alternative database or storage options.
+
+You can use session store to:
+
+- Help facilitate eCommerce shopping carts.
+- Store user cookies.
+- Maintain user login and session state data.
+- Enable IoT telemetry.
+
+### Message broker
+
+Apps built on microservices often need to asynchronously communicate. 
+
+Azure Cache for Redis can implement a publish/subscribe or queue architecture that can help enable fast and reliable communication between these microservices. 
+
+The Azure Cache for Redis message broker:
+
+- Provides a temporary data store with minimal overhead and cost.
+- Supports TLS encryption for data in transit.
+- Provides network isolation for secure communication between your services.
+
+You can use the message broker use-case to:
+
+- Publish news, financial data, or application updates to users.
+- Manage chat messages.
+- Enable communication between microservices.
+
+In the following graphic, a number of group chats, notifications, and stock quotes are occurring. They're connected to the message-broker feature in Azure Cache for Redis. This feature, in turn, connects to Azure API Apps instances and Azure web apps. These elements provide access to the group chats, notifications, and stock quotes for connected client devices.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_cache2.png?)
+
+
+### Cloud migration
+
+If you're moving from an on-premises cache to a managed service, a critical factor is how to move content to the managed service. Azure Cache for Redis helps migrate data to the cloud and also:
+
+- Enables both import and export of RDB files.
+
+- Provides compatibility with open-source Redis to help simplify migration.
+
+- Provides a fully managed service that manages:
+
+  - Patching
+  - Updates
+  - Provisioning
+  - Scaling
+  - Setup
+
+You can use cloud-migration in Azure Cache for Redis to:
+
+- Migrate your apps from your on-premises environment to the cloud.
+- Help modernize your current infrastructure as a service (IaaS) apps through the benefits of platform as a service (PaaS) services.
+
+A typical process proceeds as follows:
+
+- From an existing on-premises Redis cache, you export the cache to an RDB file.
+- You create an Azure Cache for Redis instance.
+- Next, you import the RDB into this instance.
+- Finally, you configure your new application to point to your Azure Cache for Redis instance.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_cache3.png?)
+
+
+## When to use Azure Cache for Redis
+
+We'll evaluate Azure Cache for Redis against the following criteria:
+
+- Simplicity
+- Reliability
+- Scaling
+
+### Decision criteria
+
+To determine whether to use Azure Cache for Redis, the following table provides useful criteria.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_cache4.png?)
+
+### Apply the criteria
+
+#### Do you want a managed service approach?
+
+When you use Azure Cache for Redis, you're implementing a fully managed service. This provides many benefits, including:
+
+- Automatically managed patching, updates, provisioning, configuration, setup, and scaling.
+- Implementation of Azure Monitor to track parameters and metrics within the cache, infrastructure, and network.
+- Use of any Redis client to connect to the service.
+
+#### Is reliability critical?
+
+Azure Cache for Redis provides several reliability and high-availability features, including clustering, data persistence, zone redundancy, and geo-replication.
+
+Specifically, Azure Cache for Redis has several high-availability capabilities, including that it:
+
+- Includes a redundant pair of VMs configured for automatic failover.
+
+    Note
+
+    This excludes Basic tier.
+
+- Provides up to 99.999% availability in the Enterprise tiers.
+
+- Supports a zone-redundant configuration.
+
+- Supports active geo-replication to create global caches that have local latency across regions.
+
+#### Do you anticipate sudden changes in load?
+
+It's important that the system can respond to changes in load. Sudden changes in demand might occur when you run sales promotions or at specific times of the year. 
+
+Azure Cache for Redis can handle massive throughput and tens of thousands of concurrent users, allowing applications to handle unexpected traffic surges smoothly.
