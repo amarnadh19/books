@@ -61,4 +61,79 @@ Azure Cache for Redis enables you to implement Redis as a fully managed service.
 
 ## Azure Cache for Redis tiers
 
+You can select from the following five Azure Cache for Redis tiers:
+
+- The Basic tier runs on a single virtual machine (VM) and doesn't include a service-level agreement (SLA). This tier is based on an OSS Redis cache.
+
+- The Standard tier runs on two replicated VMs and is based on an OSS Redis cache.
+
+    Note:
+
+    Standard and Basic are single-node caches. You should consider these tiers only for noncritical workloads.
+
+- The Premium tier is deployed on more powerful VMs. This tier offers features such as higher throughput, lower latency, and better availability. This tier is based on an OSS Redis cache.
+
+- The Enterprise tier offers higher availability than the Premium tier and a high-performance cache that's powered by Redis Labs' Redis Enterprise software.
+
+- The Enterprise Flash tier offers a cost-effective alternative to the Enterprise tier and is also powered by Redis Labs' Redis Enterprise software. This tier extends Redis data storage to nonvolatile memory, which reduces overall memory cost per gigabyte (GB).
+
+All tiers support the following features:
+
+- Data encryption in transit
+- Network isolation
+- Scaling
+
+The Premium, Enterprise, and Enterprise Flash tiers also support other advanced features, including:
+
+- **Clustering.** Provides for high-availability and load distribution.
+
+- **Data persistence.** Allows you to persist data in Redis. This enables you to take snapshots and back up data. You can then load these snapshots should a hardware failure occur.
+
+- **Zone redundancy.** Provides higher resilience and availability because the VMs are spread across multiple availability zones.
+
+- **Geo-replication.** Links two Azure Cache for Redis instances and creates a data-replication relationship. This replication provides a potential disaster-recovery solution.
+
+- **Import/Export.** Enables you to import data into, or export data from, Azure Cache for Redis. You can import or export an Azure Cache for Redis Database (RDB) snapshot from a premium cache to an Azure Storage Account blob.
+
+
+The following features are only available in the Enterprise tiers:
+
+- **RediSearch.** Provides a powerful indexing and querying engine with a full-text search engine.
+
+- **RedisBloom.** Provides support for probabilistic data structures.
+
+- **RedisTimeSeries.** Enables you to ingest and query large quantities of data with very high performance.
+
+- **Active Geo-Replication.** Implements conflict-free replicated data types, and supports writes to multiple cache instances. Manages merging of changes and conflict resolution when necessary.
+
+
+## How Azure Cache for Redis works
+
+Azure Cache for Redis use-cases:
+
+- Distributed cache
+- Session store
+- Message broker
+- Cloud migration
+
+### Distributed cache
+
+The distributed cache use-case in Azure Cache for Redis helps improve your apps' response times by copying frequently-accessed data to a cache.
+
+This cache has lower latency and provides for higher throughput than the primary datastore.
+
+The distributed cache feature:
+
+- Accelerates application responsiveness.
+- Helps reduce load on primary datastores and compute resources.
+- Integrates with many Azure databases, including Azure SQL and Azure Cosmos DB.
+
+You can use distributed cache to:
+
+- Manage spikes in traffic.
+- Cache and provide commonly accessed data to users.
+- Help reduce compute load on your databases.
+- Locate content geographically closer to users.
+- Provide for output caching.
+
 
