@@ -1,0 +1,581 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation Template for the Network stack
+Parameters:
+  EnvironmentName:
+    Description: Environment name for the application dev/staging/qa/production
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - staging
+      - qa
+      - production
+    ConstraintDescription: Specify either dev or staging or production
+  TierName:
+    Description: Tier name of the application
+    Type: String
+    AllowedValues:
+      - web
+      - ai
+    ConstraintDescription: Specify either dev or staging or production
+  AvailabilityZone1:
+    Description: The first availability zone in the region
+    Type: 'AWS::EC2::AvailabilityZone::Name'
+    ConstraintDescription: Must be a valid availability zone
+  AvailabilityZone2:
+    Description: The second availability zone in the region
+    Type: 'AWS::EC2::AvailabilityZone::Name'
+    ConstraintDescription: Must be a valid availability zone
+  AvailabilityZone3:
+    Description: The third availability zone in the region
+    Type: 'AWS::EC2::AvailabilityZone::Name'
+    ConstraintDescription: Must be a valid availability zone
+  AvailabilityZone4:
+    Description: The forth availability zone in the region
+    Type: 'AWS::EC2::AvailabilityZone::Name'
+    ConstraintDescription: Must be a valid availability zone
+  VpcCidr:
+    Description: The CIDR for the VPC
+    Type: String
+    ConstraintDescription: 'Must be a valid CIDR, example: 10.40.0.0/16'
+    MinLength: 1
+    MaxLength: 19
+  PublicSubnet1Cidr:
+    Description: The CIDR for the Public Subnet 1
+    Type: String
+    ConstraintDescription: 'Must be a valid CIDR, example: 10.50.0.0/16'
+    MinLength: 6
+    MaxLength: 19
+  PublicSubnet2Cidr:
+    Description: The CIDR for the Public Subnet 2
+    Type: String
+    ConstraintDescription: 'Must be a valid CIDR, example: 10.50.0.0/16'
+    MinLength: 6
+    MaxLength: 19
+  PublicSubnet3Cidr:
+    Description: The CIDR for the Public Subnet 3
+    Type: String
+    ConstraintDescription: 'Must be a valid CIDR, example: 10.50.0.0/16'
+    MinLength: 6
+    MaxLength: 19
+  PublicSubnet4Cidr:
+    Description: The CIDR for the Public Subnet 4
+    Type: String
+    ConstraintDescription: 'Must be a valid CIDR, example: 10.50.0.0/16'
+    MinLength: 6
+    MaxLength: 19
+  PrivateSubnet1Cidr:
+    Description: The CIDR for the Private Subnet 1
+    Type: String
+    ConstraintDescription: 'Must be a valid CIDR, example: 10.50.0.0/16'
+    MinLength: 6
+    MaxLength: 19
+  PrivateSubnet2Cidr:
+    Description: The CIDR for the Private Subnet 2
+    Type: String
+    ConstraintDescription: 'Must be a valid CIDR, example: 10.50.0.0/16'
+    MinLength: 6
+    MaxLength: 19
+  PrivateSubnet3Cidr:
+    Description: The CIDR for the Private Subnet 3
+    Type: String
+    ConstraintDescription: 'Must be a valid CIDR, example: 10.50.0.0/16'
+    MinLength: 6
+    MaxLength: 19
+  PrivateSubnet4Cidr:
+    Description: The CIDR for the Private Subnet 4
+    Type: String
+    ConstraintDescription: 'Must be a valid CIDR, example: 10.50.0.0/16'
+    MinLength: 6
+    MaxLength: 19
+Conditions: {}
+Resources:
+  VPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: !Ref VpcCidr
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref EnvironmentName
+              - !Ref TierName
+              - vpc
+  PublicSubnet1:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PublicSubnet1Cidr
+      AvailabilityZone: !Ref AvailabilityZone1
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - PublicSubnet1
+  PublicSubnet2:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PublicSubnet2Cidr
+      AvailabilityZone: !Ref AvailabilityZone2
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - PublicSubnet2
+  PublicSubnet3:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PublicSubnet3Cidr
+      AvailabilityZone: !Ref AvailabilityZone3
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - PublicSubnet3
+  PublicSubnet4:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PublicSubnet4Cidr
+      AvailabilityZone: !Ref AvailabilityZone4
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - PublicSubnet4
+  PrivateSubnet1:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PrivateSubnet1Cidr
+      AvailabilityZone: !Ref AvailabilityZone1
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - PrivateSubnet1
+  PrivateSubnet2:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PrivateSubnet2Cidr
+      AvailabilityZone: !Ref AvailabilityZone2
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - PrivateSubnet2
+  PrivateSubnet3:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PrivateSubnet3Cidr
+      AvailabilityZone: !Ref AvailabilityZone3
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - PrivateSubnet3
+  PrivateSubnet4:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PrivateSubnet4Cidr
+      AvailabilityZone: !Ref AvailabilityZone4
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - PrivateSubnet4
+  InternetGateway:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - igw
+  VPCGatewayAttachment:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+  PublicRouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - public-igw
+  PublicRoute:
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+    DependsOn: VPCGatewayAttachment
+  PublicSubnetRouteTableAssociation1:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet1
+      RouteTableId: !Ref PublicRouteTable
+  PublicSubnetRouteTableAssociation2:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet2
+      RouteTableId: !Ref PublicRouteTable
+  PublicSubnetRouteTableAssociation3:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet3
+      RouteTableId: !Ref PublicRouteTable
+  PublicSubnetRouteTableAssociation4:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet4
+      RouteTableId: !Ref PublicRouteTable
+  PublicSubnetNetworkAclAssociation1:
+    Type: 'AWS::EC2::SubnetNetworkAclAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet1
+      NetworkAclId: !GetAtt
+        - VPC
+        - DefaultNetworkAcl
+  PublicSubnetNetworkAclAssociation2:
+    Type: 'AWS::EC2::SubnetNetworkAclAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet2
+      NetworkAclId: !GetAtt
+        - VPC
+        - DefaultNetworkAcl
+  PublicSubnetNetworkAclAssociation3:
+    Type: 'AWS::EC2::SubnetNetworkAclAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet3
+      NetworkAclId: !GetAtt
+        - VPC
+        - DefaultNetworkAcl
+  PublicSubnetNetworkAclAssociation4:
+    Type: 'AWS::EC2::SubnetNetworkAclAssociation'
+    Properties:
+      SubnetId: !Ref PublicSubnet4
+      NetworkAclId: !GetAtt
+        - VPC
+        - DefaultNetworkAcl
+  NatGateway1:
+    DependsOn:
+      - VPCGatewayAttachment
+      - NatEIP1
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      AllocationId: !GetAtt
+        - NatEIP1
+        - AllocationId
+      SubnetId: !Ref PublicSubnet1
+  NatGateway2:
+    DependsOn:
+      - VPCGatewayAttachment
+      - NatEIP2
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      AllocationId: !GetAtt
+        - NatEIP2
+        - AllocationId
+      SubnetId: !Ref PublicSubnet2
+  NatGateway3:
+    DependsOn:
+      - VPCGatewayAttachment
+      - NatEIP3
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      AllocationId: !GetAtt
+        - NatEIP3
+        - AllocationId
+      SubnetId: !Ref PublicSubnet3
+  NatGateway4:
+    DependsOn:
+      - VPCGatewayAttachment
+      - NatEIP4
+    Type: 'AWS::EC2::NatGateway'
+    Properties:
+      AllocationId: !GetAtt
+        - NatEIP4
+        - AllocationId
+      SubnetId: !Ref PublicSubnet4
+  NatEIP1:
+    DependsOn: VPCGatewayAttachment
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+  NatEIP2:
+    DependsOn: VPCGatewayAttachment
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+  NatEIP3:
+    DependsOn: VPCGatewayAttachment
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+  NatEIP4:
+    DependsOn: VPCGatewayAttachment
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+  NatRouteTable1:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - private-nat-1
+  NatRouteTable2:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - private-nat-2
+  NatRouteTable3:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - private-nat-3
+  NatRouteTable4:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Join
+            - '-'
+            - - !Ref 'AWS::StackName'
+              - private-nat-4
+  NatRoute1:
+    Type: 'AWS::EC2::Route'
+    DependsOn: VPCGatewayAttachment
+    Properties:
+      RouteTableId: !Ref NatRouteTable1
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway1
+  NatRoute2:
+    Type: 'AWS::EC2::Route'
+    DependsOn: VPCGatewayAttachment
+    Properties:
+      RouteTableId: !Ref NatRouteTable2
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway2
+  NatRoute3:
+    Type: 'AWS::EC2::Route'
+    DependsOn: VPCGatewayAttachment
+    Properties:
+      RouteTableId: !Ref NatRouteTable3
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway3
+  NatRoute4:
+    Type: 'AWS::EC2::Route'
+    DependsOn: VPCGatewayAttachment
+    Properties:
+      RouteTableId: !Ref NatRouteTable4
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway4
+  PrivateSubnetRouteTableAssociation1:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PrivateSubnet1
+      RouteTableId: !Ref NatRouteTable1
+  PrivateSubnetRouteTableAssociation2:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PrivateSubnet2
+      RouteTableId: !Ref NatRouteTable2
+  PrivateSubnetRouteTableAssociation3:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PrivateSubnet3
+      RouteTableId: !Ref NatRouteTable3
+  PrivateSubnetRouteTableAssociation4:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref PrivateSubnet4
+      RouteTableId: !Ref NatRouteTable4
+Outputs:
+  Name:
+    Description: VPC Network Stack name
+    Value: !Ref 'AWS::StackName'
+    Export:
+      Name: !Sub '${AWS::StackName}-Name'
+  VpcId:
+    Description: VPC Id
+    Value: !Ref VPC
+    Export:
+      Name: !Sub '${AWS::StackName}-VpcId'
+  VpcCidr:
+    Description: Vpc CIDR block
+    Value: !Ref VpcCidr
+    Export:
+      Name: !Sub '${AWS::StackName}-vpc-cidr'
+  PublicSubnet1:
+    Description: Public subnet 1 ID
+    Value: !Ref PublicSubnet1
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnet1Id'
+  PublicSubnet2:
+    Description: Public subnet 2 ID
+    Value: !Ref PublicSubnet2
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnet2Id'
+  PublicSubnet3:
+    Description: Public subnet 3 ID
+    Value: !Ref PublicSubnet3
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnet3Id'
+  PublicSubnet4:
+    Description: Public subnet 4 ID
+    Value: !Ref PublicSubnet4
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnet4Id'
+  PrivateSubnet1:
+    Description: Private subnet 1 ID
+    Value: !Ref PrivateSubnet1
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet1Id'
+  PrivateSubnet2:
+    Description: Private subnet 2 ID
+    Value: !Ref PrivateSubnet2
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet2Id'
+  PrivateSubnet3:
+    Description: Private subnet 3 ID
+    Value: !Ref PrivateSubnet3
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet3Id'
+  PrivateSubnet4:
+    Description: Private subnet 4 ID
+    Value: !Ref PrivateSubnet4
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet4Id'
+  PrivateSubnet1Cidr:
+    Description: CIDR of Private subnet 1
+    Value: !Ref PrivateSubnet1Cidr
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet1Cidr'
+  PrivateSubnet2Cidr:
+    Description: CIDR of Private subnet 2
+    Value: !Ref PrivateSubnet2Cidr
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet2Cidr'
+  PrivateSubnet3Cidr:
+    Description: CIDR of Private subnet 3
+    Value: !Ref PrivateSubnet3Cidr
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet3Cidr'
+  PrivateSubnet4Cidr:
+    Description: CIDR of Private subnet 4
+    Value: !Ref PrivateSubnet4Cidr
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet4Cidr'
+
+Outputs:
+  Name:
+    Description: VPC Network Stack name
+    Value: !Ref 'AWS::StackName'
+    Export:
+      Name: !Sub '${AWS::StackName}-Name'
+  VpcId:
+    Description: VPC Id
+    Value: !Ref VPC
+    Export:
+      Name: !Sub '${AWS::StackName}-VpcId'
+  VpcCidr:
+    Description: Vpc CIDR block
+    Value: !Ref VpcCidr
+    Export:
+      Name: !Sub '${AWS::StackName}-vpc-cidr'
+  PublicSubnet1:
+    Description: Public subnet 1 ID
+    Value: !Ref PublicSubnet1
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnet1Id'
+  PublicSubnet2:
+    Description: Public subnet 2 ID
+    Value: !Ref PublicSubnet2
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnet2Id'
+  PublicSubnet3:
+    Description: Public subnet 3 ID
+    Value: !Ref PublicSubnet3
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnet3Id'
+  PublicSubnet4:
+    Description: Public subnet 4 ID
+    Value: !Ref PublicSubnet4
+    Export:
+      Name: !Sub '${AWS::StackName}-PublicSubnet4Id'
+  PrivateSubnet1:
+    Description: Private subnet 1 ID
+    Value: !Ref PrivateSubnet1
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet1Id'
+  PrivateSubnet2:
+    Description: Private subnet 2 ID
+    Value: !Ref PrivateSubnet2
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet2Id'
+  PrivateSubnet3:
+    Description: Private subnet 3 ID
+    Value: !Ref PrivateSubnet3
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet3Id'
+  PrivateSubnet4:
+    Description: Private subnet 4 ID
+    Value: !Ref PrivateSubnet4
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet4Id'
+  PrivateSubnet1Cidr:
+    Description: CIDR of Private subnet 1
+    Value: !Ref PrivateSubnet1Cidr
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet1Cidr'
+  PrivateSubnet2Cidr:
+    Description: CIDR of Private subnet 2
+    Value: !Ref PrivateSubnet2Cidr
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet2Cidr'
+  PrivateSubnet3Cidr:
+    Description: CIDR of Private subnet 3
+    Value: !Ref PrivateSubnet3Cidr
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet3Cidr'
+  PrivateSubnet4Cidr:
+    Description: CIDR of Private subnet 4
+    Value: !Ref PrivateSubnet4Cidr
+    Export:
+      Name: !Sub '${AWS::StackName}-PrivateSubnet4Cidr'
