@@ -21,6 +21,8 @@ Azure resources communicate securely with each other in one of the following way
   - Extend your virtual network private address space and the identity of your virtual network to Azure service resources, such as Azure Storage accounts and Azure SQL Database, over a direct connection. 
   
   - *Service endpoints* allow you to secure your critical Azure service resources to only a virtual network. 
+  - *Service endpoints* enables private IP addresses in the vnet to reach the endpoint of an Azure Service without needing a public IP 
+    address on the vnet
 
 - **Through VNet Peering:** 
   - You can connect virtual networks to each other, enabling resources in either virtual network to communicate with each other, using *virtual network peering*. 
