@@ -1738,9 +1738,13 @@ Using single sign-on for accounts will make it easier for users to manage their 
 
 #### SSO with Azure Active Directory
 
-**Azure AD** is a cloud-based identity service. It has built-in support for synchronizing with your on-premises Active Directory instance, or it can be used on its own. This means that all your applications, whether on-premises, in the cloud (including Microsoft 365), or even mobile, can share the same credentials. Administrators and developers can control access to data and applications by using centralized rules and policies configured in Azure AD.
+**Azure AD** is a cloud-based identity service. It has built-in support for synchronizing with your on-premises Active Directory instance, or it can be used on its own. This means that all your applications, whether on-premises, in the cloud (including Microsoft 365), or even mobile, can share the same credentials. 
 
-By using **Azure AD** for SSO, you'll also have the ability to combine multiple data sources into an intelligent security graph. This security graph can help you provide threat analysis and real-time identity protection to all accounts in Azure AD, including accounts that are synchronized from on-premises Active Directory. By using a centralized identity provider, you'll have centralized the security controls, reporting, alerting, and administration of your identity infrastructure.
+Administrators and developers can control access to data and applications by using centralized rules and policies configured in Azure AD.
+
+By using **Azure AD** for SSO, you'll also have the ability to combine multiple data sources into an intelligent security graph. This security graph can help you provide threat analysis and real-time identity protection to all accounts in Azure AD, including accounts that are synchronized from on-premises Active Directory. 
+
+By using a centralized identity provider, you'll have centralized the security controls, reporting, alerting, and administration of your identity infrastructure.
 
 
 #### Synchronize directories with Azure AD Connect
@@ -1826,7 +1830,13 @@ Azure AD B2C provides a social identity login experience, while at the same time
 
 ### Role-based access control
 
-*Role-based access control (RBAC) offers a slightly different approach*. Roles are defined as collections of access permissions. Security principals are mapped to roles directly or through group membership. Separating security principals, access permissions, and resources provides simplified access management and more detailed control.
+*Role-based access control (RBAC) offers a slightly different approach*. 
+
+Roles are defined as collections of access permissions. 
+
+Security principals are mapped to roles directly or through group membership. 
+
+Separating security principals, access permissions, and resources provides simplified access management and more detailed control.
 
 On Azure, users, groups, and roles are all stored in Azure Active Directory (Azure AD). The Azure Resource Manager API uses role-based access control to secure all resource access management within Azure.
 
