@@ -1844,18 +1844,31 @@ On Azure, users, groups, and roles are all stored in Azure Active Directory (Azu
 
 #### Roles and management groups
 
-Roles are sets of permissions, like read-only or contributor, that users can be granted to access an Azure service instance. Roles can be granted at the level of an individual service instance, but they also flow down the Azure Resource Manager hierarchy. Roles assigned at a higher scope, like an entire subscription, are inherited by child scopes, like service instances.
+Roles are sets of permissions, like read-only or contributor, that users can be granted to access an Azure service instance. 
 
-Management groups are an additional hierarchical level recently introduced into the RBAC model. Management groups add the ability to group subscriptions together and apply policy at an even higher level.
+Roles can be granted at the level of an individual service instance, but they also flow down the Azure Resource Manager hierarchy. 
 
-The ability to flow roles through an arbitrarily defined subscription hierarchy also allows administrators to grant temporary access to an entire environment for authenticated users. For example, an auditor might require temporary read-only access to all subscriptions.
+Roles assigned at a higher scope, like an entire subscription, are inherited by child scopes, like service instances.
+
+Management groups are an additional hierarchical level recently introduced into the RBAC model. 
+
+Management groups add the ability to group subscriptions together and apply policy at an even higher level.
+
+The ability to flow roles through an arbitrarily defined subscription hierarchy also allows administrators to grant temporary access to an entire environment for authenticated users. 
+
+For example, an auditor might require temporary read-only access to all subscriptions.
 
 ![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_46.png?)
 
 
 #### Privileged Identity Management
 
-In addition to managing Azure resource access with RBAC, a comprehensive approach to infrastructure protection should consider including the ongoing auditing of role members as the organization changes and evolves. Azure AD Privileged Identity Management (PIM) is an additional paid-for offering that provides oversight of role assignments, self-service, and just-in-time (JIT) role activation.
+In addition to managing Azure resource access with RBAC, a comprehensive approach to infrastructure protection should consider including the ongoing auditing of role members as the organization changes and evolves. 
+
+Azure AD Privileged Identity Management (PIM) is an additional paid-for offering that provides oversight of role assignments, self-service, and just-in-time (JIT) role activation.
 
 ![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_47.png?)
+
+With the Azure AD PIM service, you can manage, control, and monitor access to important resources in your organization.
+
 
