@@ -20,7 +20,7 @@
 - **Repository**: 
   - A *Repository* is the place where charts can be collected and shared. It's like *Perl's CPAN archive* or the *Fedora Package Database*, but for Kubernetes packages.
 
-  - The carts of all the imges used by Helm are stored in a registry called **Helm workspace**.
+  - The charts of all the images used by Helm are stored in a registry called **Helm workspace**.
 
 - **Release**:
   - A Release is an instance of a chart running in a Kubernetes cluster. 
@@ -54,14 +54,14 @@ Helm provides this functionality through the following components:
 
 Helm packages are called charts, and they consist of a few YAML configuration files and some templates that are rendered into Kubernetes manifest files. Here is the basic directory structure of a chart:
 
-package-name/
-  charts/
-  templates/
-  chart.yaml
-  LICENSE
-  README.md
-  requirements.yaml
-  values.yaml
+- package-name/
+  - charts/
+  - templates/
+  - chart.yaml
+  - LICENSE
+  - README.md
+  - requirements.yaml
+  - values.yaml
 
 These directories and files have the following functions:
 
@@ -117,3 +117,12 @@ From there, you’ll want to fill out your chart’s metadata in Chart.yaml and 
 
 The helm command has many subcommands available to help you test, package, and serve your charts.
 
+## list deployed helm charts
+
+```
+$ ./helm3 list -n grafana
+
+NAME   	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART         	APP VERSION
+grafana	grafana  	1       	2021-06-07 10:00:40.165633666 +0000 UTC	deployed	grafana-6.11.0	7.5.5      
+$ 
+```
