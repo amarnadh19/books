@@ -115,3 +115,44 @@ A customer gateway device is a physical device or software application on your s
 
 A customer gateway is a resource that you create in AWS that represents the customer gateway device in your on-premises network.
 
+
+### AWS Transit Gateway + VPN
+
+#### use case
+
+AWS managed IPsec VPN connection over the internet to regional router for multiple VPCs
+
+#### Advantages
+
+- Same as the previous option
+
+- AWS managed high availability and scalability regional network hub for up to 5,000 attachments
+
+#### Limitations
+
+- Network latency, variability, and availability are dependent on internet conditions
+
+- Customer managed endpoint is responsible for implementing redundancy and failover (if required)
+
+- Customer device must support single-hop BGP (when leveraging BGP for dynamic routing)
+
+
+#### what is Transit gateway
+
+A transit gateway is a network transit hub that you can use to interconnect your virtual private clouds (VPCs) and on-premises networks.
+
+AWS Transit Gateway is an AWS managed high availability and scalability regional network transit hub used to interconnect VPCs and customer networks.
+
+
+#### AWS Transit Gateway + VPN 
+
+AWS Transit Gateway + VPN, using the Transit Gateway VPN attachment, provides the option of creating an IPsec VPN connection between your remote network and the Transit Gateway over the internet, as shown in the following figure.
+
+![](https://github.com/amarnadh19/books/blob/main/images/aws_network_connect_5.png?)
+
+Figure: AWS Transit Gateway and VPN
+
+AWS Transit Gateway also supports and encourages multiple user gateway connections so that you can implement redundancy and failover on your side of the VPN connection as shown in the following figure.
+
+![](https://github.com/amarnadh19/books/blob/main/images/aws_network_connect_5.png?)
+

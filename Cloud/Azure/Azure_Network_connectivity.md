@@ -77,3 +77,5 @@ When working with multiple connections, you must use a RouteBased VPN type.
 Each virtual network can only have one VPN gateway, all connections through the gateway share the available bandwidth. This type of connection is often called a "multi-site" connection.
 
 ![](https://github.com/amarnadh19/books/blob/main/images/az_network_connect_2.png?)
+
+
