@@ -45,8 +45,30 @@ The following terms, sorted in order of granularity and dependence, describe the
 
 ## Jenkins VS CircleCI
 
-Jenkins is a self-contained and open source automation server that is customizable and requires setup and configuration at the organization level. Remember in the Jenkins CI chapters, we spent some time installing Jenkins in the Windows, Linux, and macOS operating systems. We also had the ability to configure Jenkins however we wanted. While this is great for software companies with dedicated teams in operations, DevOps, and so on, it is not as great for open source projects where often lone developers are setting up environments for their personal projects.
+### Jenkins
 
-CircleCI was designed around the principle of open source development and for ease of use. CircleCI can be set up within minutes of creating a project in the GitHub and Bitbucket platforms. Although CircleCI is not as customizable as Jenkins CI in this respect, it has the distinct advantage of having a quick setup. CircleCI uses an in application configuration file that uses YAML syntax and can be used in the GitHub (https://github.com/) platform as well as in the Bitbucket (https://bitbucket.org/) platform, unlike Travis CI.
+Jenkins is a self-contained and open source automation server that is customizable and requires setup and configuration at the organization level. 
 
+We need to install Jenkins in Windows, Mac or Linux.
+
+We also had the ability to configure Jenkins however we wanted. 
+
+### CircleCI
+
+CircleCI was designed around the principle of open source development and for ease of use. 
+
+CircleCI can be set up within minutes of creating a project in the GitHub and Bitbucket platforms. 
+
+Although CircleCI is not as customizable as Jenkins CI in this respect, it has the distinct advantage of having a quick setup. 
+
+CircleCI uses an in application configuration file that uses YAML syntax and can be used in the GitHub (https://github.com/) platform as well as in the Bitbucket (https://bitbucket.org/) platform, unlike Travis CI.
+
+
+## ORB
+
+A reuable package of yaml config that condenses repeated pieces of config into a single line of code.
+
+### why to use ORB?
+
+orb's are reusable code that helps automate repeated processes speedup project setup, and make it easy to integrate 3rd party tools
 
