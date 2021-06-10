@@ -1871,4 +1871,58 @@ Azure AD Privileged Identity Management (PIM) is an additional paid-for offering
 
 With the Azure AD PIM service, you can manage, control, and monitor access to important resources in your organization.
 
+This includes access to resources in Azure AD; and other Microsoft Online Services, like Microsoft 365 and Microsoft Intune.
+
+
+Here are some of the key features of PIM:
+
+- Providing just-in-time privileged access to Azure AD and Azure resources
+
+- Assigning time-bound access to resources by using start and end dates
+
+- Requiring approval to activate privileged roles
+
+- Enforcing Azure AD multifactor authentication to activate any role
+
+- Using justification to understand why users activate
+
+- Getting notifications when privileged roles are activated
+
+- Conducting access reviews to ensure that users still need roles
+
+- Downloading an audit history for an internal or external audit.
+
+To use PIM, you need one of the following paid or trial licenses:
+
+- Azure AD Premium P2
+
+- Enterprise Mobility + Security (EMS) E5
+
+
+### Providing identities to services
+
+Azure AD has two methods : **Service principals and Managed identities for Azure services**
+
+
+#### Service Principals
+
+To understand service principals, it's useful to first understand the words identity and principal as they're used in the world of identity management.
+
+An **identity** is just a thing that can be authenticated. Obviously, this includes users with usernames and passwords. an account is data associated with an identity.
+
+A **principal** is an identity that acts with certain roles or claims. Consider the use of Sudo on a Bash prompt or on Windows via Run as administrator. In both of those cases, you're still signed in as the same identity as before, but you've changed your role.
+
+A *service principal* is literally named. It's an identity that a service or application uses. Like other identities, it can be assigned roles.
+
+
+### Managed identities for Azure resources
+
+A **Managed identity** can be instantly created for any Azure service that supports it.
+
+When you create a managed identity for a service, you're creating an account on the Azure AD tenant.
+
+Azure infrastructure will automatically take care of authenticating the service and managing the account.
+
+
+## Encryption
 
