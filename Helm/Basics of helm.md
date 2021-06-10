@@ -99,14 +99,7 @@ To install a chart use
 
 ``` $ helm repo update         # Make sure we get the latest list of charts ``` 
 
-$ helm install bitnami/mysql --generate-name 
- - NAME: mysql-16123452 
- - LAST DEPLOYED: sat Feb 6 16:09:34 2021 
- - NAMESPACE: default 
- - STATUS: deployed 
- - REVISION: 1 
- - TEST SUITE: NONE 
- - NOTES: ... 
+![](https://github.com/amarnadh19/books/blob/main/images/helm2.PNG?)
 
 In the above example, bitnami/mysql chart was relesed, and the name of our new release is mysql-16123452 
 
