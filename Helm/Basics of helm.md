@@ -100,13 +100,13 @@ To install a chart use
 ``` $ helm repo update         # Make sure we get the latest list of charts ``` 
 
 ``` $ helm install bitnami/mysql --generate-name ```
-``` NAME: mysql-16123452 ```
-``` LAST DEPLOYED: sat Feb 6 16:09:34 2021 ```
-``` NAMESPACE: default ```
-``` STATUS: deployed ```
-``` REVISION: 1 ```
-``` TEST SUITE: NONE ```
-``` NOTES: ... ```
+``` - NAME: mysql-16123452 ```
+``` - LAST DEPLOYED: sat Feb 6 16:09:34 2021 ```
+``` - NAMESPACE: default ```
+``` - STATUS: deployed ```
+``` - REVISION: 1 ```
+``` - TEST SUITE: NONE ```
+``` - NOTES: ... ```
 
 In the above example, bitnami/mysql chart was relesed, and the name of our new release is mysql-16123452 
 
@@ -171,5 +171,9 @@ You will be able to request information about the release
 ``` $ helm status mysql-16123452 
     Status: UNINSTALLED 
 ```
+
+Helm tracks your releases even after you've uninstalled them, you can audit the cluster's history and even undelete a release with
+
+``` helm rollback ```
 
 
