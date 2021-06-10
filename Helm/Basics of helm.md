@@ -87,6 +87,34 @@ Helm comes preconfigured with a default chart repository, referred to as ```stab
 
 Alternate repos can be added with the ```helm repo add``` command.
 
+```$ helm repo add bitnami https://charts.bitnami.com/bitname```
+
+Once this is installed you will able to list the charts you can install
+
+![](https://github.com/amarnadh19/books/blob/main/images/helm1.PNG?)
+
+## Install chat 
+
+To install a chart use 
+
+``` $ helm repo update         # Make sure we get the latest list of charts ``` 
+
+``` $ helm install bitnami/mysql --generate-name ```
+``` NAME: mysql-16123452 ```
+``` LAST DEPLOYED: sat Feb 6 16:09:34 2021 ```
+``` NAMESPACE: default ```
+``` STATUS: deployed ```
+``` REVISION: 1 ```
+``` TEST SUITE: NONE ```
+``` NOTES: ... ```
+
+In the above example, bitnami/mysql chart was relesed, and the name of our new release is mysql-16123452 
+
+To get all information about the chart : ``` helm show all bitnami/mysql ```
+
+Whenever you install a chart, new release is created. So one chart can be installed multiple times into same cluster. And each can be independently managed and upgraded
+
+
 
 ## Chart Configuration
 
@@ -124,5 +152,24 @@ $ ./helm3 list -n grafana
 
 NAME   	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART         	APP VERSION
 grafana	grafana  	1       	2021-06-07 10:00:40.165633666 +0000 UTC	deployed	grafana-6.11.0	7.5.5      
-$ 
+
 ```
+
+## Uninstall a Release
+
+``` 
+$ helm uninstall mysql-16123452 
+release "mysql-16123452" uninstalled 
+
+```    
+This will uninstall mysql-16123452  from kubernetes, which will remove all the resources associated with thtat release as well as the release history
+
+If the flag ``` --keep-hisoty ``` is provided, release history will kept.
+
+You will be able to request information about the release
+
+``` $ helm status mysql-16123452 
+    Status: UNINSTALLED 
+```
+
+
