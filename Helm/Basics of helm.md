@@ -161,8 +161,10 @@ If the flag ``` --keep-hisoty ``` is provided, release history will kept.
 
 You will be able to request information about the release
 
-``` $ helm status mysql-16123452 
-    Status: UNINSTALLED 
+``` 
+$ helm status mysql-16123452 
+Status: UNINSTALLED 
+
 ```
 
 Helm tracks your releases even after you've uninstalled them, you can audit the cluster's history and even undelete a release with
