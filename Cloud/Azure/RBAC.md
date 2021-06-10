@@ -95,7 +95,7 @@ You can assign roles using the Azure portal, Azure CLI, Azure PowerShell, Azure 
 
 ## Groups
 
-Role assignments are transitive for groups, which means that if a user is a member of a group and that group is a member of another group that has a role assignment, the will have the permissions in the role assignment.
+Role assignments are transitive for groups, which means that if a user is a member of a group and that group is a member of another group that has a role assignment, the user will have the permissions in the role assignment.
 
 ![](https://github.com/amarnadh19/books/blob/main/images/az_rbac_5.png?)
 
