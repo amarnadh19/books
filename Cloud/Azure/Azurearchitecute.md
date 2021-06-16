@@ -1926,3 +1926,55 @@ Azure infrastructure will automatically take care of authenticating the service 
 
 ## Encryption
 
+Data is an organization's most valuable and irreplaceable asset. Encryption serves as the last and strongest line of defense in a layered security strategy for data.
+
+
+### What is encryption?
+
+Encryption is the process of making data unreadable and unusable. To use or read the encrypted data, it must be decrypted, which requires the use of a secret key. 
+
+There are two top-level types of encryption: *symmetric and asymmetric.*
+
+- **Symmetric encryption** uses the same key to encrypt and decrypt the data. Consider a password manager application. You enter your passwords, and they're encrypted with your own personal key. (Your key is often derived from your master password.) When the data needs to be retrieved, the same key is used and the data is decrypted.
+
+**Asymmetric encryption** uses a public key and private key pair. Either key can encrypt but can't decrypt its own encrypted data. To decrypt, you need the paired key. Asymmetric encryption is used for things like TLS (used in HTTPS) and data signing.
+
+
+Encryption is typically approached in two ways: *encryption at rest and encryption in transit*.
+
+
+### Encryption at rest
+
+Data at rest is the data that has been stored on a physical medium. This might be data stored on the disk of a server, data stored in a database, or data stored in a storage account.
+
+
+### Encryption in transit
+
+Data in transit is the data that's actively moving from one location to another, such as across the internet or through a private network.
+
+Encrypting data in transit protects the data from outside observers and provides a mechanism to transmit data while limiting risk of exposure.
+
+
+### Encryption on Azure
+
+#### Encrypting raw storage
+
+Azure Storage encryption for data at rest helps you protect your data to meet your organizational security and compliance commitments.
+
+The Azure Storage platform automatically encrypts your data with 256-bit Advanced Encryption Standard (AES) encryption before persisting it to disk and then decrypts the data during retrieval. 
+
+This handling of encryption, encryption at rest, decryption, and key management in Azure Storage is transparent to applications that use the service. You don't need to add any code or turn on any features.
+
+You can use Microsoft-managed encryption keys with Azure Storage encryption, or you can use your own encryption keys by selecting the option in the Azure portal.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_48.png?)
+
+Azure Storage automatically encrypts data in:
+
+- All Azure Storage services, including Azure Managed Disks, Azure Blob Storage, Azure Files, Azure Queue Storage, and Azure Table Storage
+
+- Both performance tiers (Standard and Premium)
+
+- Both deployment models (Azure Resource Manager and classic)
+
+
