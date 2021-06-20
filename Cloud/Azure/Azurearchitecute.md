@@ -1978,3 +1978,5 @@ Azure Storage automatically encrypts data in:
 - Both deployment models (Azure Resource Manager and classic)
 
 
+#### Encrypting virtual machines
+
