@@ -47,3 +47,43 @@ Deployments share the same PVC. This leads to stability issues. The better opiti
 
 Each storage class represents a type of storage. Tese storage class can be assigned to Persistent Volume.
 
+
+## Kubernetes Storage Best Practices
+
+Managing Kubernetes storage can be complex. The following best practices will help you manage storage more effectively.
+
+
+### Persistent Volume Settings
+
+
+- Always include a PVC in pod configuration.
+
+- Never include a PV in the configuration (because this violates portability).
+
+- Always create a default storage class.
+
+- Give users the option to select a StorageClass in their PVC.
+
+
+### Resource Quotas for Namespaces
+
+
+Resource quotas are also available at the namespace level, giving you another layer of control over cluster resource usage.
+
+Resource quotas limit the total amount of CPU, memory, and storage resources that can be used by all containers running in the namespace. 
+
+It can also limit consumption of storage resources according to service levels or backup.
+
+The following command checks if resource quotas are enabled at the namespace level:
+
+```
+kubectl describe namespace <namespace_name>
+
+```
+
+### Support High Performance with Quality of Service Definitions
+
+
+Some Kubernetes providers extend the definition of a PVC with quality of service (QoS) parameters. This means it prioritizes read/write volumes for specific deployments, enabling higher throughput if needed by the application.
+
+
