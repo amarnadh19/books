@@ -1980,3 +1980,145 @@ Azure Storage automatically encrypts data in:
 
 #### Encrypting virtual machines
 
+**Azure Disk Encryption** is a capability that helps you encrypt your Windows and Linux IaaS virtual machine disks. 
+
+Azure Disk Encryption uses the industry-standard BitLocker feature of Windows and the DM-Crypt feature of Linux to provide volume encryption for the OS and data disks.
+
+The solution is integrated with **Azure Key Vault** to help you control and manage the disk-encryption keys and secrets.
+
+Disk Encryption for Windows IaaS and Linux VMs is in general availability in all Azure public regions and Azure Government regions for Standard and Premium VMs.
+
+If you use Azure Security Center, you're alerted if you have VMs that aren't encrypted. The alerts appear as High Severity, and the recommendation is to encrypt these VMs.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_49.png?)
+
+
+#### Encrypting databases
+
+Transparent data encryption helps protect Azure SQL Database and Azure Data Warehouse against the threat of malicious activity. 
+
+It performs real-time encryption and decryption of the database, associated backups, and transaction log files at rest without requiring changes to the application
+
+By default, transparent data encryption is enabled for all newly deployed Azure SQL databases.
+
+Transparent data encryption encrypts the storage of an entire database by using a symmetric key called the *database encryption key*. 
+
+By default, Azure provides a unique encryption key per logical SQL Server instance and handles all the details. 
+
+*Bring your own key* is also supported with keys stored in Azure Key Vault.
+
+For its on-premises SQL Server databases, your organization has turned on the SQL Server *Always Encrypted* feature. 
+
+*Always Encrypted* is designed to protect sensitive data, such as client personal information or financial data. 
+
+This feature helps protect column data at rest and in transit by having the client application handle the encryption and decryption outside the SQL Server database through an installed driver.
+
+The *Always Encrypted client* driver performs the encryption and decryption processes. It rewrites the T-SQL queries as necessary to encrypt data passed to the database and decrypt the results, while keeping these operations transparent to the application.
+
+
+#### Encrypting secrets
+
+Azure Key Vault is a cloud service that works as a secure store for secrets. 
+
+Key Vault allows you to create multiple secure containers, called vaults. 
+
+These vaults are backed by hardware security modules (HSMs). 
+
+Vaults help reduce the chances of accidental loss of security information by centralizing the storage of application secrets. 
+
+Vaults also control and log the access to anything stored in them.
+
+Azure Key Vault can handle requesting and renewing Transport Layer Security (TLS) certificates, to provide a robust certificate lifecycle management solution. 
+
+Key Vault is designed to support any type of secret. These secrets can be passwords, database credentials, API keys, and certificates.
+
+
+#### Encrypting backups
+
+Azure Backup encrypts local backups by using AES256 and a key created from the passphrase configured by the administrator. 
+
+The data is securely transferred to Azure through HTTPS. 
+
+The already-encrypted data is then stored on disk. Azure VMs are also automatically encrypted at rest because they use Azure Storage for their disks.
+
+
+
+## Network security
+
+### What is network security?
+
+For network security, an organization can focus its efforts on the following areas:
+
+- *Securing traffic flow between applications and the internet* focuses on limiting exposure outside your network. Network attacks will most often start outside your network, so by limiting the internet exposure and securing the perimeter, you can reduce the risk of being attacked.
+
+- *Securing traffic flow among applications* focuses on data between applications and their tiers, between different environments, and in other services within your network. By limiting exposure between these resources, you reduce the effect that a compromised resource can have. This can help reduce further propagation within the network.
+
+- *Securing traffic flow between users and an application* focuses on securing the network flow for your users. This limits the exposure that your resources have to outside attacks, and it provides a secure mechanism for users to utilize your resources.
+
+
+### Layered approach to network security
+
+#### Internet protection
+
+If you start on the perimeter of the network, you're focused on limiting and eliminating attacks from the internet
+
+Identify all resources that are allowing inbound network traffic of any type. Ensure that they're necessary and restricted to only the required ports and protocols.
+
+You can look for this information in Azure Security Center. Security Center will identify internet-facing resources that don't have network security groups associated with them.
+
+Azure Application Gateway is a Layer 7 load balancer that also includes a web application firewall (WAF) to provide advanced security for your HTTP-based services. 
+
+The WAF is based on rules from the OWASP 3.0 or 2.2.9 core rule sets. It provides protection from commonly known vulnerabilities such as cross-site scripting and SQL injection.
+
+In the following diagram, the WAF feature of the application gateway protects the system from malicious attacks. The load balancer distributes the legitimate requests among virtual machines.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_50.png?)
+
+For protection of non-HTTP-based services or for increased customization, you can use *network virtual appliances (NVAs)* to secure your network resources. 
+
+NVAs are similar to firewall appliances that you might find in on-premises networks, and are available from popular network security vendors. 
+
+NVAs can provide greater customization of security for those applications that require it. But they increase complexity, so we recommend that you carefully consider your requirements.
+
+Any resource exposed to the internet is at risk for a *denial-of-service attack*. These types of attacks try to overwhelm a network resource by sending so many requests that the resource becomes slow or unresponsive.
+
+To mitigate these attacks, *Azure DDoS Protection* provides basic protection across all Azure services and enhanced protection for further customization for your resources. 
+
+DDoS Protection blocks attack traffic and forwards legitimate traffic to its intended destination. Within a few minutes of attack detection, you're notified through Azure Monitor metrics.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_51.png?)
+
+
+#### Virtual network security
+
+Inside a virtual network, it's important to limit communication between resources to only what's required.
+
+For communication between virtual machines, *network security groups* are a critical piece to restrict unnecessary communication. 
+
+*Network security groups* operate at layers 3 and 4. 
+
+They provide a list of allowed and denied communication to and from network interfaces and subnets. 
+
+Network security groups are fully customizable, and they enable you to lock down network communication to and from your virtual machines. 
+
+By using network security groups, you can isolate applications between environments, tiers, and services.
+
+The following diagram shows how a network security group restricts the back end and middle tier from communicating directly with the internet. The front end receives the internet requests and then passes them to the middle tier. The middle tier communicates with the back end.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_52.png?)
+
+To isolate Azure services to allow communication only from virtual networks, use *virtual network service endpoints*. With *service endpoints*, you can secure Azure service resources to your virtual network.
+
+Securing service resources to a virtual network provides improved security by fully removing public internet access to resources and allowing traffic only from your virtual network.
+
+
+#### Network integration
+
+It's common to have existing network infrastructure that needs to be integrated to provide communication from on-premises networks, or to provide improved communication between services in Azure
+
+*Virtual private network (VPN) connections* are a common way of establishing secure communication channels between networks.
+
+*ExpressRoute* lets you extend your on-premises networks into the Microsoft cloud over a private connection facilitated by a connectivity provider.
+
+Virtual network peering establishes a direct connection between designated virtual networks. After a connection is established, you can use network security groups to provide isolation between resources in the same way that you secure resources within a virtual network.
+
