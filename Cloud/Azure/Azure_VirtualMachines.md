@@ -28,7 +28,7 @@ az vm create \
 
 ### To connect Linux machine
 
-ssh azureuser@publicIP
+ssh username@publicIP
 
 ### To list the Images 
 
