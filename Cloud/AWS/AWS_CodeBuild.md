@@ -16,7 +16,7 @@ You can get started quickly by using prepackaged build environments, or you can 
 
 - The **build specification** is a YAML file that lets you choose the commands to run at each phase of the build and other settings. Without a **build spec**, CodeBuild cannot successfully convert your build input into build output or locate the build output artifact in the build environment to upload to your output bucket.
 
-  - If you include a build spec as part of the source code, by default, the build spec file must be named buildspec.yml and placed in the root of your source directory.
+  - If you include a build spec as part of the source code, by default, the build spec file must be named *buildspec.yml* and placed in the root of your source directory.
 
 - A collection of input files is called **build input artifacts or build input** and a deployable version of a source code is called **build output artifact or build output**.
 
@@ -115,3 +115,27 @@ If you use a local cache, you must choose one or more of three cache modes:
 ## Pricing
 
 You are charged for compute resources based on the duration it takes for your build to execute. The per-minute rate depends on the compute type you use.
+
+
+## buildspec.yml
+
+In this build spec declaration:
+
+- **version** represents the version of the build spec standard being used. This build spec declaration uses the latest version, 0.2.
+
+- **phases** represents the build phases during which you can instruct CodeBuild to run commands. These build phases are listed here as *install, pre_build, build, and post_build*. You cannot change the spelling of these build phase names, and you cannot create more build phase names.
+
+- **artifacts** represents the set of build output artifacts that CodeBuild uploads to the output bucket. files represents the files to include in the build output.
+
+
+### Build Phases in CodeBuild
+
+Four main phases
+
+1) **install** - Install package in the build environment.
+
+2) **pre-build** - Sign in to things or install dependencies.
+
+3) **build** - Command runs duirng the build process.
+
+4) **post_build** - Package things up, push docker image, notification etc.
