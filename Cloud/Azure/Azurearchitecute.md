@@ -2122,3 +2122,214 @@ It's common to have existing network infrastructure that needs to be integrated 
 
 Virtual network peering establishes a direct connection between designated virtual networks. After a connection is established, you can use network security groups to provide isolation between resources in the same way that you secure resources within a virtual network.
 
+***
+
+# Analyze costs and create budgets with Azure Cost Management
+
+## 
+
+**Azure Cost Management** gives you the tools to plan for, analyze, and reduce your spending to maximize your cloud investment.
+
+## Cost management principles
+
+When beginning your Cost Management journey, make sure to adhere to the following principles to best align yourself and your organization for success.
+
+### Planning
+
+Comprehensive, up-front planning enables you to tailor cloud usage to your specific business requirements. Before creating any new resources, ask yourself:
+
+- What business problem am I solving?
+
+- What usage patterns do I expect from my resources?
+
+Your answers will help you select the offerings that are right for you. They determine the infrastructure to use, and how it's used to maximize your Azure efficiency.
+
+### Visibility
+
+When structured well, Cost Management helps you to inform people about the Azure costs they're responsible for or for the money they spend. Azure Cost Management has a tool called **Cost Analysis**. It's designed to give you insight into where your money is spent. Take advantage of this tool. It can help you find identify key cost drivers and trends within your environments.
+
+### Accountability
+
+Attribute costs in your organization to make sure that people responsible are accountable for their team's spending. Good organization helps to manage and reduce costs, and hold people accountable for efficient spending in your organization. Once properly organized, you can begin creating budgets in Cost Management to track and alert on your spending.
+
+### Optimization
+
+Act to reduce your spending. Make the most of it based on the findings gathered through planning and increasing cost visibility. You might consider purchase and licensing optimizations, or infrastructure deployment changes based on your findings in the Cost Analysis tool.
+
+### Iteration
+
+Everyone in your organization must engage in the cost management lifecycle. They need to stay involved on an ongoing basis to optimize costs. Be rigorous about this iterative process, and make it a key tenet of responsible cloud governance in your organization.
+
+
+## Where to find Cost Management
+
+The Cost Management tools are accessed from a variety of locations in the Azure portal:
+
+- Subscription and resource group windows
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_53.png?)
+
+- Cost Management + Billing window
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_54.png?)
+
+
+## Evaluate your costs using cost analysis
+
+There are also many ways you can customize cost views for deeper analysis.
+
+- **Accumulated cost view** - This view represents the predefined cost analysis view configuration. Each view includes date range, granularity, group by, and filter settings. The default view shows accumulated costs for the current billing period, but you can change to other built-in views. This view answers questions like: How much have I spent so far this month? Will I stay within my budget?
+
+- **Actual cost** - This view shows the total usage and purchase costs for the current month as they're accrued, and will show on your bill.
+
+- **Forecast** - This view shows the total forecasted costs for the period you choose. Use the forecast chart view to identify potential budget breaches. When there's a potential budget breach, projected overspending is shown as a red area. An indicator symbol is also shown in the chart. Hovering over the symbol shows the estimated date of the budget breach.
+
+- **Budget** - This view shows the planned spending limit for the selected scope, if available.
+
+- **Pivot (donut) charts** - This view provides dynamic pivots, breaking down the total cost by a common set of standard properties. They show the largest to smallest costs for the current month. You can change pivot charts at any time by selecting a different pivot. Costs are categorized by service (meter category), location (region), and child scope by default. For example, enrollment accounts are under billing accounts, resource groups are under subscriptions, and resources are under resource groups.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_55.png?)
+
+
+### Customized cost views
+
+Let's look at each cost view in more detail.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_56.png?)
+
+**Accumulated costs** - By default, cost analysis shows data for the current month. Use the date selector to switch to common date ranges quickly. Examples include the last seven days, the last month, the current year, or a custom date range. Pay-as-you-go subscriptions also include date ranges based on your billing period, which isn't bound to the calendar month, like the current billing period or last invoice. Use the PREVIOUS and NEXT links at the top of the menu to jump to the previous or next period, respectively. For example, PREVIOUS will switch from the Last 7 days to 8-14 days ago or 15-21 days ago.
+
+Cost analysis shows accumulated costs by default. Accumulated costs include all costs for each day plus the previous days, for a constantly growing view of your daily aggregate costs. This view is optimized to show how you're trending against a budget for the selected time range.
+
+**Cost by resource** – The cost by resource view shows a table of grouped resources sorted by highest cost.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_57.png?)
+
+**Daily costs** - The daily view showing costs for each day. The daily view doesn't show a growth trend. The view is designed to show irregularities as cost spikes or dips from day to day. If you've selected a budget, the daily view also shows an estimate of your daily budget.
+
+When your daily costs are consistently above the estimated daily budget, you can expect you'll surpass your monthly budget. The estimated daily budget is a means to help you visualize your budget at a lower level. If you have fluctuations in daily costs, then the estimated daily budget comparison to your monthly budget is less precise.
+
+Here's a daily view of recent spending.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_58.png?)
+
+**Cost by service** – By default, this view shows the last three months of spending on services shown in bar charts. Donut charts show spending for the same period by service name, resource location, and resource group name.
+
+
+## Actual versus amortized cost
+
+Let's look at Azure service costs for the current month. You should see a graph like the following example.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_59.png?)
+
+By default, cost analysis shows all usage and purchase costs as they are accrued and will show on your invoice, also known as **Actual cost**. Viewing actual cost is ideal for reconciling your invoice. However, purchase spikes in cost can be alarming when you're keeping an eye out for spending anomalies and other changes in cost. To flatten out spikes caused by reservation purchase costs, switch to Amortized cost.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_60.png?)
+
+
+## Save and share views
+
+Customizing a view in cost analysis is easy. Just pick the date range you need, group the data to see a breakdown, and then choose the visualization that you want. Pin your view to a dashboard for quick access, and then share the dashboard with your team so everyone can track costs from a single place.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_61.png?)
+
+You can also share a direct link to your customized view so others can copy and personalize it for themselves. To share a link to a view, select **Share**.
+
+Both sharing options offer flexibility, but you need something more convenient. You can save customized views and share them with others, directly from within cost analysis. In the view, select **Save**.
+
+People with Cost Management Contributor (or greater) access can create shared views. You can create up to 50 shared views per scope.
+
+Anyone can save up to 50 private views, even if they only have read access. These views cannot be shared with others directly in cost analysis, but they can be pinned to a dashboard or shared via URL so others can save a copy.
+
+All views are accessible from the view menu. You'll see your private views first, then you see views shared across the scope, and lastly the built-in views that are always available.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_62.png?)
+
+## Export data
+
+Go to Subscriptions, select a subscription from the list, and in the menu pane under Cost Management, select Cost analysis. At the top of the Cost analysis pane, select Settings. On the Configuration pane, select Exports, and then select an export option. For example, select Schedule export.
+
+Besides subscriptions, you can create exports on resource groups, accounts, departments, and enrollments.
+
+Enter a name for the export, and for Export type setting, select Daily export of month-to-date costs. Select a start date.
+
+
+***
+
+# Design your migration to Azure
+
+## Azure migration framework
+
+You can use a framework of Assess, Migrate, Optimize, and Monitor as a path for migration. Each stage focuses on a particular aspect of ensuring the success of a migration.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_64.png?)
+
+
+### Discovery and evaluation
+
+Start with a full assessment of your current environment. Identify the servers, applications, and services that are in scope for migration.
+
+For each application, there are multiple migration options:
+
+- **Rehost**: Recreate your existing infrastructure in Azure. Choosing this approach has the least impact because it requires minimal changes. It typically involves moving virtual machines from your data center to virtual machines on Azure.
+
+- **Refactor**: Move services running on virtual machines to platform-as-a-service (PaaS) services. This approach can reduce operational requirements, improve release agility, and keep your costs low. Small enhancements to run more efficiently in the cloud can have large impacts on performance.
+
+- **Rearchitect**: You might be forced to rearchitect some systems so that they can be migrated. Other apps could be changed to become cloud native, or to take advantage of new approaches to software, such as containers or microservices.
+
+- **Rebuild**: You might need to rebuild software if the cost to rearchitect it is more than that of starting from scratch.
+
+- **Replace**: While you're reviewing your estate, it's possible you'll find that third-party applications could completely replace your custom applications. Evaluate software-as-a-service (SaaS) options that can be used to replace existing applications.
+
+
+## Assess your environment with Azure Migrate
+
+### What is Azure Migrate?
+
+Azure Migrate is a free service, provided by Microsoft, that discovers, assesses, and migrates on-premises systems to Azure.
+
+zure Migrate can assess both Hyper-V and VMware-based virtual machines, as well as physical servers. Azure Migrate also supports the visualization of dependencies for those machines. 
+
+It helps you create groups of machines that can be assessed together and ultimately migrated to Azure at the same time.
+
+### Work with Azure Migrate
+
+When you use Azure Migrate, the assessments it produces are created within a project that is set up in the Azure portal.
+
+After you create a project, Azure Migrate requires you to complete two steps to produce an assessment:
+
+- Discover your virtual machines.
+
+- Create assessments.
+
+
+#### Discover machines
+
+To perform an agentless discovery, the Azure Migrate: Server Assessment tool guides you through downloading a lightweight collector appliance, which carries out the discovery of systems in your environment. 
+
+The collector appliance is available to download to VMware or Hyper-V environment. Import and spin up the collector appliance, and then complete its configuration to connect it to the Azure Migrate project.
+
+The collector gathers data about VM cores, memory, disk sizes, and network adapters. Where applicable, the collector also gathers performance data like CPU and memory usage, disk IOPS, disk throughput, and network output.
+
+When the data collection is complete, it's pushed to your Azure Migrate project. On the Azure portal, you can now view all the discovered systems or download a report to review.
+
+For VMware environments, the process can be visualized as follows:
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_65.svg?)
+
+If your company wants details about how the VMs are related to each other (via a visualization of dependencies), you can install agents to collect that data. Azure Migrate will prompt you to install the Microsoft Monitoring Agent and Dependency Agent on each VM. The agents are available for both Windows and Linux.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_66.png?)
+
+After these agents are installed and configured, they collect data like fully qualified domain name (FQDN), OS, IP addresses, MAC addresses, running processes, and incoming and outgoing TCP connections.
+
+
+### Create an assessment
+
+Azure Migrate can now assess your environment's readiness to be migrated to Azure. In the portal, select the Assessments section, and then select Create assessment. An assessment is created with default settings. You can change these settings later by editing the properties of the assessment.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_well_arch_67.png?)
+
+
+## Migrate servers with Azure Migrate
+
