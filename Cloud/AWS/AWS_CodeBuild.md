@@ -139,3 +139,38 @@ Four main phases
 3) **build** - Command runs duirng the build process.
 
 4) **post_build** - Package things up, push docker image, notification etc.
+
+
+# Defining Environment Variables in CodeBuild Buildspec Files
+
+## Why use environment variables in a build project?
+
+AWS CodeBuild works like a terminal in your pipeline. You provide your code as an input artifact, for example, as a source artifact from a CodeCommit repository, and run some commands on it. These commands may be part of a build process or a test action. Therefore, let’s list why you may need to use environment variables in your builds briefly.
+
+- The first apparent reason is simplifying your build commands and managing your buildspec file efficiently. You can define environment variables as key-value pairs and refer to them in your commands.
+
+- You may need to load some configuration parameters from AWS Systems Manager Parameter Store before your build commands run.
+
+- Or, you can even load sensitive parameter values like usernames and passwords from AWS Secrets Manager.
+
+## Defining a literal environment variable
+
+In a buildspec file, you define environment variables under the env section. You place your simple environment variables by defining the variables section in env. 
+
+In the example below, we define an S3_BUCKET variable and assign “my-website-bucket” as its value. Then, we reference this value in the build phase, just like a regular environment variable using the dollar ($) sign.
+
+```
+version: 0.2
+env:
+  variables:
+    S3_BUCKET: "my-website-bucket"
+phases:
+  ...
+  build:
+    commands:
+      - echo "S3 bucket is $S3_BUCKET"
+  ...
+artifacts:
+    ...
+
+```
