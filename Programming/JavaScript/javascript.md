@@ -338,5 +338,168 @@ Methods require parentheses after the name. If the method requires data input, t
 
 #### The Array Object
 
+Arrays are objects that represent a list of values.
+
+Each item in the list is called an element. To initialize an array, you can set it to an array literal. An array literal is a comma-separated list of expressions enclosed in square brackets, like so:
+
+```
+["Saab", "Ford", "BMW", "GM"]
+
+```
+
+Elements in arrays can be different data types. Often, all the elements are the same data type:
+
+```
+["Milk", false, 123, document, "Gold", -.9876]
+
+```
+
+Elements in a literal array can be expressions, but they are evaluated and only the expression values are stored:
+
+```
+[price - cost, Math.random(), document.title, someVariable / 2]
+```
+
+Variables and object properties can contain arrays:
+
+```
+let todoList = [
+	"Wash Laundry",
+	"Clean Silver",
+	"Write Letters",
+	"Purchase Groceries",
+	"Retrieve Mail",
+	"Prepare Dinner"
+]
+game.scores = [120, 175, 145, 200]
+
+```
+
+Array elements can be arrays:
+
+```
+notes = [
+	[
+		"Wash Laundry",
+		"Clean Silver",
+		"Write Letters"
+	], 123, "999-999-9999"
+]
+```
+
+The array objects with useful properties and methods are as follows:
+
+- **length** is a property with a number data-type that displays the number of items in the array.
+
+- **push** is a method with a number data-type that appends an element and returns the new length.
+
+- **unshift** is a method with a number data-type that prepends an element and returns the new length.
+
+- **shift** is a method with a mixed data-type that removes the first element and returns the removed element's value.
+
+- **pop** is a method with a mixed data-type that removes the last element to return the removed element's value.
+
+- **concat** is a method with a function data-type that merges two or more arrays to return a new array.
+
+
+#### Using the Console Object
+
+The console object has a method called log that we can use to test expressions in a JavaScript program. It takes an unlimited number of expressions separated by commas. All the expressions we enter into the console window would work with the console.log method. It evaluates the expressions and returns their results in the console. Multiple expressions are separated by a space.
+
+console.log syntax:
+
+```
+console.log(expression 1[, expression 2][, expression n])
+
+```
+
+Here are some examples of the console.log method:
+
+```
+console.log("Odd number count started!");
+console.log("Iteration:", i);
+console.log("Number:", number);
+console.log(oddsCount + " odd numbers found!");
+console.log(document);
+
+```
+
+
+## Syntax
+
+Programs follow a set of rules that define keywords, symbols, and structure. This is called the syntax.
+
+The following is a basic set of rules and conventions. Conventions are another term for best practices.
+
+The naming rules and conventions for functions and variables are as follows:
+
+- 26 upper and lowercase letters (A-Z, a-z).
+ 
+- Any character but the first character can be one of 10 digits (0-9).
+
+- No spaces, dashes, or commas. The underscore  character is acceptable.
+
+- Capitalization follows camelCase. This means that all characters are lowercase, except for the first letters of words and except for the first word in compound worded names.
+
+- No JavaScript reserved words; for example, you cannot use typeof, var, let, and const.
+
+### Semicolon at the End of Code Statements
+
+### Lines of Code versus Statements
+
+Each line in a JavaScript source file does not need to be a single line of executable code. You can break a single line of executable code into multiple source file lines, or put multiple lines of executable code on a single source file line. This flexibility allows you to format the code so that it is easier to follow and edit.
+
+The following is a single line of executable code using a single source file line:
+
+```
+let todoList = ["Laundry", "Letters", "Groceries", "Mail", "Dinner"]
+
+```
+
+However, it may be more desirable to use multiple source file lines, like so:
+
+```
+let todoList = [
+	"Laundry",
+	"Letters",
+	"Groceries",
+	"Mail",
+	"Dinner"
+]
+
+```
+
+You can have more than one line of code on the same line if you use ; after the previous code line:
+
+```
+var bid = 10; checkBid(bid)
+
+```
+
+### Comments
+
+JavaScript has inline commenting, also known as single-line commenting. This uses the double forward slash, //.
+
+All the text between ```/* and */ ``` is ignored when the program is executed. 
+
+
+## Conditional and Loop Flow
+
+### Code Blocks
+
+Code blocks are statements that are placed between an open and close curly bracket. The syntax is as follows:
+
+```
+//code block
+{
+	//Statement1
+	//Statement2
+	//Statement3
+}
+
+```
+
+Code blocks by themselves do not offer any statement flow advantage until you combine them with conditional or loop statements.
+
 
 ---
