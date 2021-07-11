@@ -501,5 +501,173 @@ Code blocks are statements that are placed between an open and close curly brack
 
 Code blocks by themselves do not offer any statement flow advantage until you combine them with conditional or loop statements.
 
+### Conditional Flow Statements
+
+#### if...else Statement
+
+The if, else...if, and else statements give you four structures for selecting or skipping blocks of code.
+
+#### if statement
+
+Code in an if statement is processed if the expression evaluates to true and is skipped if the expression evaluates to false. The syntax is as follows:
+
+```
+if(boolean expression){
+   //Statement
+   //Statement
+   //Statement
+}
+if(boolean expression)
+   //Single statement
+```
+
+This shows the flow of the if statement. If the Boolean expression is true, the code is processed. If false, the code is skipped:
+
+![](https://github.com/amarnadh19/books/blob/main/images/js_3.jpeg?)
+
+```
+var diceValue = Math.floor(Math.random() * 6) + 1;
+console.log("Dice value:", diceValue);
+if(diceValue % 2 != 0){
+console.log("Is an odd number.");
+}
+```
+
+**explanation of above program**
+
+var --> to declare variable. Name of variable is diceValue.
+
+Math.floor() --> The floor() method rounds a number DOWNWARDS to the nearest integer, and returns the result.
+
+##### Math.floor()
+
+If the passed argument is an integer, the value will not be rounded.
+
+
+eg: floor (1.6) will display 1 as output
+
+Some examples:
+
+```
+var a = Math.floor(0.60);
+  var b = Math.floor(0.40);
+  var c = Math.floor(5);
+  var d = Math.floor(5.1);
+  var e = Math.floor(-5.1);
+  var f = Math.floor(-5.9);
+```
+
+we get output:
+
+```
+0
+0
+5
+5
+-6
+-6
+```
+
+##### Math.random
+
+The random() method returns a random number from 0 (inclusive) up to but not including 1 (exclusive).
+
+Example
+Return a random number between 1 and 10:
+
+```Math.floor((Math.random() * 10) + 1);```
+
+
+#### if Statement and else Statement
+
+The syntax is as follows:
+
+```
+if(boolean expression){
+   //Statement
+   //Statement
+   //Statement
+}else{
+   //Statement
+   //Statement
+   //Statement
+}
+if(boolean expression)
+   //Single statement
+else
+   //Single statement
+```
+
+The if...else working is visible from the following flowchart:
+
+![](https://github.com/amarnadh19/books/blob/main/images/js_4.jpeg?)
+
+
+#### if Statements with Multiple else...if Statements
+
+You can have one or more else...if statements in addition to the if statement. The if statement and each else...if statement has its own expression.
+
+```
+if(boolean expression){
+   //Statement
+   //Statement
+   //Statement
+}else if(boolean expression){
+   //Statement
+   //Statement
+   //Statement
+}else if(boolean expression){
+   //Statement
+   //Statement
+   //Statement
+}
+if(boolean expression)
+   //Single statement
+else if(boolean expression)
+   //Single statement 
+else if(boolean expression)
+   //Single statement
+```
+
+![](https://github.com/amarnadh19/books/blob/main/images/js_5.jpeg?)
+
+
+#### if Statement, Multiple else...if statements, and the else Statement
+
+You can have one else statement follow the last else...if statement. 
+
+![](https://github.com/amarnadh19/books/blob/main/images/js_6.jpeg?)
+
+
+#### The break Statement
+
+The break statement is used within blocks for loop statements and the switch statements. When the break statement is encountered inside loop statement and switch statement blocks, program flow continues on the next line following the block. The syntax is as follows:
+
+```
+break
+break label
+```
+
+#### switch Statement
+
+The switch statement defines a block of code divided up by case statements and an optional default statement.
+
+The case statements are followed by a possible value for the switch statement expression and then a colon, :. Optionally, the code will follow a case statement. The default statement is just followed by a colon, :.
+
+```
+switch(expression){
+   case expression_value:      
+      //Optional statement(s)   
+      break; //optional        
+   case expression_value:      
+     //Optional statement(s)   
+      break; //optional        
+   default:      
+      //Statement(s)            
+}
+```
+
+![](https://github.com/amarnadh19/books/blob/main/images/js_7.jpeg?)
+
 
 ---
