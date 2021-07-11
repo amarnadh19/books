@@ -111,7 +111,7 @@ Below are some arithmetic operators in JS.
 - % --> Remainder        eg: 200 % 5 = 0
 
 
-#### Grouping (concatenation (+))
+##### Grouping (concatenation (+))
 
 It converts non-string data types into strings
 
@@ -131,7 +131,7 @@ The output for each would be as follows:
 ```
 
 
-#### Operator Precedence
+##### Operator Precedence
 
 Expressions are not evaluated left to right. Instead, they are evaluated based on a preset operator order, which is called the operator precedence. For example, the multiplication operator has higher precedence than the addition operator does. You can override the operator's precedence using the grouping operator. It forces the evaluation of the expression contained within it before the rest of the expression is evaluated.
 
@@ -155,14 +155,14 @@ The output for each of the preceding examples would be as follows:
 
 ```
 
-#### Comparing data
+##### Comparing data
 
 The resulting value of comparing data is either true or false. The following table describes certain comparison operators, along with examples:
 
 ![](https://github.com/amarnadh19/books/blob/main/images/js_1.jpeg?)
 
 
-#### logical operators
+##### logical operators
 
 Multiple parts of an expression can be compared using logical operators. These are sometimes called Boolean operators. Some Boolean operators, along with a description of them and examples, are as follows:
 
@@ -170,7 +170,7 @@ Multiple parts of an expression can be compared using logical operators. These a
 ![](https://github.com/amarnadh19/books/blob/main/images/js_2.jpeg?)
 
 
-#### typeof
+##### typeof
 
 A very helpful operator is typeof. It shows the data type as a string. 
 
@@ -196,6 +196,147 @@ boolean
 string
 ```
 
+#### Using Variables and Constants in Expressions
+
+The value of a variable can be changed after it is assigned. The value that's assigned to a constant cannot be changed
+
+Variables and constants need to be declared before we can use them. For variables, there are two declaration keywords: **var and let**. 
+
+For constants, the declaration keyword is **const**.
+
+Variables and constants require a **name**.
+
+The **assignment operator** is the single equals sign, =
+
+The variable's **data type** is dynamic and is the same as the expression.
+
+Variables do not need to be assigned a value when declared. A constant must be assigned a value when declared.
+
+```
+var firstName
+var totalLikes
+var errorMessage
+var isSold
+```
+
+Variables that are not assigned a value still have a **data type**. That data type is named **undefined**. The typeof operator detects undefined data types.
+
+Here are some examples of declaring a variable and assigning a value:
+
+```
+var firstName = "Albert"
+var totalLikes = 50
+var errorMessage = "Something terrible happened"
+var isSold = false
+```
+
+
+#### Functions That Return Values
+
+Functions may be written to return a value. In that case, we can use them in expressions. When we use a function, it is also called invoking the function.
+
+To use a function in an expression, you need to include the function name, followed by parentheses. If the function requires input, it is placed inside the parentheses as valid expressions. These are called arguments. If more than one argument is needed, they are separated with commas.
+
+These examples assume that the function will return a value.
+
+Have a look at this example on expressing functions that do not require an argument:
+
+```
+getTotal() 
+isLoggedIn()
+```
+
+This example shows us expressing a function that has one argument expressed as a number literal:
+
+```
+getCelsiusFromFahrenheit(32)
+
+```
+
+This example shows us expressing a function that has multiple arguments using literal values:
+
+```
+getSearchResults("Pet Names", 25)
+
+```
+
+Finally, this example shows us expressing a function that has multiple arguments using variables:
+
+```
+var amount = 100000
+var decimals = 2
+var decimalSeparator = "."
+var thousandsSeparator = ","
+formatCurrency(amount, decimals, decimalSeparator, thousandsSeparator)
+
+```
+
+
+### The Object Data Type
+
+JavaScript is designed around object data, thus making it important to understand. There are JavaScript objects that have been ready-made for us to use and you, as a programmer, will create objects. In either case, JavaScript objects are composed of **properties and methods**:
+
+**Property:** A value that has an assigned named. Together, they are often called a name/value pair. Values can be any type, that is, data, a number, a string, a Boolean, or an object. Property values can be changed dynamically.
+
+**Method:** A function that performs an action.
+
+
+#### Ready-Made Objects
+
+JavaScript has ready-made objects that we can use to help us begin to learn how to program. There are many useful objects built into JavaScript. Web browsers provide a collection of objects called the Document Object Model (DOM).
+
+Some examples of ready-made objects are as follows:
+
+- window is an object in DOM. It has access to the web browser's open window. Often considered a top-level DOM object containing other web browser-created objects as its properties, it has methods for setting timer events and printing.
+
+- console is an object in DOM. It provides the ability to output to the web browser console window. It is also a property of the window object.
+
+- document is an object in DOM. It has access to a web page's HTML elements, styles, and content. It is also a property of the window object.
+
+- location is an object in DOM. It has information about the current URL. It is a property of the window object.
+
+- Math is a built-in object. It consists of math constants such as Pi, and functions such as rounding.
+
+- Date is a built-in object. It provides calendar date and time operations.
+
+
+#### Self-Made Objects
+
+You often have to create objects when developing real-world applications.
+
+- elapsedTime is a property with a data type number. It displays the seconds that have elapsed since timing started.
+
+- resultsHistory is a property data type object. It displays a list of previous timings.
+
+- isTiming is a property data type Boolean. It displays the state of its timing.
+
+- isPaused is a property data type Boolean. It displays the state if paused.
+
+- start is a method data type function. It starts timing and sets elapsedTime to 0.
+
+- pause is a method data type function. It pauses the timing.
+
+- resume is a method data type function. It resumes the timing.
+
+- stop is a method data type function. It stops timing and adds the result to resultsHistory.
+
+
+#### Object Dot Notation
+
+To reference object properties and methods, you use dot notation. This is the object name, followed by a period, and then the name of the property or method. Let's use the stopWatch object as an example:
+
+```
+stopWatch.elapsedTime
+stopWatch.start()
+stopWatch.start()
+stopWatch.stop()
+
+```
+
+Methods require parentheses after the name. If the method requires data input, the data is placed inside the parentheses.
+
+
+#### The Array Object
 
 
 ---
