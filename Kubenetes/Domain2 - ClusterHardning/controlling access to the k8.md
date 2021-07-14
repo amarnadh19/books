@@ -62,3 +62,30 @@ Below example give User: amar; only access to read pod in namespace testing.
 
 Kubernetes supports multiple authorization modules, such as ABAC mode, RBAC Mode, and Webhook mode. When an administrator creates a cluster, they configure the authorization modules that should be used in the API server. If more than one authorization modules are configured, Kubernetes checks each module, and if any module authorizes the request, then the request can proceed. If all of the modules deny the request, then the request is denied (HTTP status code 403).
 
+## Admission control
+
+Admission Control modules are software modules that can modify or reject requests. In addition to the attributes available to Authorization modules, Admission Control modules can access the contents of the object that is being created or modified. 
+
+Unlike Authentication and Authorization modules, if any admission controller module rejects, then the request is immediately rejected.
+
+
+## API server ports and IPs
+
+The API server can actually serve on 2 ports:
+
+By default the Kubernetes API server serves HTTP on 2 ports:
+
+1. localhost port:
+   - is intended for testing and bootstrap and for other components of the master node (scheduler, controller-manager) to talk to the API.
+   - No TLS
+   - default is port 8080, change with --insecure-port flag.
+   - default IP is localhost, change with --insecure-bind-address flag
+   - request bypasses authentication and authorization modules.
+   - protected by need to have host access.
+2. "SecurePort":
+   - use whenever possible
+   - uses TLS. Set cert with --tls-cert-file and key with --tls-private-key-file flag.
+   - default is port 6443, change with --secure-port flag.
+   - default IP is first non-localhost network interface, change with --bind-address flag.
+   - request handled by authentication and authorization modules.
+   - authentication and authorization modules run.
