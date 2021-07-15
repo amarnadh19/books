@@ -100,15 +100,15 @@ The string operator allows us to combine parts of an expression into a string va
 
 Below are some arithmetic operators in JS.
 
-- ** --> exponentation  eg: 2 ** 3 = 8  (2 power 3)
+- `**` --> exponentation  eg: 2 ** 3 = 8  (2 power 3)
 
-- * --> Multiplication   eg: 2 * 3 = 6 
+- `*` --> Multiplication   eg: 2 * 3 = 6 
 
-- + --> addition		 eg: 2 + 3 = 5
+- `+` --> addition		 eg: 2 + 3 = 5
 
-- - --> subtraction      eg: 3 - 2 = 1
+- `-` --> subtraction      eg: 3 - 2 = 1
 
-- % --> Remainder        eg: 200 % 5 = 0
+- `%` --> Remainder        eg: 200 % 5 = 0
 
 
 ##### Grouping (concatenation (+))
@@ -668,6 +668,9 @@ switch(expression){
 ```
 
 ![](https://github.com/amarnadh19/books/blob/main/images/js_7.jpeg?)
+
+
+### Loop Statements
 
 
 ---
