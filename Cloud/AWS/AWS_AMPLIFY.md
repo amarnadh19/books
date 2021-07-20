@@ -1,5 +1,9 @@
 https://docs.amplify.aws/cli/teams/overview
+
 https://aws.amazon.com/blogs/mobile/configure-environment-variables-and-secrets-for-your-lambda-functions-with-amplify-cli/
+
+
+# Configure-environment-variables-and-secrets-for-your-lambda-functions-with-amplify-cli/
 
 
 # AWS Amplify
