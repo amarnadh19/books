@@ -50,6 +50,7 @@ exports.handler = async (event) => {
 
 ### amplify-function-secrets-policy:
 
+```
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -63,9 +64,10 @@ exports.handler = async (event) => {
         }
     ]
 }
-
+```
 ### lambda execution policy:
 
+```
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -80,7 +82,7 @@ exports.handler = async (event) => {
         }
     ]
 }
-
+```
 ### SecretsManagerReadWrite policy which can add directly
 
 
