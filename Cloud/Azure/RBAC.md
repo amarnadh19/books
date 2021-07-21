@@ -57,6 +57,14 @@ Roles can be high-level, like owner, or specific, like virtual machine reader.
 
 Azure includes several Built-in-roles that you can use.
 
+To understand how the roles work, let's examine three roles that apply to all resource types:
+
+- **Owner**, which has full access to all resources, including the right to delegate access to others.
+
+- **Contributor**, which can create and manage all types of Azure resources but can’t grant access to others.
+
+- **Reader**, which can view existing Azure resources.
+
 For example: Virtual Machine Contributor role allows a user to create and manage virtual machines.
 
 If the build-in roles don't meet the specific needs of your organization, you can create your own *Azure Custom Roles*.
