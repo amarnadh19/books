@@ -1,6 +1,13 @@
 # Steps to move one VM from one VNet to other
 
-## Using Same resourcegroup and Same region
+## Change subnet of VM (under same VNet)
+
+1) Login to portal. 
+2) click on VM’s virtual network interface card (vNIC).Select the device and left side,IP configurations and choose the subnet where to move the server.
+
+  ![](https://github.com/amarnadh19/books/blob/main/images/az_vm_move_subnet_1.png?)
+
+## Using Same resourcegroup and Same region - VNet1 to VNet2 
 
 1) Collect the disk information.
 
@@ -15,5 +22,5 @@
 6) check the progress of VM creation. If all went good, then login with the username and password given to previous VM. then check the application status and perform test for application if needed.
 
 
-# Using same resourcegroup and Different region.
+# Move Azure VMs across regions
 
