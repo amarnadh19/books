@@ -45,7 +45,7 @@ You can assign a role to any of these security principals.
 
 ### Role definition
 
-A *role definition* is a collection of permissions. 
+A *role definition* is a collection of permissions written using JSON file.
 
 It is typically just called a *role*. 
 
