@@ -2,6 +2,10 @@
 
 Azure Active Directory (Azure AD) is Microsoft's multi-tenant cloud-based directory and identity management service.
 
+While they share a similar name, Azure AD is not a cloud version of Windows Server Active Directory. It's also not intended as a complete replacement for an on-premises Active Directory. 
+
+Instead, if you're already using a Windows AD server, you can connect it to Azure AD to extend your directory into Azure. This approach allows users to use the same credentials to access local and cloud-based resources.
+
 Azure Active directory is MS enterprise cloud based identity and Access management (IAM). It can be sync with on-prem AD and Provide authentication to other cloud providers through OAUTH.
 
 ![](https://github.com/amarnadh19/books/blob/main/images/az_AD_fun_1.png?)
@@ -70,3 +74,24 @@ Azure Active Directory comes in four editions—Free, Microsoft 365 Apps, Premiu
 
 - **Azure Active Directory Premium P2** --> In addition to the Free and P1 features, P2 also offers Azure Active Directory Identity Protection to help provide risk-based Conditional Access to your apps and critical company data. Privileged Identity Management is included to help discover, restrict, and monitor administrators and their access to resources and to provide just-in-time access when needed.
 
+
+## Directories, subscriptions, and users
+
+Microsoft offers several cloud-based offerings today - all of which can use Azure AD to identify users and control access.
+
+- Microsoft Azure
+- Microsoft 365
+- Microsoft Intune
+- Microsoft Dynamics 365
+
+When a company or organization signs up to use one of these offerings, they are assigned a default directory, an instance of Azure AD. This directory holds the users and groups that will have access to each of the services the company has purchased. This default directory can be referred to as a *tenant*. A tenant represents the organization and the default directory assigned to it.
+
+*Subscriptions* in Azure are both a billing entity and a security boundary. Resources such as virtual machines, websites, and databases are associated with a single subscription. Each subscription also has a single account owner responsible for any charges incurred by resources in that subscription. If your organization wants a subscription billed to another account, you can transfer the subscription. A subscription is associated with a single Azure AD directory. Multiple subscriptions can trust the same directory, but a subscription can only trust one directory.
+
+Users and groups can be added to multiple subscriptions - this allows the user to create, control, and access resources in the subscription. When you add a user to a subscription, the user must be known to the associated directory as shown in the following image.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_AD_fun_2.png?)
+
+If you belong to multiple directories, you can switch the current directory you are working in through the Directory + subscription button in the Azure portal header.
+
+![](https://github.com/amarnadh19/books/blob/main/images/az_AD_fun_3.png?)
