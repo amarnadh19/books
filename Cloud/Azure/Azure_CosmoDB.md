@@ -16,7 +16,7 @@ Single milliseconds latency
 
 Automatic updates and patching.
 
-## Benifits
+## Benefits
 
 ### Guaranteed speed at any scale
 
