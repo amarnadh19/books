@@ -28,7 +28,7 @@ which contains information about the invocation, function, and execution environ
 
 ### callback
 
-It is a function that you can call in Non-async handlers to send response. The call back take two arguments
+It is a function that you can call in Non-sync handlers to send response. The call back take two arguments
 
 - Error 
 - Response
@@ -193,4 +193,92 @@ Use the JavaScript function JSON.stringify() to convert it into a string.
 ```
 const myJSON = JSON.stringify(arr);
 ```
+
+---
+
+## this keyword in javascript
+
+Objects are the basic building blocks in JavaScript. There’s one special object available in JavaScript, the this object. You can see the value of this at every line of JavaScript execution. The value of this is decided based on how the code is being executed.
+
+In most cases, the value of this is determined by how a function is called.
+
+It can't be set by assignment during execution, and it may be different each time the function is called.
+
+
+### “this” Refers to a Global Object
+
+By default, the execution context for an execution is global — which means if a code is being executed as part of a simple function call, then this refers to a global object.
+
+For example
+
+```
+const test = {
+  prop: 92,
+  func: function() {
+    return this.prop;
+  },
+};
+
+console.log(test.func());
+// expected output: 92
+
+```
+
+In a NodeJS environment, a special object called global will be the value of this.
+
+If strict mode is enabled for any function, then the value of this will be marked as undefined as in strict mode. The global object refers to undefined in place of the windows object.
+
+### “this” Refers to a New Instance
+
+When a function is invoked with the new keyword, then the function is known as a constructor function and returns a new instance. In such cases, the value of this refers to a newly created instance.
+
+```
+function Person(fn, ln) {
+  this.first_name = fn;
+  this.last_name = ln;
+
+  this.displayName = function() {
+    console.log(`Name: ${this.first_name} ${this.last_name}`);
+  }
+}
+
+let person = new Person("John", "Reed");
+person.displayName();  // Prints Name: John Reed
+let person2 = new Person("Paul", "Adams");
+person2.displayName();  // Prints Name: Paul Adams
+
+```
+
+In the case of person.displayName, this refers to a new instance person, and in case of person2.displayName(), this refers to person2 (which is a different instance than Person).
+
+
+### “this” Refers to an Invoker Object (Parent Object)
+
+In JavaScript, the property of an object can be a method or a simple value. When an object’s method is invoked, then this refers to the object which contains the method being invoked.
+
+In this example, we’re going to use the method foo as defined in the first example.
+
+```
+function foo () {
+  'use strict';
+  console.log("Simple function call")
+  console.log(this === window); 
+}
+
+let user = {
+  count: 10,
+  foo: foo,
+  foo1: function() {
+    console.log(this === window);
+  }
+}
+
+user.foo()  // Prints false because now “this” refers to user object instead of global object.
+let fun1 = user.foo1;
+fun1() // Prints true as this method is invoked as a simple function.
+user.foo1()  // Prints false on console as foo1 is invoked as a object’s method
+
+```
+
+```user.foo()``` prints false because now this refers to the user object instead of the global object.
 
