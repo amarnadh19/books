@@ -282,3 +282,4 @@ user.foo1()  // Prints false on console as foo1 is invoked as a object’s metho
 
 ```user.foo()``` prints false because now this refers to the user object instead of the global object.
 
+  
