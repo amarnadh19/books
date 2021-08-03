@@ -2,6 +2,8 @@
 
 Azure Advisor is a free service built into Azure that provides best practice recommendations for your workloads. These recommendations are personalized and actionable.
 
+Advisor provides recommendations for virtual Machines, availability sets, application gateways, App Services, SQL Servers, and Redis Cache.
+
 The Azure Well-Architected Framework is a set of guiding principles that you can use to improve the quality of a workload. The framework consists of these five pillars of architecture excellence:
 
 1) Cost Optimization
