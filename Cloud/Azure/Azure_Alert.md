@@ -63,3 +63,67 @@ The following are key attributes of an alert rule:
 
 Creating an alert is a three-step task: define the alert condition, define alert details, and define an action group.
 
+## Action Rules
+
+An action group is a collection of notification preferences defined by the owner of an Azure subscription. Azure Monitor and Service Health alerts use action groups to notify users that an alert has been triggered. Various alerts may use the same action group or different action groups depending on the user's requirements.
+
+When an action is configured to notify a person by email or SMS the person will receive a confirmation indicating he / she has been added to the action group.
+
+![](https://github.com/amarnadh19/books/blob/main/images/Az_alert_3.png?)
+
+- Email – Emails will be sent to the email addresses. Ensure that your email filtering is configured appropriately. You may have up to 1000 email actions in an Action Group.
+
+- ITSM – You may have up to 10 ITSM actions in an Action Group ITSM Action requires an ITSM Connection.
+
+- Logic App – You may have up to 10 Logic App actions in an Action Group.
+
+- Function App – The function keys for Function Apps configured as actions are read through the Functions API.
+
+- Runbook – You may have up to 10 Runbook actions in an Action Group.
+
+- SMS – You may have up to 10 SMS actions in an Action Group.
+
+- Voice – You may have up to 10 Voice actions in an Action Group.
+
+- Webhook – You may have up to 10 Webhook actions in an Action Group. Retry logic - The timeout period for a response is 10 seconds. The webhook call will be retried a maximum of 2 times when the following HTTP status codes are returned: 408, 429, 503, 504 or the HTTP endpoint does not respond. The first retry happens after 10 seconds. The second and last retry happens after 100 seconds.
+
+You may have up to 10 Azure app actions in an Action Group. At this time the Azure app action only supports ServiceHealth alerts.
+
+## Managing Alerts
+
+You can alert on metrics and logs as described in monitoring data sources. These include but are not limited to:
+
+- Metric values
+
+- Log search queries
+
+- Activity Log events
+
+- Health of the underlying Azure platform
+
+- Tests for web site availability
+
+## Alerts Experience
+
+The default Alerts page provides a summary of alerts that are created within a particular time window. It displays the total alerts for each severity with columns that identify the total number of alerts in each state for each severity.
+
+![](https://github.com/amarnadh19/books/blob/main/images/Az_alert_4.png?)
+
+### Subscription
+	
+Select up to five Azure subscriptions. Only alerts in the selected subscriptions are included in the view.
+
+### ResourceGroup
+
+Select a single resource group. Only alerts with targets in the selected resource group are included in the view.
+
+### Time Range
+
+Only alerts fired within the selected time window are included in the view. Supported values are the past hour, the past 24 hours, the past 7 days, and the past 30 days.
+
+## Alert Detail Page
+
+The Alert detail page is displayed when you select an alert. It provides details of the alert and enables you to change its state.
+
+![](https://github.com/amarnadh19/books/blob/main/images/Az_alert_5.png?)
+
