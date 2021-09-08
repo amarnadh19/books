@@ -58,3 +58,4 @@ The AD DS Connector account is created for reading and writing to Windows Server
 | N/A | User running the installation Wizard | Administrator of the local server | Creates the ADSync service account that is used as to run the syncronization service. |
 | Connect to Azure AD | Azure AD directory credentials | Global Administrator role in Azure AD | Enabling sync in the Azure AD directory;; Creation of the Azure AD connector account is is used for on going sync opreation in Azure AD |
 |connect o ADDS| On premises Active Directory credentials | Member of the Enterprise Admins group in Active Directory | Creates the AD DS connector account in Active Directory and grant permissions to it.|
+
