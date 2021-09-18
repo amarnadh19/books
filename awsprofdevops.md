@@ -6,13 +6,6 @@
 
 ***
 
-## Topic: CI/CD
-
-### What is CI?
-
-Continuous integration is a process of automating the build and testing of code every time a team member commits changes to varsion control.
-
-
 ## SDLC (Software Development Life Cycle)
 
 ### What is SDLC?
@@ -28,3 +21,12 @@ There are six phases in SDLC life cycle.
 Mainly Business Analyst perform a requirment analysis for the project.
 
 This requirement could be internal to organization or external to Customer.
+
+
+
+
+## Topic: CI/CD
+
+### What is CI?
+
+Continuous integration is a process of automating the build and testing of code every time a team member commits changes to varsion control.
