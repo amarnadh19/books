@@ -39,3 +39,37 @@ You can enable multiple authentication methods at once. You should usually use a
 - Service account tokens for service accounts.
 - at least one other method for user authentication.
 
+The ```system:authenticated``` group is included in the list of groups for all authenticated users.
+
+### X509 Client Certs
+
+Client certificate authentication is enabled by passing the ```--client-ca-file=SOMEFILE``` option to API server.
+
+The referenced file much contain one or more certificate authorities to use to validate client certificates presented to the API server.
+
+If a client certificate is presented and verified, the common name of the subject is used as a username for the request.
+
+For example using the openssl command line tool to generate a certificate signing request.
+
+```
+openssl req -new -key jbeda.pem -out jbeda-csr.pem -subj "/CN=jbeda/O=app1/O=app2
+```
+
+This would create a CSR for the username "jbeda", belonging to two groups "app1" and "app2"
+
+
+### Static Token file
+
+The API server reads bearer tokens from a file which given the ```--token-atuh-file=SOMEFILE``` option on the command line.
+
+Currently, tokens last indefinitely and the token list cannot be changed without restarting API Server.
+
+The token file is a ```csv``` file with a minimum of 3 columns:
+
+- Token
+- User name
+- User Uid followed by optional gorup names.
+
+
+### Putting a Bearer Token in the Request
+
