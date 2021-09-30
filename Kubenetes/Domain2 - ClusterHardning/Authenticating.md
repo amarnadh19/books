@@ -34,3 +34,8 @@ As HTTP requests are made to the API server, plugins attempt to associate the fo
 
 - Extra fields: a map of strings to list of strings which holds additional information authorizers may find useful.
 
+You can enable multiple authentication methods at once. You should usually use atleast two methods:
+
+- Service account tokens for service accounts.
+- at least one other method for user authentication.
+
