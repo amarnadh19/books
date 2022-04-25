@@ -73,3 +73,5 @@ The token file is a ```csv``` file with a minimum of 3 columns:
 
 ### Putting a Bearer Token in the Request
 
+When using bearer token authentication from an http client, the API server expects an ```Authorization``` header with a value of ```Bearer THETOKEN```. 
+
